@@ -24,6 +24,7 @@ window.MIN_POINTS = 0;
 window.PrivateEnterprise;
 window.NationalSecurity;
 window.SocialWelfare;
+window.MAX_INST = 3;
 
 window.cubeIconClass = {};
 window.cubeIconClass.Y ="cube cube-Y fa fa-coins";
@@ -69,11 +70,35 @@ window.cubeDrawDescription.KW = "Spend <i class='" + window.cubeIconClass.Y + "'
 
 window.actionDescription = {};
 window.actionDescription.KK = {};
-window.actionDescription.KK.ReduceWealth = "Reduce Wealth by one and increase cuts on every institution by one";
+window.actionDescription.KK.ReduceWealth = "Reduce Wealth by one";
+window.actionDescription.KK.IncreaseCuts = "Increase cuts on every institution by one";
 window.actionDescription.BK = {};
 window.actionDescription.BK.SpendY = "Spend <i class='" + window.cubeIconClass.Y + "' />";
 window.actionDescription.BK.AddR = "Add <i class='" + window.cubeIconClass.R + "' />";
+window.actionDescription.KR = {};
+window.actionDescription.KR.DecreasePopularity = "Decrease Popularity by one";
+window.actionDescription.RY = {};
+window.actionDescription.RY.RemoveYR = "Either Remove <i class='" + window.cubeIconClass.Y + "' /> and <i class='" + window.cubeIconClass.R + "' />";
+window.actionDescription.RY.IncreasePopularityAddK = "Increase Popularity by one and add <i class='" + window.cubeIconClass.K + "' />";
 
+window.actionDescription.IncreaseCuts = {};
+window.actionDescription.IncreaseCuts.PE = "todo PE";
+window.actionDescription.IncreaseCuts.NS = "todo NS";
+window.actionDescription.IncreaseCuts.SW = "todo SW";
+
+
+//alert
+window.alertMsg = {};
+window.alertMsg.NoIncome = "No Income available in Treasury";
+
+//logic parameters
+window.draw = "";
+window.actionNeeded = false;
+window.actionCompleted = false;
+window.cutsNeeded = false;
+window.cutsCompleted = false;
+window.fundNeeded = false;
+window.fundCompleted = false;
 
 window.actionDiv = $('#actions');
 
@@ -139,7 +164,7 @@ function defaultBagSetUp()
      2 Blue/Security & Policing 
      1 White/Welfare 
      1 Yellow/Income
-    */
+    
     addToArray("K", window.Bag);
     addToArray("K", window.Bag);
     addToArray("K", window.Bag);
@@ -150,6 +175,11 @@ function defaultBagSetUp()
     addToArray("B", window.Bag);
     addToArray("W", window.Bag);
     addToArray("Y", window.Bag);
+*/
+
+    //FOR DEBUG:
+    addToArray("K", window.Bag);
+    addToArray("B", window.Bag);
 }
 
 function defaultTrackSetUp()
@@ -204,13 +234,13 @@ function newTurn()
     refreshUx();
 }
 
-function addAction(text, btnNumber, logic)
+function addButton(text, classBtn, btnNumber, logic)
 {
     var btnAction = document.createElement("button");
     btnAction.type = "button"
     btnAction.classList.add("btn");
     btnAction.classList.add("btn-outline-dark");
-    btnAction.classList.add("action-btn");
+    btnAction.classList.add(classBtn);
     btnAction.classList.add("col-" + 12 / parseInt(btnNumber));
     btnAction.innerHTML = text;
     $(btnAction).on("click", logic);
@@ -220,48 +250,184 @@ function addAction(text, btnNumber, logic)
 
 function endAction()
 {
-    $(".action-btn").addClass("disabled");
-    $(".action-btn").off("click");
+    if(!window.actionNeeded || (window.actionNeeded && window.actionCompleted))
+    {
+        //$(".action-btn").addClass("disabled");
+        //$(".action-btn").off("click");
+        $(".action-btn").hide();
+
+        refreshUx();
+
+        if(window.cutsNeeded)
+            createCuts();
+        else if(window.fundNeeded)
+            createFunds();
+    }
+}
+
+function createCuts() 
+{
+    switch (window.draw) {
+        case "KK":
+            addButton(window.actionDescription.KK.IncreaseCuts, "cuts-btn", 1, function(){
+                IncreaseCuts("PE");
+                IncreaseCuts("NS");
+                IncreaseCuts("SW");
+                window.cutsCompleted = true;
+                endCuts();
+            });
+            break;
+        case "BK":
+            addButton(window.actionDescription.IncreaseCuts.NS, "cuts-btn", 2, function(){
+                IncreaseCuts("NS");
+                window.cutsCompleted = true;
+                endCuts();
+            });
+            addButton(window.actionDescription.IncreaseCuts.SW, "cuts-btn", 2, function(){
+                IncreaseCuts("SW");
+                window.cutsCompleted = true;
+                endCuts();
+            });
+            break;
+        case "KR":
+            break;
+        case "KY":
+            break;
+        case "KW":
+            break;
+        default:
+            effect = "NON GESTITO: " + draw;
+            break;
+    }
     refreshUx();
 }
+
+function IncreaseCuts(inst) 
+{
+    switch(inst)
+    {
+        case "PE":
+            if(window.PrivateEnterprise < window.MAX_INST)
+            {
+                window.PrivateEnterprise++;   
+            }
+            else
+            {
+                window.PrivateEnterprise = 1;
+                //TODO ACTION
+            }
+        break;        
+        case "NS":
+            if(window.NationalSecurity < window.MAX_INST)
+            {
+                window.NationalSecurity++;   
+            }
+            else
+            {
+                window.NationalSecurity = 1;
+                //TODO ACTION
+            }
+        break;    
+        case "SW":
+            if(window.SocialWelfare < window.MAX_INST)
+            {
+                window.SocialWelfare++;   
+            }
+            else
+            {
+                window.SocialWelfare = 1;
+                //TODO ACTION
+            }
+        break;
+    }
+}
+
+function endCuts()
+{
+    if(!window.cutsNeeded || (window.cutsNeeded && window.cutsCompleted))
+    {
+        $(".cuts-btn").hide();
+
+        refreshUx();
+
+        if(window.fundNeeded)
+            createFunds();
+    }
+}
+
+function createFunds() 
+{
+    alert("todo");
+}
+
+function endFunds()
+{
+    if(!window.fundNeeded || (window.fundNeeded && window.fundCompleted))
+    {
+        $(".fund-btn").hide();
+
+        refreshUx();
+    }
+}
+
 
 function cubeDrawResult(c1, c2)
 { 
     if(c1 < c2)
     {
-        draw = c1 + c2;
+        window.draw = c1 + c2;
     }
     else
     {
-        draw = c2 + c1;
+        window.draw = c2 + c1;
     }
     console.log("draw couple: " + draw);
     
-    switch (draw) {
+    window.actionNeeded = true;
+    window.actionCompleted = false;
+    window.cutsNeeded = false;
+    window.cutsCompleted = false;
+    window.fundNeeded = false;
+    window.fundCompleted = false;
+
+    switch (window.draw) {
         case "KK":
             //Reduce Wealth by one
-            addAction(window.actionDescription.KK.ReduceWealth, 1, function(){window.Wealth = Math.max(window.Wealth -1,window.MIN_POINTS);endAction();});
+            addButton(window.actionDescription.KK.ReduceWealth, "action-btn", 1, function(){
+                window.Wealth = Math.max(window.Wealth -1,window.MIN_POINTS);
+                window.actionCompleted = true;
+                endAction();});
             //window.Wealth = Math.max(window.Wealth -1,window.MIN_POINTS);
             //and increase cuts on every institution by one
             //TODO_INSTITUTIONS
+            window.cutsNeeded = true;
             break;
         case "BK":
             //spend Y or add R
-            addAction(window.actionDescription.BK.SpendY, 2, function(){
+            addButton(window.actionDescription.BK.SpendY, "action-btn", 2, function(){
                 var indexY = window.Treasury.indexOf("Y");
-                if(indexY > -1) { window.Treasury.splice(indexY, 1); }
-                else { alert("No Income available in Treasury"); }
+                if(indexY > -1) { 
+                    window.Treasury.splice(indexY, 1); 
+                    window.actionCompleted = true;}
+                else { 
+                    alert(window.alertMsg.NoIncome); 
+                }
                 endAction();
             });
-            addAction(window.actionDescription.BK.AddR, 2, function(){addToArray("R", window.Bag);endAction();});
-            //(+ Cuts)
+            addButton(window.actionDescription.BK.AddR, "action-btn", 2, function(){
+                addToArray("R", window.Bag);
+                window.actionCompleted = true;
+                endAction();
+            });
             //TODO_CUTS
+            window.cutsNeeded = true;
             break;
         case "KR":
             //Decrease Popularity by one 
             window.Popularity = Math.max(window.Popularity -1,window.MIN_POINTS);
             //(+ Cuts)
             //TODO_CUTS
+            window.cutsNeeded = true;
             break;
         case "RY":
             //ither Remove Y and R or increase Popularity by one and add K
@@ -313,12 +479,14 @@ function cubeDrawResult(c1, c2)
             //Spend Y or reduce Health by one. 
             //TODO_CHOISE
             //(+ Cuts)
-            //TODO_CUTS
+            //TODO_CUTS            
+            window.cutsNeeded = true;
             break;
         default:
             effect = "NON GESTITO: " + draw;
             break;
     }
+
     //console.Log("Effect: " + effect);
     $('span#cubeDrawResult').html(window.cubeDrawTitle[draw]);
     $('span#cubeDrawResultEffect').html(window.cubeDrawDescription[draw]);
@@ -345,28 +513,44 @@ function refreshUx()
 {
     logCubes();
 
-    if (window.Current && window.Current.length > 0) { 
-        document.getElementById("newTurn-btn").setAttribute('disabled',true);
-        document.getElementById("endTurn-btn").removeAttribute('disabled');
-    } else { 
-        document.getElementById("newTurn-btn").removeAttribute('disabled');
-        document.getElementById("endTurn-btn").setAttribute('disabled',true);
-        
-        if (window.Bag && window.Bag.length > 0) { 
-            document.getElementById("newYear-btn").setAttribute('disabled',true);
-        } else { 
-            document.getElementById("newYear-btn").removeAttribute('disabled');
+    document.getElementById("newTurn-btn").setAttribute('disabled',true);
+    document.getElementById("endTurn-btn").setAttribute('disabled',true);
+    document.getElementById("newYear-btn").setAttribute('disabled',true);
+
+    if((!window.actionNeeded || (window.actionNeeded && window.actionCompleted)) &&
+        (!window.cutsNeeded || (window.cutsNeeded && window.cutsCompleted)) &&
+        (!window.fundNeeded || (window.fundNeeded && window.fundCompleted))) {
+
+        if (window.Current && window.Current.length > 0) { 
             document.getElementById("newTurn-btn").setAttribute('disabled',true);
+            document.getElementById("endTurn-btn").removeAttribute('disabled');
+        } else { 
+            document.getElementById("endTurn-btn").setAttribute('disabled',true);
+            
+            if(window.Bag && window.Bag.length === 1) {
+                addToArray(drawCube(window.Bag), window.Used);
+            }
+
+            if (window.Bag && window.Bag.length > 0) { 
+                document.getElementById("newTurn-btn").removeAttribute('disabled');
+            } else { 
+                document.getElementById("newYear-btn").removeAttribute('disabled');
+            }
         }
     }
-    
-    $("td.points-cell").removeClass("current");
-    
+
+    $("td.points-cell").removeClass("current");    
     $("td.points-cell#emp-cell-"+ window.Employment).addClass("current");
     $("td.points-cell#pub-cell-"+ window.PublicSafety).addClass("current");
     $("td.points-cell#wea-cell-"+ window.Wealth).addClass("current");
     $("td.points-cell#hea-cell-"+ window.Health).addClass("current");
     $("td.points-cell#pop-cell-"+ window.Popularity).addClass("current");
+
+
+    $("td.Institutions-cell").removeClass("current");
+    $("td.Institutions-cell#pen-cell-"+ window.PrivateEnterprise).addClass("current");
+    $("td.Institutions-cell#nas-cell-"+ window.NationalSecurity).addClass("current");
+    $("td.Institutions-cell#sow-cell-"+ window.SocialWelfare).addClass("current");
 }
 
 function init()
