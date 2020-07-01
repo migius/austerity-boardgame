@@ -82,9 +82,9 @@ window.actionDescription.RY.RemoveYR = "Either Remove <i class='" + window.cubeI
 window.actionDescription.RY.IncreasePopularityAddK = "Increase Popularity by one and add <i class='" + window.cubeIconClass.K + "' />";
 
 window.actionDescription.IncreaseCuts = {};
-window.actionDescription.IncreaseCuts.PE = "todo PE";
-window.actionDescription.IncreaseCuts.NS = "todo NS";
-window.actionDescription.IncreaseCuts.SW = "todo SW";
+window.actionDescription.IncreaseCuts.PE = "Increase cuts on Private Enterprise";
+window.actionDescription.IncreaseCuts.NS = "Increase cuts on National Security";
+window.actionDescription.IncreaseCuts.SW = "Increase cuts on Social Welfare";
 
 
 //alert
@@ -267,6 +267,9 @@ function endAction()
 
 function createCuts() 
 {
+    var IncreasePE = false;
+    var IncreaseNS = false;
+    var IncreaseSW = false;
     switch (window.draw) {
         case "KK":
             addButton(window.actionDescription.KK.IncreaseCuts, "cuts-btn", 1, function(){
@@ -278,27 +281,47 @@ function createCuts()
             });
             break;
         case "BK":
-            addButton(window.actionDescription.IncreaseCuts.NS, "cuts-btn", 2, function(){
-                IncreaseCuts("NS");
-                window.cutsCompleted = true;
-                endCuts();
-            });
-            addButton(window.actionDescription.IncreaseCuts.SW, "cuts-btn", 2, function(){
-                IncreaseCuts("SW");
-                window.cutsCompleted = true;
-                endCuts();
-            });
+            IncreaseNS = true;
+            IncreaseSW = true;
             break;
         case "KR":
+            IncreasePE = true;
+            IncreaseNS = true;
             break;
         case "KY":
+            IncreasePE = true;
+            IncreaseSW = true;
             break;
         case "KW":
+            IncreasePE = true;
+            IncreaseSW = true;
             break;
         default:
             effect = "NON GESTITO: " + draw;
             break;
     }
+
+    if(IncreasePE)
+        addButton(window.actionDescription.IncreaseCuts.PE, "cuts-btn", 2, function(){
+            IncreaseCuts("PE");
+            window.cutsCompleted = true;
+            endCuts();
+        });
+
+    if(IncreaseNS)
+        addButton(window.actionDescription.IncreaseCuts.NS, "cuts-btn", 2, function(){
+            IncreaseCuts("NS");
+            window.cutsCompleted = true;
+            endCuts();
+        });
+
+    if(IncreaseSW)
+        addButton(window.actionDescription.IncreaseCuts.SW, "cuts-btn", 2, function(){
+            IncreaseCuts("SW");
+            window.cutsCompleted = true;
+            endCuts();
+        });
+
     refreshUx();
 }
 
