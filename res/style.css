@@ -1,0 +1,145 @@
+i.cube {
+    font-size: 30px;
+}
+i.cube-W {
+    color: #999;
+}
+i.cube-Y {
+    color: #fc1;
+}
+i.cube-B {
+    color: #00f;
+}
+i.cube-R {
+    color: #f00;
+}
+
+i.smallCube {
+    font-size: 13px;
+}
+i.cube-DY {
+    color: #970;
+}
+
+div#commands {
+    position: fixed;
+    bottom: 10px;
+    left:10px;
+}
+
+.emp-cell {
+    background-color: #ead6a4;
+    border: 1px solid #e09c37;
+}
+#emp-cell-0, .table thead th.emp-cell {
+    background-color: #e09c37;
+    border: 1px solid #e09c37;
+}
+
+.pub-cell {
+    background-color: #d4d4f4;
+    border: 1px solid #b0a2c1;
+}
+#pub-cell-0, .table thead th.pub-cell {
+    background-color: #b0a2c1;
+    border: 1px solid #b0a2c1;
+}
+
+.wea-cell {
+    background-color: #eaca72;
+    border: 1px solid #e28500;
+}
+#wea-cell-0, .table thead th.wea-cell {
+    background-color: #e28500;
+    border: 1px solid #e28500;
+}
+
+.hea-cell {
+    background-color: #a4a4d4;
+    border: 1px solid #1d0da8;
+}
+#hea-cell-0, .table thead th.hea-cell {
+    background-color: #1d0da8;
+    border: 1px solid #1d0da8;
+    color: white;
+}
+
+.pop-cell {
+    background-color: #90d090;
+    border: 1px solid #008A31;
+}
+
+#pop-cell-0, .table thead th.pop-cell {
+    background-color: #008A31;
+    border-bottom: 1px solid #008A31;
+}
+
+/*Institutions*/
+    
+.pen-cell {
+    background-color: #ead6a4;
+    border: 1px solid #e09c37;
+    border-top: 1px solid #e09c37 !important;
+    width: 23%;
+}
+
+.table thead th.pen-cell {
+    background-color: #e09c37;
+    border: 1px solid #e09c37;
+}
+
+
+.nas-cell {
+    background-color: #a4a4d4;
+    border: 1px solid #1d0da8;
+    border-top: 1px solid #1d0da8 !important;
+    width: 23%;
+}
+
+.table thead th.nas-cell {
+    background-color: #1d0da8;
+    border: 1px solid #1d0da8;
+    color: white;
+}
+
+.sow-cell {
+    background-color: #aaa;
+    border: 1px solid #555;
+    border-top: 1px solid #555 !important;
+    width: 23%;
+}
+
+.table thead th.sow-cell {
+    background-color: #222;
+    border: 1px solid #222;
+    color: white;
+}
+
+
+
+.Institutions-cell.private-action-cell, .Institutions-cell.icon-cell {
+    background-color: #fff;
+    border: 0px;
+    border-top: 0px !important;
+    width: 8%
+}
+.Institutions-cell.Institutions-cell-first    {
+    filter: brightness(0.8);
+}
+
+
+
+
+.table th, .table td {
+    padding: 3px;
+}
+ 
+td.current {
+    padding: 0rem;
+    border: 6px solid #ff0000 !important;
+}
+
+
+button.btn.choose-btn {
+    white-space: normal;
+}

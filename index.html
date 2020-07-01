@@ -1,228 +1,242 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css?v=0" />
-
-
-<div class="container">
-  <h1>Austerity</h1> [under development]
-  <div class="row">
-  <div id="array" class="col-xs-12 col-md-6" >
-    <div class="row">
-      <div class="col-xs-6 col-md-3">
-        <h2>Bag</h2>
-        <div id="bagContent"></div>
-      </div>
-
-      <div class="col-xs-6 col-md-3">
-        <h2>Current</h2>
-        <div id="currentContent"></div>
-      </div>
-
-      <div class="col-xs-6 col-md-3">
-        <h2>Used</h2>
-        <div id="usedContent"></div>
-      </div>
-
-      <div class="col-xs-6 col-md-3">
-        <h2>Treasury</h2>
-        <div id="treasuryContent"></div>
-      </div>
-    </div>
-    <div class="col-xs-12">
-      <h5>
-        Cube draw result: <b><span id="cubeDrawResult" /></b>
-      </h5>
-      <p>
-        Effect: <i><span id="cubeDrawResultEffect" /></i>
-      </p>
-    </div>
-    <div class="col-xs-12">
-      
-      <div id="actions">
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang=en        style="height:100%;">
+    <head>
+    <meta charset=utf-8>
+    <title>Austerity</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"/>
+    <meta name=description content="Web implementation of Austerity by Jake Staines"/>
+    <meta name=author content="migio"/>
     
-    
-    <div class="col-xs-12">
-      <h5>
-        <b>Institutions</b>
-      </h5>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="res/style.css?v=0" />
+        
+</head>
+<body>
+
+    <div class="container">
+        <h1>Austerity</h1> [under development]
+        <div class="row">
+        <div id="array" class="col-xs-12 col-md-6" >
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <h2>Bag</h2>
+                    <div id="bagContent"></div>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h2>Current</h2>
+                    <div id="currentContent"></div>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h2>Used</h2>
+                    <div id="usedContent"></div>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h2>Treasury</h2>
+                    <div id="treasuryContent"></div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <h5>
+                    Cube draw result: <b><span id="cubeDrawResult" /></b>
+                </h5>
+                <p>
+                    Effect: <i><span id="cubeDrawResultEffect" /></i>
+                </p>
+            </div>
+            <div class="col-xs-12">
+                
+                <div id="actions">
+                </div>
+            </div>
+            
+            
+            <div class="col-xs-12">
+                <h5>
+                    <b>Institutions</b>
+                </h5>
+            </div>
+            
+            <div class="col-xs-12">
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th class="pen-cell" colspan="5">Private Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="Institutions-cell private-action-cell pen-cell" id="pop-cell-10" colspan="5"> <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     +1 Employment</i></td>
+                        </tr>
+                        <tr>
+                            <td class="Institutions-cell icon-cell pen-cell" id="pen-cell-icon">
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i><br />
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i><br />
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i><br /></td>
+                            <td class="Institutions-cell Institutions-cell-first pen-cell" id="pen-cell-1"></td>
+                            <td class="Institutions-cell pen-cell" id="pen-cell-2"></td>
+                            <td class="Institutions-cell pen-cell" id="pen-cell-3"></td>
+                            <td class="Institutions-cell pen-cell" id="pen-cell-4"> - 2 Employment</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th class="nas-cell" colspan="5">National Security</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="Institutions-cell private-action-cell nas-cell" id="pop-cell-10" colspan="5"> <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-B fa fa-user-shield "></i></td>
+                        </tr>
+                        <tr>
+                            <td class="Institutions-cell icon-cell nas-cell" id="nas-cell-icon">
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i><br />
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i><br /></td>
+                            <td class="Institutions-cell Institutions-cell-first nas-cell" id="nas-cell-1"></td>
+                            <td class="Institutions-cell nas-cell" id="nas-cell-2"></td>
+                            <td class="Institutions-cell nas-cell" id="nas-cell-3"></td>
+                            <td class="Institutions-cell nas-cell" id="nas-cell-4"> add <i class="cube cube-R fa fa-bomb    "></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th class="sow-cell" colspan="5">Social Welfare</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="Institutions-cell private-action-cell nas-cell" id="sow-cell-10" colspan="5"> <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-W fa fa-briefcase-medical "></i></td>
+                        </tr>
+                        <tr>
+                            <td class="Institutions-cell icon-cell sow-cell" id="sow-cell-icon">
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i><br />
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i><br />
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i><br /></td>
+                            <td class="Institutions-cell Institutions-cell-first sow-cell" id="sow-cell-1"></td>
+                            <td class="Institutions-cell sow-cell" id="sow-cell-2"></td>
+                            <td class="Institutions-cell sow-cell" id="sow-cell-3"></td>
+                            <td class="Institutions-cell sow-cell" id="sow-cell-4"> - 2 Health</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-md-6">
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <th class="emp-cell">Employment</th>
+                        <th class="pub-cell">Public Safety</th>
+                        <th class="wea-cell">Wealth</th>
+                        <th class="hea-cell">Health</th>
+                        <th class="pop-cell">Popularity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-10">10 <i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></td>
+                        <td class="points-cell pub-cell " id="pub-cell-10">10</td>
+                        <td class="points-cell wea-cell" id="wea-cell-10">10</td>
+                        <td class="points-cell hea-cell" id="hea-cell-10">10</td>
+                        <td class="points-cell pop-cell" id="pop-cell-10">10</td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-9"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></td>
+                        <td class="points-cell pub-cell" id="pub-cell-9"></td>
+                        <td class="points-cell wea-cell" id="wea-cell-9"></td>
+                        <td class="points-cell hea-cell" id="hea-cell-9"></td>
+                        <td class="points-cell pop-cell" id="pop-cell-9"></td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-8"><i class="cube cube-DY fa fa-coins smallCube"></i></td>
+                        <td class="points-cell pub-cell" id="pub-cell-8"></td>
+                        <td class="points-cell wea-cell" id="wea-cell-8"></td>
+                        <td class="points-cell hea-cell" id="hea-cell-8"></td>
+                        <td class="points-cell pop-cell" id="pop-cell-8"></td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-7">7 <i class="cube cube-DY fa fa-coins smallCube"></i></td>
+                        <td class="points-cell pub-cell" id="pub-cell-7">7 </td>
+                        <td class="points-cell wea-cell" id="wea-cell-7">7 </td>
+                        <td class="points-cell hea-cell" id="hea-cell-7">7 </td>
+                        <td class="points-cell pop-cell" id="pop-cell-7">7 </td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-6"><i class="cube cube-DY fa fa-coins smallCube"></i></td>
+                        <td class="points-cell pub-cell" id="pub-cell-6"></td>
+                        <td class="points-cell wea-cell" id="wea-cell-6"></td>
+                        <td class="points-cell hea-cell" id="hea-cell-6"></td>
+                        <td class="points-cell pop-cell" id="pop-cell-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-5">5 <i class="cube cube-DY fa fa-coins smallCube"></i></td>
+                        <td class="points-cell pub-cell" id="pub-cell-5">5 </td>
+                        <td class="points-cell wea-cell" id="wea-cell-5">5 </td>
+                        <td class="points-cell hea-cell" id="hea-cell-5">5 </td>
+                        <td class="points-cell pop-cell" id="pop-cell-5">5 </td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-4">&nbsp;</td>
+                        <td class="points-cell pub-cell" id="pub-cell-4"></td>
+                        <td class="points-cell wea-cell" id="wea-cell-4"></td>
+                        <td class="points-cell hea-cell" id="hea-cell-4"></td>
+                        <td class="points-cell pop-cell" id="pop-cell-4"></td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-3">3 </td>
+                        <td class="points-cell pub-cell" id="pub-cell-3">3 </td>
+                        <td class="points-cell wea-cell" id="wea-cell-3">3 </td>
+                        <td class="points-cell hea-cell" id="hea-cell-3">3 </td>
+                        <td class="points-cell pop-cell" id="pop-cell-3">3 </td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-2">&nbsp;</td>
+                        <td class="points-cell pub-cell" id="pub-cell-2"></td>
+                        <td class="points-cell wea-cell" id="wea-cell-2"></td>
+                        <td class="points-cell hea-cell" id="hea-cell-2"></td>
+                        <td class="points-cell pop-cell" id="pop-cell-2"></td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-1">1 </td>
+                        <td class="points-cell pub-cell" id="pub-cell-1">1 </td>
+                        <td class="points-cell wea-cell" id="wea-cell-1">1 </td>
+                        <td class="points-cell hea-cell" id="hea-cell-1">1 </td>
+                        <td class="points-cell pop-cell" id="pop-cell-1">1 </td>
+                    </tr>
+                    <tr>
+                        <td class="points-cell emp-cell" id="emp-cell-0">&nbsp;</td>
+                        <td class="points-cell pub-cell" id="pub-cell-0"></td>
+                        <td class="points-cell wea-cell" id="wea-cell-0"></td>
+                        <td class="points-cell hea-cell" id="hea-cell-0"></td>
+                        <td class="points-cell pop-cell" id="pop-cell-0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
     </div>
-    
-    <div class="col-xs-12">
-      <table class="table table-hover ">
-        <thead>
-          <tr>
-            <th class="pen-cell" colspan="5">Private Enterprise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="Institutions-cell private-action-cell pen-cell" id="pop-cell-10" colspan="5"> <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">   +1 Employment</i></td>
-          </tr>
-          <tr>
-            <td class="Institutions-cell icon-cell pen-cell" id="pen-cell-icon">
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i><br />
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i><br />
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i><br /></td>
-            <td class="Institutions-cell Institutions-cell-first pen-cell" id="pen-cell-1"></td>
-            <td class="Institutions-cell pen-cell" id="pen-cell-2"></td>
-            <td class="Institutions-cell pen-cell" id="pen-cell-3"></td>
-            <td class="Institutions-cell pen-cell" id="pen-cell-4"> - 2 Employment</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="table table-hover ">
-        <thead>
-          <tr>
-            <th class="nas-cell" colspan="5">National Security</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="Institutions-cell private-action-cell nas-cell" id="pop-cell-10" colspan="5"> <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">   add </i> <i class="cube cube-B fa fa-user-shield "></i></td>
-          </tr>
-          <tr>
-            <td class="Institutions-cell icon-cell nas-cell" id="nas-cell-icon">
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i><br />
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i><br /></td>
-            <td class="Institutions-cell Institutions-cell-first nas-cell" id="nas-cell-1"></td>
-            <td class="Institutions-cell nas-cell" id="nas-cell-2"></td>
-            <td class="Institutions-cell nas-cell" id="nas-cell-3"></td>
-            <td class="Institutions-cell nas-cell" id="nas-cell-4"> add <i class="cube cube-R fa fa-bomb  "></td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="table table-hover ">
-        <thead>
-          <tr>
-            <th class="sow-cell" colspan="5">Social Welfare</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="Institutions-cell private-action-cell nas-cell" id="sow-cell-10" colspan="5"> <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">   add </i> <i class="cube cube-W fa fa-briefcase-medical "></i></td>
-          </tr>
-          <tr>
-            <td class="Institutions-cell icon-cell sow-cell" id="sow-cell-icon">
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i><br />
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i><br />
-              <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i><br /></td>
-            <td class="Institutions-cell Institutions-cell-first sow-cell" id="sow-cell-1"></td>
-            <td class="Institutions-cell sow-cell" id="sow-cell-2"></td>
-            <td class="Institutions-cell sow-cell" id="sow-cell-3"></td>
-            <td class="Institutions-cell sow-cell" id="sow-cell-4"> - 2 Health</td>
-          </tr>
-        </tbody>
-      </table>
+
+    <div id="commands">
+        <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success">New turn</button>
+        <button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning">End turn</button>
+        <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger">New year</button>
     </div>
-  </div>
-  
-  <div class="col-xs-12 col-md-6">
-    <table class="table table-hover ">
-      <thead>
-        <tr>
-          <th class="emp-cell">Employment</th>
-          <th class="pub-cell">Public Safety</th>
-          <th class="wea-cell">Wealth</th>
-          <th class="hea-cell">Health</th>
-          <th class="pop-cell">Popularity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-10">10 <i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></td>
-          <td class="points-cell pub-cell " id="pub-cell-10">10</td>
-          <td class="points-cell wea-cell" id="wea-cell-10">10</td>
-          <td class="points-cell hea-cell" id="hea-cell-10">10</td>
-          <td class="points-cell pop-cell" id="pop-cell-10">10</td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-9"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></td>
-          <td class="points-cell pub-cell" id="pub-cell-9"></td>
-          <td class="points-cell wea-cell" id="wea-cell-9"></td>
-          <td class="points-cell hea-cell" id="hea-cell-9"></td>
-          <td class="points-cell pop-cell" id="pop-cell-9"></td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-8"><i class="cube cube-DY fa fa-coins smallCube"></i></td>
-          <td class="points-cell pub-cell" id="pub-cell-8"></td>
-          <td class="points-cell wea-cell" id="wea-cell-8"></td>
-          <td class="points-cell hea-cell" id="hea-cell-8"></td>
-          <td class="points-cell pop-cell" id="pop-cell-8"></td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-7">7 <i class="cube cube-DY fa fa-coins smallCube"></i></td>
-          <td class="points-cell pub-cell" id="pub-cell-7">7 </td>
-          <td class="points-cell wea-cell" id="wea-cell-7">7 </td>
-          <td class="points-cell hea-cell" id="hea-cell-7">7 </td>
-          <td class="points-cell pop-cell" id="pop-cell-7">7 </td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-6"><i class="cube cube-DY fa fa-coins smallCube"></i></td>
-          <td class="points-cell pub-cell" id="pub-cell-6"></td>
-          <td class="points-cell wea-cell" id="wea-cell-6"></td>
-          <td class="points-cell hea-cell" id="hea-cell-6"></td>
-          <td class="points-cell pop-cell" id="pop-cell-6"></td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-5">5 <i class="cube cube-DY fa fa-coins smallCube"></i></td>
-          <td class="points-cell pub-cell" id="pub-cell-5">5 </td>
-          <td class="points-cell wea-cell" id="wea-cell-5">5 </td>
-          <td class="points-cell hea-cell" id="hea-cell-5">5 </td>
-          <td class="points-cell pop-cell" id="pop-cell-5">5 </td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-4">&nbsp;</td>
-          <td class="points-cell pub-cell" id="pub-cell-4"></td>
-          <td class="points-cell wea-cell" id="wea-cell-4"></td>
-          <td class="points-cell hea-cell" id="hea-cell-4"></td>
-          <td class="points-cell pop-cell" id="pop-cell-4"></td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-3">3 </td>
-          <td class="points-cell pub-cell" id="pub-cell-3">3 </td>
-          <td class="points-cell wea-cell" id="wea-cell-3">3 </td>
-          <td class="points-cell hea-cell" id="hea-cell-3">3 </td>
-          <td class="points-cell pop-cell" id="pop-cell-3">3 </td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-2">&nbsp;</td>
-          <td class="points-cell pub-cell" id="pub-cell-2"></td>
-          <td class="points-cell wea-cell" id="wea-cell-2"></td>
-          <td class="points-cell hea-cell" id="hea-cell-2"></td>
-          <td class="points-cell pop-cell" id="pop-cell-2"></td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-1">1 </td>
-          <td class="points-cell pub-cell" id="pub-cell-1">1 </td>
-          <td class="points-cell wea-cell" id="wea-cell-1">1 </td>
-          <td class="points-cell hea-cell" id="hea-cell-1">1 </td>
-          <td class="points-cell pop-cell" id="pop-cell-1">1 </td>
-        </tr>
-        <tr>
-          <td class="points-cell emp-cell" id="emp-cell-0">&nbsp;</td>
-          <td class="points-cell pub-cell" id="pub-cell-0"></td>
-          <td class="points-cell wea-cell" id="wea-cell-0"></td>
-          <td class="points-cell hea-cell" id="hea-cell-0"></td>
-          <td class="points-cell pop-cell" id="pop-cell-0"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
-</div>
-
-<div id="commands">
-  <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success">New turn</button>
-  <button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning">End turn</button>
-  <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger">New year</button>
-</div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
-<script src="logic.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <script src="res/loc/EN.js" ></script>
+    <script src="res/logic.js" ></script>
+</body>
 
 
 
