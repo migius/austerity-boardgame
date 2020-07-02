@@ -756,12 +756,12 @@ function newYear()
 }
 
 function gameWin() {
-    alert("YOU WIN! Refresh the page for a new game!");
+    alert(window.alertMsg.Win);
     window.gameFinished = true;
 }
 
 function gameLosed() {
-    alert("YOU LOSE! Refresh the page for a new game!");
+    alert(window.alertMsg.Lose);
     window.gameFinished = true;
 }
 
