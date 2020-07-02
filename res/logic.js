@@ -26,6 +26,12 @@ window.NationalSecurity;
 window.SocialWelfare;
 window.MAX_INST = 3;
 
+//number of cubes
+window.fundedInst = {}
+window.fundedInst.PE = 0;
+window.fundedInst.NS = 0;
+window.fundedInst.SW = 0;
+
 //logic parameters
 window.draw = "";
 window.actionNeeded = false;
@@ -34,6 +40,9 @@ window.cutsNeeded = false;
 window.cutsCompleted = false;
 window.fundNeeded = false;
 window.fundCompleted = false;
+window.fundChoiceNeeded = false;
+window.fundChoiceCompleted = false;
+window.gameFinished = false;
 
 window.actionDiv = $('#actions');
 
@@ -123,7 +132,7 @@ function defaultBagSetUp()
      2 Blue/Security & Policing 
      1 White/Welfare 
      1 Yellow/Income
-    
+*/    
     addToArray("K", window.Bag);
     addToArray("K", window.Bag);
     addToArray("K", window.Bag);
@@ -134,10 +143,18 @@ function defaultBagSetUp()
     addToArray("B", window.Bag);
     addToArray("W", window.Bag);
     addToArray("Y", window.Bag);
-*/
+
 
     //FOR DEBUG:
-    addToArray("R", window.Bag);
+    //addToArray("R", window.Bag);
+    //addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
     addToArray("Y", window.Bag);
 }
 
@@ -343,22 +360,79 @@ function endCuts()
 
 function createFunds() 
 {
-    addButton(window.actionDescription.Funds.Discard, "fund-btn", 3, function(){
+    //institution that can be funded
+    let number = 0
+    if(!window.fundedInst.PE) number++;
+    if(!window.fundedInst.NS) number++;
+    if(!window.fundedInst.SW) number++;
+
+    let btnNum = 2;
+    if(number) btnNum = 3;
+
+
+    addButton(window.actionDescription.Funds.Discard, "fund-btn", btnNum, function(){
         addToArray(drawSpecificCube(window.Current,"Y"), window.Used);
         window.fundCompleted = true;
         endFunds();
     });
-    addButton(window.actionDescription.Funds.Treasury, "fund-btn", 3, function(){
+    addButton(window.actionDescription.Funds.Treasury, "fund-btn", btnNum, function(){
         addToArray(drawSpecificCube(window.Current,"Y"), window.Treasury);
         window.fundCompleted = true;
         endFunds();
     });
-    addButton(window.actionDescription.Funds.Fund, "fund-btn", 3, function(){
-        alert("TODO");
-        window.fundCompleted = true;
-        endFunds();
-    });
+    if(number)
+        addButton(window.actionDescription.Funds.Fund, "fund-btn", 3, function(){     
+            drawSpecificCube(window.Current,"Y");   
+            window.fundChoiceNeeded = true;
+            if(!window.fundedInst.PE) fundChoise("PE", number);
+            if(!window.fundedInst.NS) fundChoise("NS", number);
+            if(!window.fundedInst.SW) fundChoise("SW", number);
+                     
+            window.fundCompleted = true;
+            endFunds();
+        });
 }
+
+
+function fundChoise(type, number) {
+    switch(type) {
+        case "PE":
+            addButton(window.actionDescription.Funds.Choice.PE, "fund-c-btn", number, function(){
+                window.Employment = Math.min(window.Employment +1,window.MAX_POINTS);
+                window.fundedInst.PE++;
+                window.fundChoiceCompleted = true;
+                endFundChoice();
+            });         
+            break;
+        case "NS":
+            addButton(window.actionDescription.Funds.Choice.NS, "fund-c-btn", number, function(){
+                addToArray("B", window.Used);
+                window.fundedInst.NS++;
+                window.fundChoiceCompleted = true;
+                endFundChoice();
+            });  
+            break;
+        case "SW":
+            addButton(window.actionDescription.Funds.Choice.SW, "fund-c-btn", number, function(){
+                addToArray("W", window.Used);
+                window.fundedInst.SW++;
+                window.fundChoiceCompleted = true;
+                endFundChoice();
+            });   
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function endFunds()
 {
@@ -366,6 +440,15 @@ function endFunds()
     {
         $(".fund-btn").remove();
 
+        refreshUx();
+    }
+}
+
+function endFundChoice()
+{
+    if(!window.fundChoiceNeeded || (window.fundChoiceNeeded && window.fundChoiceCompleted))
+    {
+        $(".fund-c-btn").remove();
         refreshUx();
     }
 }
@@ -389,6 +472,8 @@ function cubeDrawResult(c1, c2)
     window.cutsCompleted = false;
     window.fundNeeded = false;
     window.fundCompleted = false;
+    window.fundChoiceCompleted = false;
+    window.fundChoiceNeeded = false;
 
     switch (window.draw) {
         case "KK":
@@ -474,8 +559,27 @@ function cubeDrawResult(c1, c2)
                 //window.actionCompleted = true;
                 $(".action-btn").remove();
                 refreshUx();
+
+                //let number = 0;
+                //if(window.fundedInst.PE<2) number++;
+                //if(window.fundedInst.NS<2) number++;
+                //if(window.fundedInst.SW<2) number++;
+
+                //let btnNum = 1;
+                //if(number) btnNum = 2;
+
+                //if(number)
                 addButton(window.actionDescription.YY.SpendYY, "action-btn", 2, function(){
-                    alert("not implemented");
+                    drawSpecificCube(window.Current,"Y");
+                    drawSpecificCube(window.Current,"Y");
+                    window.fundChoiceNeeded = true;
+                    //if(window.fundedInst.PE<2) 
+                    fundChoise("PE", 3);
+                    //if(window.fundedInst.NS<2) 
+                    fundChoise("NS", 3);
+                    //if(window.fundedInst.SW<2) 
+                    fundChoise("SW", 3);
+
                     window.actionCompleted = true;
                     endAction();});   
                 addButton(window.actionDescription.YY.NO, "action-btn", 2, function(){
@@ -595,27 +699,101 @@ function endTurn()
 
 function newYear()
 {
+    //Check to see if you have won - see Ending the Game below
+    if(window.Used.indexOf("K") < 0) gameWin();
+
+    //Add a number of yellow Income cubes to your Treasury equal to the number of Income icons printed in the current space on the Employment track (0, 1 or 2).
+    if(window.Employment >= 9) {
+        addToArray("Y", window.Used);
+        addToArray("Y", window.Used);
+    }
+    else if(window.Employment >= 5) {
+        addToArray("Y", window.Used);        
+    }
+
+    //Adjust Wealth one step up or down the track towards the level of Employment (e.g. if Employment is lower than Wealth, reduce Wealth by one step; if Employment is at the same level as Wealth, then leave Wealth where it is).
+    if(window.Employment > window.Wealth) {
+        window.Wealth++;
+    }
+    else if(window.Employment < window.Wealth) {
+        window.Wealth--;
+    }
+
+    //Adjust Health one step up or down the track towards the level of Public Safety.
+    if(window.PublicSafety > window.Health) {
+        window.Health++;
+    }
+    else if(window.PublicSafety < window.Health) {
+        window.Health--;
+    }
+
+    //Adjust Popularity one step up or down the track towards the level of Wealth, and then adjust Popularity a second time one step up or down the track towards the level of Health.
+    if(window.Wealth > window.Popularity) {
+        window.Popularity++;
+    }
+    else if(window.Wealth < window.Popularity) {
+        window.Popularity--;
+    }
+    if(window.Health > window.Popularity) {
+        window.Popularity++;
+    }
+    else if(window.Health < window.Popularity) {
+        window.Popularity--;
+    }
+
+    //Put all the cubes from the Used area and Income cubes placed on Institutions back in the bag and start the next political year.
     while(window.Used && window.Used.length > 0) {
             addToArray(drawCube(window.Used),window.Bag);
         }
+
+    //reset funded
+    window.fundedInst.PE = 0;
+    window.fundedInst.NS = 0;
+    window.fundedInst.SW = 0;
+
+
     refreshUx();
+}
+
+function gameWin() {
+    alert("YOU WIN! Refresh the page for a new game!");
+    window.gameFinished = true;
+}
+
+function gameLosed() {
+    alert("YOU LOSE! Refresh the page for a new game!");
+    window.gameFinished = true;
+}
+
+function checkLose() {
+    if(window.Employment == window.MIN_POINTS) gameLosed();
+    if(window.PublicSafety == window.MIN_POINTS) gameLosed();
+    if(window.Wealth == window.MIN_POINTS) gameLosed();
+    if(window.Health == window.MIN_POINTS) gameLosed();
+    if(window.Popularity == window.MIN_POINTS) gameLosed();
 }
 
 function refreshUx()
 {
+    checkLose();
+
     logCubes();
 
     document.getElementById("newTurn-btn").setAttribute('disabled',true);
     document.getElementById("endTurn-btn").setAttribute('disabled',true);
     document.getElementById("newYear-btn").setAttribute('disabled',true);
 
-    if((!window.actionNeeded || (window.actionNeeded && window.actionCompleted)) &&
+    if(!window.gameFinished &&
+        (!window.actionNeeded || (window.actionNeeded && window.actionCompleted)) &&
         (!window.cutsNeeded || (window.cutsNeeded && window.cutsCompleted)) &&
-        (!window.fundNeeded || (window.fundNeeded && window.fundCompleted))) {
+        (!window.fundNeeded || (window.fundNeeded && window.fundCompleted)) &&
+        (!window.fundChoiceNeeded || (window.fundChoiceNeeded && window.fundChoiceCompleted))) {
 
         if (window.Current && window.Current.length > 0) { 
             document.getElementById("newTurn-btn").setAttribute('disabled',true);
             document.getElementById("endTurn-btn").removeAttribute('disabled');
+            endTurn();
+            refreshUx();
         } else { 
             document.getElementById("endTurn-btn").setAttribute('disabled',true);
             

@@ -97,6 +97,10 @@ window.actionDescription.Funds = {};
 window.actionDescription.Funds.Discard = "Move <i class='" + window.cubeIconClass.Y + "' ></i> to the Used area";
 window.actionDescription.Funds.Treasury = "Place <i class='" + window.cubeIconClass.Y + "' ></i> into your Treasury";
 window.actionDescription.Funds.Fund = "Fund an Institution";
+window.actionDescription.Funds.Choice = {};
+window.actionDescription.Funds.Choice.PE = '+1 Employment';
+window.actionDescription.Funds.Choice.NS = 'add <i class="cube cube-B fa fa-user-shield "></i>';
+window.actionDescription.Funds.Choice.SW = 'add <i class="cube cube-W fa fa-briefcase-medical "></i>';
 
 
 
