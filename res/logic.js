@@ -233,14 +233,12 @@ function endAction()
         //$(".action-btn").off("click");
         $(".action-btn").remove();
 
-        //se ho un giallo in Current
-        window.fundNeeded = window.Current.indexOf("Y") > -1;
-
+        checkFunds();
         refreshUx();
 
         if(window.cutsNeeded)
             createCuts();
-        else if(window.fundNeeded)
+        else if(checkFunds())
             createFunds();
     }
 }
@@ -353,9 +351,18 @@ function endCuts()
 
         refreshUx();
 
-        if(window.fundNeeded)
+        if(checkFunds())
             createFunds();
     }
+}
+
+
+function checkFunds()
+{
+    window.fundNeeded = window.Current.indexOf("Y") > -1;
+    window.fundCompleted = !window.fundNeeded;
+
+    return window.fundNeeded;
 }
 
 function createFunds() 
@@ -441,6 +448,9 @@ function endFunds()
         $(".fund-btn").remove();
 
         refreshUx();
+
+        if(checkFunds() && !window.fundChoiceNeeded)
+            createFunds();
     }
 }
 
@@ -450,6 +460,9 @@ function endFundChoice()
     {
         $(".fund-c-btn").remove();
         refreshUx();
+
+        if(checkFunds())
+            createFunds();
     }
 }
 
