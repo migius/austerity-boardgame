@@ -1,5 +1,5 @@
 i.cube {
-    font-size: 30px;
+    font-size: 20px;
 }
 i.cube-W {
     color: #999;
@@ -12,6 +12,9 @@ i.cube-B {
 }
 i.cube-R {
     color: #f00;
+}
+i.cube-K {
+    color: #000;
 }
 
 i.smallCube {
@@ -75,42 +78,49 @@ div#commands {
 }
 
 /*Institutions*/
+
+div#Institutions table thead tr th {
+    text-transform: uppercase;
+    color: white;
+}
+
+div#Institutions table thead tr th span {
+    color: #000;
+}
     
-.pen-cell {
+table td.pen-cell {
     background-color: #ead6a4;
     border: 1px solid #e09c37;
-    border-top: 1px solid #e09c37 !important;
     width: 23%;
 }
 
 .table thead th.pen-cell {
-    background-color: #e09c37;
+    background-color: #e09c37;    
+    background: linear-gradient(90deg, #e09c37 25%, #fff 85%);
     border: 1px solid #e09c37;
 }
 
-
-.nas-cell {
+table td.nas-cell {
     background-color: #a4a4d4;
     border: 1px solid #1d0da8;
-    border-top: 1px solid #1d0da8 !important;
     width: 23%;
 }
 
 .table thead th.nas-cell {
     background-color: #1d0da8;
+    background: linear-gradient(90deg, #1d0da8 25%, #fff 85%);
     border: 1px solid #1d0da8;
-    color: white;
 }
 
-.sow-cell {
+table td.sow-cell {
     background-color: #aaa;
     border: 1px solid #555;
-    border-top: 1px solid #555 !important;
     width: 23%;
 }
 
 .table thead th.sow-cell {
     background-color: #222;
+    background: linear-gradient(90deg, #222 25%, #fff 85%);
     border: 1px solid #222;
     color: white;
 }
@@ -140,6 +150,10 @@ td.current {
 }
 
 
-button.btn.choose-btn {
+button.btn.choose-btn, .btn-std-action {
     white-space: normal;
+}
+
+footer.footer {
+    background-color: #eee;
 }

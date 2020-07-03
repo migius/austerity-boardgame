@@ -110,3 +110,5 @@ window.alertMsg = {};
 window.alertMsg.NoIncome = "No Income available in Treasury";
 window.alertMsg.Lose = "YOU LOSE! Refresh the page for a new game!";
 window.alertMsg.Win = "YOU WIN! Refresh the page for a new game!";
+window.alertMsg.NotEnoughY = "Not enough Y!";
+window.alertMsg.NotEnoughK = "Not enough K!";;
