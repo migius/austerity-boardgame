@@ -1,3 +1,7 @@
+div.container {
+    max-width: 95%;
+}
+
 i.cube {
     font-size: 20px;
 }
@@ -34,7 +38,7 @@ div#commands {
     background-color: #ead6a4;
     border: 1px solid #e09c37;
 }
-#emp-cell-0, .table thead th.emp-cell {
+#emp-cell-0, .row.head div.emp-cell {
     background-color: #e09c37;
     border: 1px solid #e09c37;
 }
@@ -43,7 +47,7 @@ div#commands {
     background-color: #d4d4f4;
     border: 1px solid #b0a2c1;
 }
-#pub-cell-0, .table thead th.pub-cell {
+#pub-cell-0, .row.head div.pub-cell {
     background-color: #b0a2c1;
     border: 1px solid #b0a2c1;
 }
@@ -52,7 +56,7 @@ div#commands {
     background-color: #eaca72;
     border: 1px solid #e28500;
 }
-#wea-cell-0, .table thead th.wea-cell {
+#wea-cell-0, .row.head div.wea-cell {
     background-color: #e28500;
     border: 1px solid #e28500;
 }
@@ -61,7 +65,7 @@ div#commands {
     background-color: #a4a4d4;
     border: 1px solid #1d0da8;
 }
-#hea-cell-0, .table thead th.hea-cell {
+#hea-cell-0, .row.head div.hea-cell {
     background-color: #1d0da8;
     border: 1px solid #1d0da8;
     color: white;
@@ -72,66 +76,72 @@ div#commands {
     border: 1px solid #008A31;
 }
 
-#pop-cell-0, .table thead th.pop-cell {
+#pop-cell-0, .row.head div.pop-cell {
     background-color: #008A31;
     border-bottom: 1px solid #008A31;
 }
 
-/*Institutions*/
-
-div#Institutions table thead tr th {
+.row.head div, div.tracks div.tr-0 {
     text-transform: uppercase;
     color: white;
+    font-weight: bold;
 }
 
-div#Institutions table thead tr th span {
-    color: #000;
+div.tracks div.row div.col {
+    max-width: 20%;
+    flex: 0 0 20%;
+}
+
+/*Institutions*/
+
+div#Institutions div div.head span.title {
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+}
+
+div#Institutions div.row.col-12 {
+    margin: 0px;
+    padding: 0px;
 }
     
-table td.pen-cell {
+div.pen-cell {
     background-color: #ead6a4;
     border: 1px solid #e09c37;
-    width: 23%;
 }
 
-.table thead th.pen-cell {
+div.pen-head {
     background-color: #e09c37;    
-    background: linear-gradient(90deg, #e09c37 25%, #fff 85%);
+    background: linear-gradient(90deg, #e09c37 30%, #fff 85%);
     border: 1px solid #e09c37;
 }
 
-table td.nas-cell {
+div.nas-cell {
     background-color: #a4a4d4;
     border: 1px solid #1d0da8;
-    width: 23%;
 }
 
-.table thead th.nas-cell {
+div.nas-head {
     background-color: #1d0da8;
-    background: linear-gradient(90deg, #1d0da8 25%, #fff 85%);
+    background: linear-gradient(90deg, #1d0da8 30%, #fff 85%);
     border: 1px solid #1d0da8;
 }
 
-table td.sow-cell {
+div.sow-cell {
     background-color: #aaa;
     border: 1px solid #555;
-    width: 23%;
 }
 
-.table thead th.sow-cell {
+div.sow-head {
     background-color: #222;
-    background: linear-gradient(90deg, #222 25%, #fff 85%);
+    background: linear-gradient(90deg, #222 30%, #fff 85%);
     border: 1px solid #222;
-    color: white;
 }
-
 
 
 .Institutions-cell.private-action-cell, .Institutions-cell.icon-cell {
     background-color: #fff;
     border: 0px;
-    border-top: 0px !important;
-    width: 8%
 }
 .Institutions-cell.Institutions-cell-first    {
     filter: brightness(0.8);
@@ -144,8 +154,7 @@ table td.sow-cell {
     padding: 3px;
 }
  
-td.current {
-    padding: 0rem;
+td.current, div.current {
     border: 6px solid #ff0000 !important;
 }
 

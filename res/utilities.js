@@ -165,16 +165,16 @@ function refreshUx()
         }
     }
 
-    $("td.points-cell").removeClass("current");    
-    $("td.points-cell#emp-cell-"+ window.Employment).addClass("current");
-    $("td.points-cell#pub-cell-"+ window.PublicSafety).addClass("current");
-    $("td.points-cell#wea-cell-"+ window.Wealth).addClass("current");
-    $("td.points-cell#hea-cell-"+ window.Health).addClass("current");
-    $("td.points-cell#pop-cell-"+ window.Popularity).addClass("current");
+    $("div.points-cell").removeClass("current");    
+    $("div.points-cell#emp-cell-"+ window.Employment).addClass("current");
+    $("div.points-cell#pub-cell-"+ window.PublicSafety).addClass("current");
+    $("div.points-cell#wea-cell-"+ window.Wealth).addClass("current");
+    $("div.points-cell#hea-cell-"+ window.Health).addClass("current");
+    $("div.points-cell#pop-cell-"+ window.Popularity).addClass("current");
 
 
-    $("td.Institutions-cell").removeClass("current");
-    $("td.Institutions-cell#pen-cell-"+ window.PrivateEnterprise).addClass("current");
-    $("td.Institutions-cell#nas-cell-"+ window.NationalSecurity).addClass("current");
-    $("td.Institutions-cell#sow-cell-"+ window.SocialWelfare).addClass("current");
+    $("div.Institutions-cell").removeClass("current");
+    $("div.Institutions-cell#pen-cell-"+ window.PrivateEnterprise).addClass("current");
+    $("div.Institutions-cell#nas-cell-"+ window.NationalSecurity).addClass("current");
+    $("div.Institutions-cell#sow-cell-"+ window.SocialWelfare).addClass("current");
 }
