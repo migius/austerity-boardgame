@@ -21,23 +21,6 @@ function defaultBagSetUp()
 
 
     //FOR DEBUG:
-    //addToArray("R", window.Bag);
-    //addToArray("Y", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("K", window.Bag);
-    addToArray("Y", window.Bag);
-    addToArray("Y", window.Bag);
-    addToArray("Y", window.Bag);
-    addToArray("Y", window.Bag);
-    addToArray("Y", window.Bag);
-    addToArray("Y", window.Bag);
-}
 
 function defaultTrackSetUp()
 {
