@@ -21,6 +21,7 @@ function defaultBagSetUp()
 
 
     //FOR DEBUG:
+}
 
 function defaultTrackSetUp()
 {
