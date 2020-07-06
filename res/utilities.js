@@ -131,8 +131,9 @@ function refreshUx()
     //document.getElementById("endTurn-btn").setAttribute('disabled',true);
     //document.getElementById("newYear-btn").setAttribute('disabled',true);
     $("#newTurn-btn-g").hide();
-    //$("#endTurn-btn-g").hide();
+    $("#endTurn-btn-g").hide();
     $("#newYear-btn-g").hide();
+    $('button.btn-std-action').prop('disabled', false);
 
     checkFunds();
 
@@ -145,8 +146,8 @@ function refreshUx()
         if (window.Current && window.Current.length > 0) { 
             //document.getElementById("newTurn-btn").setAttribute('disabled',true);
             //document.getElementById("endTurn-btn").removeAttribute('disabled');
-            $("#newTurn-btn-g").show();
-            endTurn();
+            $("#endTurn-btn-g").show();
+            //endTurn();
             //refreshUx();
         } else { 
             //document.getElementById("endTurn-btn").setAttribute('disabled',true);
@@ -161,6 +162,7 @@ function refreshUx()
             } else { 
                 //document.getElementById("newYear-btn").removeAttribute('disabled');
                 $("#newYear-btn-g").show();
+                $('button.btn-std-action').prop('disabled', true);
             }
         }
     }
@@ -177,4 +179,10 @@ function refreshUx()
     $("div.Institutions-cell#pen-cell-"+ window.PrivateEnterprise).addClass("current");
     $("div.Institutions-cell#nas-cell-"+ window.NationalSecurity).addClass("current");
     $("div.Institutions-cell#sow-cell-"+ window.SocialWelfare).addClass("current");
+
+    $("div.Institutions-cell.private-action-cell").removeClass("p-a-used");
+    if(window.fundedInst.PE) $("div.Institutions-cell.private-action-cell.pen-cell").addClass("p-a-used");
+    if(window.fundedInst.NS) $("div.Institutions-cell.private-action-cell.nas-cell").addClass("p-a-used");
+    if(window.fundedInst.SW) $("div.Institutions-cell.private-action-cell.sow-cell").addClass("p-a-used");
+
 }

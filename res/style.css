@@ -28,6 +28,49 @@ i.cube-DY {
     color: #970;
 }
 
+div#result-box {
+    border: 1px solid black;
+    background-color: antiquewhite;
+    font-family: monospace;
+    text-align: justify;
+}
+
+h2.newspaper-name {
+    font-family: serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: xxx-large;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:block;
+    width:100%;
+    min-width:1px;    
+}
+
+p.newspaper-info {
+    font-size: smaller;
+    font-style: oblique;
+}
+
+div#result-box h5 {
+    font-size: xxx-large;
+    text-align: center;
+    clear: both;
+    font-variant: small-caps;
+    border-top: double 8px black;
+}
+
+.row.paper-text {
+    font-size: smaller;
+}
+
+#cubeDrawResultEffect {
+    font-weight: bold;
+    border: 2px dotted black;
+    font-size: x-large;
+}
+
 div#commands {
     position: fixed;
     bottom: 10px;
@@ -147,7 +190,9 @@ div.sow-head {
     filter: brightness(0.8);
 }
 
-
+div.p-a-used {
+    filter: opacity(0.5);
+}
 
 
 .table th, .table td {

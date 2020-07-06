@@ -46,6 +46,8 @@ window.gameFinished = false;
 
 window.actionDiv = $('#actions');
 
+$("#result-box").hide();
+
 function newTurn()
 {
     var c1 = drawCube(window.Bag);
@@ -77,6 +79,8 @@ function newTurn()
 
 function endTurn()
 {
+    $("#result-box").hide();
+
     //window.actionDiv.empty();
     while(window.Current && window.Current.length > 0) {
             addToArray(drawCube(window.Current),window.Used);

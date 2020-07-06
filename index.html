@@ -19,222 +19,238 @@
     <div class="container">
         <h1>Austerity</h1> [under development]
         <div class="row">
-        <div id="array" class="col-xs-12 col-md-6" >
-            <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <h2>Bag</h2>
-                    <div id="bagContent"></div>
-                </div>
-
-                <div class="col-xs-6 col-md-3">
-                    <h2>Current</h2>
-                    <div id="currentContent"></div>
-                </div>
-
-                <div class="col-xs-6 col-md-3">
-                    <h2>Used</h2>
-                    <div id="usedContent"></div>
-                </div>
-
-                <div class="col-xs-6 col-md-3">
-                    <h2>Treasury</h2>
-                    <div id="treasuryContent"></div>
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <h5>
-                    Cube draw result: <b><span id="cubeDrawResult" /></b>
-                </h5>
-                <p>
-                    Effect: <i><span id="cubeDrawResultEffect" /></i>
-                </p>
-            </div>
-            <div class="col-xs-12">                
-                <div id="actions" class="row">
-                    <div id="newTurn-btn-g" class="btn-group col-12" role="group">
-                        <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success col-12">New turn</button>
+            <div class="col-xs-12 col-md-6" >
+                <div class="row" id="bags">
+                    <div class="col-xs-6 col-md-3">
+                        <h2>Bag</h2>
+                        <div id="bagContent"></div>
                     </div>
-                    <!--<button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning d-none">End turn</button>-->
-                    <div id="newYear-btn-g" class="btn-group col-12" role="group">
-                        <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger col-12">New year</button>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h2>Current</h2>
+                        <div id="currentContent"></div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h2>Used</h2>
+                        <div id="usedContent"></div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h2>Treasury</h2>
+                        <div id="treasuryContent"></div>
                     </div>
                 </div>
+
+                <div id="result-box" class="col-xs-12 mt-3 p-2">
+                    <h2 class="newspaper-name">
+                        <i class="fas fa-newspaper float-left d-none d-sm-block"></i>Economic News<i class="fas fa-newspaper float-right d-none d-sm-block""></i>
+                    </h2>
+                    <p class="newspaper-info"><span class="float-left">Thursday, November 5th 2020</span><span class="float-right">3 £</span></p>
+                    <h5>
+                        <span id="cubeDrawResult" />
+                    </h5>
+                    <div class="row paper-text">
+                        <div class="col-4 d-none d-lg-block">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada in ipsum a lacinia. Morbi suscipit, lacus id congue pharetra, metus libero tristique nisl, tincidunt rhoncus tellus sapien eget enim. Praesent vehicula scelerisque mi, a viverra tortor tempor quis. Fusce tristique placerat nibh vitae mollis. Sed erat erat, porta egestas purus nec, consectetur maximus massa. Aenean lacinia tellus ut velit mollis ultricies. Duis a urna non lectus luctus feugiat. Nullam sed metus at risus semper feugiat id non nunc.
+                        </div>
+                        <div class="col-12 col-lg-4">
+                           Aenean ullamcorper dui tempus gravida dignissim. Sed non erat risus. Maecenas ac massa ipsum. Integer vel interdum enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla feugiat accumsan elit, tempor lacinia nisl consequat quis. 
+                           <p id="cubeDrawResultEffect" class="p-2"></p>
+                        </div>   
+                        <div class="col-4 d-none d-lg-block">
+                            Sed at elementum nisi, euismod blandit nisl. Donec vulputate lobortis quam, sit amet eleifend diam iaculis et. Pellentesque a vulputate nunc. Suspendisse vitae lacinia massa, mollis ultrices urna. Pellentesque nec eleifend dolor, ut varius nibh. Mauris eros purus, fermentum vel eros sed, interdum pellentesque lacus. Mauris mattis feugiat lectus laoreet congue. Proin dignissim sollicitudin orci, vel congue odio pharetra eget.
+                        </div>           
+                    </div>                 
+                </div>
+        
+                
             </div>            
             
-            <div class="col-xs-12">
-                <h5>
-                    <b>Institutions</b>
-                </h5>
-            </div>
-            
-            <div class="col-xs-12" id="Institutions">
-                <div class="row col-12">
-                    <div class="pen-head col-12 head" ><span class="title">Private Enterprise</span>
-                        <span class="float-right">
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i> / 
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i> / 
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i>
-                        </span>
+            <div class="col-xs-12 col-md-6">
+
+                <div class="col-xs-12 mt-3 " id="buttonsArea">   
+                    <h5>Actions</h5>             
+                    <div id="actions" class="row">
+                        <div id="newTurn-btn-g" class="btn-group col-12" role="group">
+                            <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success col-12">New turn</button>
+                        </div>
+                        <div id="endTurn-btn-g" class="btn-group col-12" role="group">
+                            <button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning col-12">End turn</button>
+                        </div>    
+                        <div id="newYear-btn-g" class="btn-group col-12" role="group">
+                            <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger col-12">New year</button>
+                        </div>
                     </div>
-                    <div class="Institutions-cell private-action-cell pen-cell col-12 pt-1 pb-1" id="pen-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     +1 Employment</i></div>                    
-                    <div class="Institutions-cell Institutions-cell-first pen-cell col-2" id="pen-cell-1"></div>
-                    <div class="Institutions-cell pen-cell col-2" id="pen-cell-2"></div>
-                    <div class="Institutions-cell pen-cell col-2" id="pen-cell-3"></div>
-                    <div class="Institutions-cell pen-cell col-6" id="pen-cell-4"> - 2 Employment</div>
-                </div>
-            
-                <div class="row col-12 mt-2">
-                    <div class="nas-head col-12 head" ><span class="title">National Security</span>
-                        <span class="float-right">
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i> / 
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i>
-                        </span>
+                </div>   
+
+                <div class="mt-3 ">
+                    <h5>Actions</h5>
+                    <div class="row" id="standard-action-area">
+                        <div class="btn-group col-4" role="group">
+                            <button type="button" onClick="borrowMoney();" id="bm-action-btn" class="btn btn-info col-12 btn-std-action">
+                                Borrow Money<hr />
+                                Add <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-Y smallCube fa fa-coins "></i><br />
+                                Add to bag <i class="cube cube-K fa fa-credit-card smallCube"></i>
+                            </button>
+                        </div>
+                        <div class="btn-group col-4" role="group">
+                            <button type="button" onClick="raiseTaxes();" id="rt-action-btn" class="btn btn-info col-12 btn-std-action">
+                                Raise Taxes<hr />
+                                Add to bag <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-R fa fa-bomb smallCube "></i><br />
+                                &nbsp;
+                            </button>
+                        </div>
+                        <div class="btn-group col-4" role="group">
+                            <button type="button" onClick="payLoans();" id="pl-action-btn" class="btn btn-info col-12 btn-std-action">
+                                Pay Loans<hr />
+                                Remove <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-K fa fa-credit-card smallCube"></i><br />
+                                &nbsp;
+                            </button>
+                        </div>
                     </div>
-                    <div class="Institutions-cell private-action-cell pen-cell col-12 pt-1 pb-1" id="nas-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-B fa fa-user-shield "></i></div>                    
-                    <div class="Institutions-cell Institutions-cell-first nas-cell col-2" id="nas-cell-1"></div>
-                    <div class="Institutions-cell nas-cell col-2" id="nas-cell-2"></div>
-                    <div class="Institutions-cell nas-cell col-2" id="nas-cell-3"></div>
-                    <div class="Institutions-cell nas-cell col-6" id="nas-cell-4"> Add <i class="cube cube-R fa fa-bomb smallCube "></i></div>
                 </div>
-            
-                <div class="row col-12 mt-2">
-                    <div class="sow-head col-12 head" ><span class="title">Social Welfare</span>
-                        <span class="float-right">
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i> / 
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i> / 
-                            <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i>
-                        </span>
-                    </div>
-                    <div class="Institutions-cell private-action-cell pen-cell col-12 pt-1 pb-1" id="sow-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-W fa fa-briefcase-medical "></i></div>                    
-                    <div class="Institutions-cell Institutions-cell-first sow-cell col-2" id="sow-cell-1"></div>
-                    <div class="Institutions-cell sow-cell col-2" id="sow-cell-2"></div>
-                    <div class="Institutions-cell sow-cell col-2" id="sow-cell-3"></div>
-                    <div class="Institutions-cell sow-cell col-6" id="sow-cell-4"> - 2 Health</div>
-                </div>
-
-            </div>
-        </div>            
-        
-        <div class="col-xs-12 col-md-6">
-
-            <div class="col-xs-12">
-                <h5>
-                    <b>Actions</b>
-                </h5>
-            </div>
-
-            <div class="row">
-                <div class="btn-group col-4" role="group">
-                    <button type="button" onClick="borrowMoney();" id="bm-action-btn" class="btn btn-info col-12 btn-std-action">
-                        Borrow Money<hr />
-                        Add <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-Y smallCube fa fa-coins "></i><br />
-                        Add to bag <i class="cube cube-K fa fa-credit-card smallCube"></i>
-                    </button>
-                </div>
-                <div class="btn-group col-4" role="group">
-                    <button type="button" onClick="raiseTaxes();" id="rt-action-btn" class="btn btn-info col-12 btn-std-action">
-                        Raise Taxes<hr />
-                        Add to bag <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-R fa fa-bomb smallCube "></i><br />
-                        &nbsp;
-                    </button>
-                </div>
-                <div class="btn-group col-4" role="group">
-                    <button type="button" onClick="payLoans();" id="pl-action-btn" class="btn btn-info col-12 btn-std-action">
-                        Pay Loans<hr />
-                        Remove <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-K fa fa-credit-card smallCube"></i><br />
-                        &nbsp;
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-3 col-12 tracks">
-                <div class="row head">
-                    <div class="emp-cell col">Employment</div>
-                    <div class="pub-cell col">Public Safety</div>
-                    <div class="wea-cell col">Wealth</div>
-                    <div class="hea-cell col">Health</div>
-                    <div class="pop-cell col">Popularity</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-10">10 <span class="float-right"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                    <div class="col points-cell pub-cell " id="pub-cell-10">10</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-10">10</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-10">10</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-10">10</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-9">9 <span class="float-right"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                    <div class="col points-cell pub-cell " id="pub-cell-9">9</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-9">9</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-9">9</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-9">9</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-8">8 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                    <div class="col points-cell pub-cell " id="pub-cell-8">8</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-8">8</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-8">8</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-8">8</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-7">7 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                    <div class="col points-cell pub-cell " id="pub-cell-7">7</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-7">7</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-7">7</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-7">7</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-6">6 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                    <div class="col points-cell pub-cell " id="pub-cell-6">6</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-6">6</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-6">6</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-6">6</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-5">5 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                    <div class="col points-cell pub-cell " id="pub-cell-5">5</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-5">5</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-5">5</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-5">5</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-4">4 <span class="float-right"> </div>
-                    <div class="col points-cell pub-cell " id="pub-cell-4">4</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-4">4</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-4">4</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-4">4</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-3">3 <span class="float-right"> </div>
-                    <div class="col points-cell pub-cell " id="pub-cell-3">3</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-3">3</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-3">3</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-3">3</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-2">2 <span class="float-right"> </div>
-                    <div class="col points-cell pub-cell " id="pub-cell-2">2</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-2">2</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-2">2</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-2">2</div>
-                </div>
-                <div class="row">
-                    <div class="col points-cell emp-cell" id="emp-cell-1">1 <span class="float-right"> </div>
-                    <div class="col points-cell pub-cell " id="pub-cell-1">1</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-1">1</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-1">1</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-1">1</div>
-                </div>
-                <div class="row tr-0">
-                    <div class="col points-cell emp-cell" id="emp-cell-0">0 <span class="float-right"> </div>
-                    <div class="col points-cell pub-cell " id="pub-cell-0">0</div>
-                    <div class="col points-cell wea-cell" id="wea-cell-0">0</div>
-                    <div class="col points-cell hea-cell" id="hea-cell-0">0</div>
-                    <div class="col points-cell pop-cell" id="pop-cell-0">0</div>
-                </div>
-
             </div>
         </div>
+
+        <div class="row mb-2">
+            <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 mt-3 " id="Institutions">
+                    <h5>Institutions</h5>
+                    <div class="row col-12">
+                        <div class="pen-head col-12 head" ><span class="title">Private Enterprise</span>
+                            <span class="float-right">
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i> / 
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i> / 
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i>
+                            </span>
+                        </div>
+                        <div class="Institutions-cell private-action-cell pen-cell col-12 pt-1 pb-1" id="pen-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     +1 Employment</i></div>                    
+                        <div class="Institutions-cell Institutions-cell-first pen-cell col-2" id="pen-cell-1"></div>
+                        <div class="Institutions-cell pen-cell col-2" id="pen-cell-2"></div>
+                        <div class="Institutions-cell pen-cell col-2" id="pen-cell-3"></div>
+                        <div class="Institutions-cell pen-cell col-6" id="pen-cell-4"> - 2 Employment</div>
+                    </div>
+                
+                    <div class="row col-12 mt-2">
+                        <div class="nas-head col-12 head" ><span class="title">National Security</span>
+                            <span class="float-right">
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i> / 
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i>
+                            </span>
+                        </div>
+                        <div class="Institutions-cell private-action-cell nas-cell col-12 pt-1 pb-1" id="nas-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-B fa fa-user-shield "></i></div>                    
+                        <div class="Institutions-cell Institutions-cell-first nas-cell col-2" id="nas-cell-1"></div>
+                        <div class="Institutions-cell nas-cell col-2" id="nas-cell-2"></div>
+                        <div class="Institutions-cell nas-cell col-2" id="nas-cell-3"></div>
+                        <div class="Institutions-cell nas-cell col-6" id="nas-cell-4"> Add <i class="cube cube-R fa fa-bomb smallCube "></i></div>
+                    </div>
+                
+                    <div class="row col-12 mt-2">
+                        <div class="sow-head col-12 head" ><span class="title">Social Welfare</span>
+                            <span class="float-right">
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i> / 
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i> / 
+                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i>
+                            </span>
+                        </div>
+                        <div class="Institutions-cell private-action-cell sow-cell col-12 pt-1 pb-1" id="sow-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-W fa fa-briefcase-medical "></i></div>                    
+                        <div class="Institutions-cell Institutions-cell-first sow-cell col-2" id="sow-cell-1"></div>
+                        <div class="Institutions-cell sow-cell col-2" id="sow-cell-2"></div>
+                        <div class="Institutions-cell sow-cell col-2" id="sow-cell-3"></div>
+                        <div class="Institutions-cell sow-cell col-6" id="sow-cell-4"> - 2 Health</div>
+                    </div>
+
+                </div>                
+            </div>
+            <div class="col-xs-12 col-md-6">                
+                <div class="mt-3 col-12 tracks">
+                    <div class="row head">
+                        <div class="emp-cell col">Employment</div>
+                        <div class="pub-cell col">Public Safety</div>
+                        <div class="wea-cell col">Wealth</div>
+                        <div class="hea-cell col">Health</div>
+                        <div class="pop-cell col">Popularity</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-10">10 <span class="float-right"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
+                        <div class="col points-cell pub-cell " id="pub-cell-10">10</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-10">10</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-10">10</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-10">10</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-9">9 <span class="float-right"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
+                        <div class="col points-cell pub-cell " id="pub-cell-9">9</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-9">9</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-9">9</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-9">9</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-8">8 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
+                        <div class="col points-cell pub-cell " id="pub-cell-8">8</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-8">8</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-8">8</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-8">8</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-7">7 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
+                        <div class="col points-cell pub-cell " id="pub-cell-7">7</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-7">7</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-7">7</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-7">7</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-6">6 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
+                        <div class="col points-cell pub-cell " id="pub-cell-6">6</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-6">6</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-6">6</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-6">6</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-5">5 <span class="float-right"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
+                        <div class="col points-cell pub-cell " id="pub-cell-5">5</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-5">5</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-5">5</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-5">5</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-4">4 <span class="float-right"> </div>
+                        <div class="col points-cell pub-cell " id="pub-cell-4">4</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-4">4</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-4">4</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-4">4</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-3">3 <span class="float-right"> </div>
+                        <div class="col points-cell pub-cell " id="pub-cell-3">3</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-3">3</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-3">3</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-3">3</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-2">2 <span class="float-right"> </div>
+                        <div class="col points-cell pub-cell " id="pub-cell-2">2</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-2">2</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-2">2</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-2">2</div>
+                    </div>
+                    <div class="row">
+                        <div class="col points-cell emp-cell" id="emp-cell-1">1 <span class="float-right"> </div>
+                        <div class="col points-cell pub-cell " id="pub-cell-1">1</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-1">1</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-1">1</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-1">1</div>
+                    </div>
+                    <div class="row tr-0">
+                        <div class="col points-cell emp-cell" id="emp-cell-0">0 <span class="float-right"> </div>
+                        <div class="col points-cell pub-cell " id="pub-cell-0">0</div>
+                        <div class="col points-cell wea-cell" id="wea-cell-0">0</div>
+                        <div class="col points-cell hea-cell" id="hea-cell-0">0</div>
+                        <div class="col points-cell pop-cell" id="pop-cell-0">0</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

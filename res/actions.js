@@ -217,8 +217,9 @@ function cubeDrawResult(c1, c2)
     }
 
     //console.Log("Effect: " + effect);
-    $('span#cubeDrawResult').html(window.cubeDrawTitle[draw]);
-    $('span#cubeDrawResultEffect').html(window.cubeDrawDescription[draw]);
+    $('#cubeDrawResult').html(window.cubeDrawTitle[draw]);
+    $('#cubeDrawResultEffect').html(window.cubeDrawDescription[draw]);
+    $("#result-box").show();
 }
 
 function endAction()
