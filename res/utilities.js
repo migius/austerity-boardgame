@@ -143,7 +143,7 @@ function refreshUx()
         (!window.fundNeeded || (window.fundNeeded && window.fundCompleted)) &&
         (!window.fundChoiceNeeded || (window.fundChoiceNeeded && window.fundChoiceCompleted))) {
 
-        if (window.Current && window.Current.length > 0) { 
+        if (!window.turnEnded) { 
             //document.getElementById("newTurn-btn").setAttribute('disabled',true);
             //document.getElementById("endTurn-btn").removeAttribute('disabled');
             $("#endTurn-btn-g").show();

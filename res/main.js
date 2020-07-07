@@ -43,6 +43,8 @@ window.fundCompleted = false;
 window.fundChoiceNeeded = false;
 window.fundChoiceCompleted = false;
 window.gameFinished = false;
+window.turnEnded = true;
+
 
 window.actionDiv = $('#actions');
 
@@ -74,6 +76,7 @@ function newTurn()
     
     cubeDrawResult(c1, c2);
     
+    window.turnEnded = false;
     refreshUx();
 }
 
@@ -85,6 +88,8 @@ function endTurn()
     while(window.Current && window.Current.length > 0) {
             addToArray(drawCube(window.Current),window.Used);
         }
+
+    window.turnEnded = true;
     refreshUx();
 }
 
