@@ -108,7 +108,10 @@ window.actionDescription.Funds.Choice.SW = 'add <i class="cube cube-W fa fa-brie
 //alert
 window.alertMsg = {};
 window.alertMsg.NoIncome = "No Income available in Treasury";
-window.alertMsg.Lose = "YOU LOSE! Refresh the page for a new game!";
-window.alertMsg.Win = "YOU WIN! Refresh the page for a new game!";
+window.alertMsg.Lose = "YOU LOSE!";
+window.alertMsg.Win = "YOU WIN!";
 window.alertMsg.NotEnoughY = "Not enough Y!";
-window.alertMsg.NotEnoughK = "Not enough K!";;
+window.alertMsg.NotEnoughK = "Not enough K!";
+window.alertMsg.NotEnoughR = "Not enough R!";
+window.alertMsg.NotEnoughB = "Not enough B!";
+window.alertMsg.NotEnoughW = "Not enough W!";

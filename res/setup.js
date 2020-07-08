@@ -8,6 +8,11 @@ function defaultBagSetUp()
      1 White/Welfare 
      1 Yellow/Income
     */    
+    window.Bag = [];
+    window.Current = [];
+    window.Used = [];
+    window.Treasury = [];
+
     addToArray("K", window.Bag);
     addToArray("K", window.Bag);
     addToArray("K", window.Bag);
@@ -21,6 +26,12 @@ function defaultBagSetUp()
 
 
     //FOR DEBUG:
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
+    addToArray("Y", window.Bag);
 }
 
 function defaultTrackSetUp()
@@ -37,6 +48,23 @@ function defaultInstitutionsSetUp()
     window.PrivateEnterprise = 1;
     window.NationalSecurity = 1;
     window.SocialWelfare = 1;
+
+    window.fundedInst.PE = 0;
+    window.fundedInst.NS = 0;
+    window.fundedInst.SW = 0;
+}
+
+function defaultActions() {    
+    window.actionNeeded = false;
+    window.actionCompleted = false;
+    window.cutsNeeded = false;
+    window.cutsCompleted = false;
+    window.fundNeeded = false;
+    window.fundCompleted = false;
+    window.fundChoiceNeeded = false;
+    window.fundChoiceCompleted = false;
+    window.gameFinished = false;
+    window.turnEnded = true;
 }
 
 function defaultSetUp()
@@ -44,4 +72,8 @@ function defaultSetUp()
     defaultBagSetUp();
     defaultTrackSetUp();
     defaultInstitutionsSetUp();
+    defaultActions();
+    refreshUx();
+    $("#newGame-btn-g").hide();
+    $("#result-box").hide();
 }

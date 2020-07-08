@@ -40,6 +40,7 @@ function cubeDrawResult(c1, c2)
                     window.actionCompleted = true;}
                 else { 
                     alert(window.alertMsg.NoIncome); 
+                    return null;
                 }
                 endAction();
             });
@@ -62,6 +63,17 @@ function cubeDrawResult(c1, c2)
         case "RY":
             //ither Remove Y and R or increase Popularity by one and add K
             addButton(window.actionDescription.RY.RemoveYR, "action-btn", 2, function(){
+                
+                if(window.Current.indexOf("Y") < 0) {
+                    alert(window.alertMsg.NotEnoughY); 
+                    return null;
+                }
+                if(window.Current.indexOf("R") < 0) {
+                    alert(window.alertMsg.NotEnoughR); 
+                    return null;
+                }
+
+
                 drawSpecificCube(window.Current,"R");
                 drawSpecificCube(window.Current,"Y"); 
                 window.actionCompleted = true;
@@ -111,6 +123,14 @@ function cubeDrawResult(c1, c2)
 
                 //if(number)
                 addButton(window.actionDescription.YY.SpendYY, "action-btn", 2, function(){
+                    if(getAllIndexes(window.Current,"Y").length < 2)
+                    {
+                        //if I have less tha 2 Y I can't do it
+                        alert(window.alertMsg.NotEnoughY); 
+                        return null;
+                    }
+
+
                     drawSpecificCube(window.Current,"Y");
                     drawSpecificCube(window.Current,"Y");
                     window.fundChoiceNeeded = true;
@@ -133,6 +153,17 @@ function cubeDrawResult(c1, c2)
         case "KY":
             //Optionally Spend Y to Remove K (or Cuts)            
             addButton(window.actionDescription.KY.SpendYRemoveK, "action-btn", 2, function(){
+
+                if(window.Current.indexOf("Y") < 0) {
+                    alert(window.alertMsg.NotEnoughY); 
+                    return null;
+                }
+                if(window.Current.indexOf("K") < 0) {
+                    alert(window.alertMsg.NotEnoughK); 
+                    return null;
+                }
+
+
                 drawSpecificCube(window.Current,"K");
                 drawSpecificCube(window.Current,"Y");  //TODO: issue#1
                 window.actionCompleted = true;
@@ -163,6 +194,16 @@ function cubeDrawResult(c1, c2)
         case "BR":
             //Either Remove B and R or reduce Public Safety by one     
             addButton(window.actionDescription.BR.RemoveBR, "action-btn", 2, function(){
+
+                if(window.Current.indexOf("B") < 0) {
+                    alert(window.alertMsg.NotEnoughB); 
+                    return null;
+                }
+                if(window.Current.indexOf("R") < 0) {
+                    alert(window.alertMsg.NotEnoughR); 
+                    return null;
+                }
+
                 drawSpecificCube(window.Current,"B");
                 drawSpecificCube(window.Current,"R");
                 window.actionCompleted = true;
@@ -175,6 +216,11 @@ function cubeDrawResult(c1, c2)
         case "BW":
             //Either Remove W or increase Employment by one and decrease Popularity by one
             addButton(window.actionDescription.BW.RemoveW, "action-btn", 2, function(){
+                if(window.Current.indexOf("W") < 0) {
+                    alert(window.alertMsg.NotEnoughW); 
+                    return null;
+                }
+                
                 drawSpecificCube(window.Current,"W");
                 window.actionCompleted = true;
                 endAction();});
@@ -200,6 +246,7 @@ function cubeDrawResult(c1, c2)
                     window.actionCompleted = true;}
                 else { 
                     alert(window.alertMsg.NoIncome); 
+                    return null;
                 }
                 endAction();
             });
@@ -219,7 +266,7 @@ function cubeDrawResult(c1, c2)
     //console.Log("Effect: " + effect);
     $('#cubeDrawResult').html(window.cubeDrawTitle[draw]);
     $('#cubeDrawResultEffect').html(window.cubeDrawDescription[draw]);
-    $("#result-box").show();
+    $("#result-box").slideDown(400);
 }
 
 function endAction()
@@ -522,11 +569,13 @@ function payLoans() {
     }
 
     while(YToPay > 0) {
+        /*
         if(window.Treasury.indexOf("Y") > -1 && window.Used.indexOf("Y") > -1 && YAvailable > YToPay){
             alert("todo: choose Treasury or Used");
             return;
         }
         else
+            */
             if(window.Treasury.indexOf("Y") > -1) {
                 drawSpecificCube(window.Treasury,"Y");
                 YToPay--;

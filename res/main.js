@@ -28,27 +28,17 @@ window.MAX_INST = 3;
 
 //number of cubes
 window.fundedInst = {}
-window.fundedInst.PE = 0;
-window.fundedInst.NS = 0;
-window.fundedInst.SW = 0;
 
 //logic parameters
 window.draw = "";
-window.actionNeeded = false;
-window.actionCompleted = false;
-window.cutsNeeded = false;
-window.cutsCompleted = false;
-window.fundNeeded = false;
-window.fundCompleted = false;
-window.fundChoiceNeeded = false;
-window.fundChoiceCompleted = false;
-window.gameFinished = false;
-window.turnEnded = true;
 
 
 window.actionDiv = $('#actions');
 
-$("#result-box").hide();
+
+function newGame() {
+    defaultSetUp();
+}
 
 function newTurn()
 {
@@ -154,11 +144,13 @@ function newYear()
 function gameWin() {
     alert(window.alertMsg.Win);
     window.gameFinished = true;
+    $("#newGame-btn-g").show();
 }
 
 function gameLosed() {
     alert(window.alertMsg.Lose);
     window.gameFinished = true;
+    $("#newGame-btn-g").show();
 }
 
 function checkLose() {
