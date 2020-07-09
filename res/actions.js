@@ -220,7 +220,7 @@ function cubeDrawResult(c1, c2)
                     alert(window.alertMsg.NotEnoughW); 
                     return null;
                 }
-                
+
                 drawSpecificCube(window.Current,"W");
                 window.actionCompleted = true;
                 endAction();});
@@ -266,7 +266,7 @@ function cubeDrawResult(c1, c2)
     //console.Log("Effect: " + effect);
     $('#cubeDrawResult').html(window.cubeDrawTitle[draw]);
     $('#cubeDrawResultEffect').html(window.cubeDrawDescription[draw]);
-    $("#result-box").slideDown(400);
+    $("#result-box").slideDown(700);
 }
 
 function endAction()
