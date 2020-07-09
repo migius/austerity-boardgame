@@ -71,3 +71,8 @@ function defaultSetUp()
     $("#newGame-btn-g").hide();
     $("#result-box").hide();
 }
+
+function removeLoader() {
+    $('div.container').removeClass("loading");
+    $('div.loader').hide();
+}

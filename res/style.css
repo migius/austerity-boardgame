@@ -219,3 +219,14 @@ button.btn.choose-btn, .btn-std-action {
 footer.footer {
     background-color: #eee;
 }
+
+.loader {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    display: flex;
+}
+
+.loading {
+    filter: blur(5px) grayscale(0.8) opacity(0.1);
+}

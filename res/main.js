@@ -166,6 +166,7 @@ function init()
 {
     defaultSetUp();
     refreshUx();
+    removeLoader();
 }
 
 
