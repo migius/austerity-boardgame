@@ -2,11 +2,22 @@ div.container {
     max-width: 95%;
 }
 
+.bag {
+    border: 1px solid black;
+    background: linear-gradient(180deg, #333 0%, #eee 100%);
+    margin: 8px 0px;
+    padding: 1px 2px;
+    color: white;
+    height: 100%;
+    border-radius: 0.25rem;
+}
+
 i.cube {
     font-size: 20px;
+    text-shadow: 0 0 3px white;
 }
 i.cube-W {
-    color: #999;
+    color: #00a2b6;
 }
 i.cube-Y {
     color: #fc1;

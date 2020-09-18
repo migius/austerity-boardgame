@@ -1,4 +1,27 @@
 
+function refreshCubeDrawResult()
+{
+    $(".action-btn").remove();        
+    $(".cuts-btn").remove();
+    $(".fund-btn").remove();
+    $(".fund-c-btn").remove();
+
+    //2 cubes
+    if(window.Current.length == 2)
+        cubeDrawResult(window.Current[0],window.Current[1]);
+    else if(window.Current.length == 1)
+        endAction();
+    else {
+        window.actionNeeded = false;
+        window.cutsNeeded = false;
+        window.fundNeeded = false;
+        window.fundChoiceNeeded = false;
+        refreshUx();
+    }
+
+
+}
+
 function cubeDrawResult(c1, c2)
 { 
     if(c1 < c2)
@@ -11,256 +34,254 @@ function cubeDrawResult(c1, c2)
     }
     console.log("draw couple: " + draw);
     
-    window.actionNeeded = true;
-    window.actionCompleted = false;
-    window.cutsNeeded = false;
-    window.cutsCompleted = false;
-    window.fundNeeded = false;
-    window.fundCompleted = false;
-    window.fundChoiceCompleted = false;
-    window.fundChoiceNeeded = false;
-
-    switch (window.draw) {
-        case "KK":
-            //Reduce Wealth by one
-            addButton(window.actionDescription.KK.ReduceWealth, "action-btn", 1, function(){
-                window.Wealth = Math.max(window.Wealth -1,window.MIN_POINTS);
-                window.actionCompleted = true;
-                endAction();});
-            //window.Wealth = Math.max(window.Wealth -1,window.MIN_POINTS);
-            //and increase cuts on every institution by one
-            //window.cutsNeeded = true;
-            break;
-        case "BK":
-            //spend Y or add R
-            addButton(window.actionDescription.BK.SpendY, "action-btn", 2, function(){
-                var indexY = window.Treasury.indexOf("Y");
-                if(indexY > -1) { 
-                    window.Treasury.splice(indexY, 1); 
-                    window.actionCompleted = true;}
-                else { 
-                    alert(window.alertMsg.NoIncome); 
-                    return null;
-                }
-                endAction();
-            });
-            addButton(window.actionDescription.BK.AddR, "action-btn", 2, function(){
-                addToArray("R", window.Used);
-                window.actionCompleted = true;
-                endAction();
-            });
-            //window.cutsNeeded = true;
-            break;
-        case "KR":
-            //Decrease Popularity by one 
-            addButton(window.actionDescription.KR.DecreasePopularity, "action-btn", 1, function(){
-                window.Popularity = Math.max(window.Popularity -1,window.MIN_POINTS);
-                window.actionCompleted = true;
-                endAction();});
-            //(+ Cuts)
-            //window.cutsNeeded = true;
-            break;
-        case "RY":
-            //ither Remove Y and R or increase Popularity by one and add K
-            addButton(window.actionDescription.RY.RemoveYR, "action-btn", 2, function(){
-                
-                if(window.Current.indexOf("Y") < 0) {
-                    alert(window.alertMsg.NotEnoughY); 
-                    return null;
-                }
-                if(window.Current.indexOf("R") < 0) {
-                    alert(window.alertMsg.NotEnoughR); 
-                    return null;
-                }
-
-
-                drawSpecificCube(window.Current,"R");
-                drawSpecificCube(window.Current,"Y"); 
-                window.actionCompleted = true;
-                endAction();});
-            addButton(window.actionDescription.RY.IncreasePopularityAddK, "action-btn", 2, function(){
-                window.Popularity = Math.min(window.Popularity +1,window.MAX_POINTS);
-                addToArray("K", window.Used);
-                window.actionCompleted = true;
-                endAction();});
-            break;
-        case "RR":
-            //Decrease Public Safety by two
-            addButton(window.actionDescription.RR.DecreasePS2, "action-btn", 1, function(){
-                window.PublicSafety = Math.max(window.PublicSafety -2,window.MIN_POINTS);
-                window.actionCompleted = true;
-                endAction();});
-            break;
-        case "RW":
-            //Decrease Employment by one
-            addButton(window.actionDescription.RW.DecreaseEmployment, "action-btn", 1, function(){
-                window.Employment = Math.max(window.Employment -1,window.MIN_POINTS);
-                window.actionCompleted = true;
-                endAction();});            
-            break;
-        case "WW":
-            //Increase Employment by two
-            addButton(window.actionDescription.WW.IncreaseEmployment2, "action-btn", 1, function(){
-                window.Employment = Math.min(window.Employment +2,window.MAX_POINTS);
-                window.actionCompleted = true;
-                endAction();});                      
-            break;
-        case "YY":
-            //Increase Wealth by one; 
-            addButton(window.actionDescription.YY.IncreaseWealth, "action-btn", 1, function(){
-                window.Wealth = Math.min(window.Wealth +1,window.MAX_POINTS);
-                //window.actionCompleted = true;
-                $(".action-btn").remove();
-                refreshUx();
-
-                //let number = 0;
-                //if(window.fundedInst.PE<2) number++;
-                //if(window.fundedInst.NS<2) number++;
-                //if(window.fundedInst.SW<2) number++;
-
-                //let btnNum = 1;
-                //if(number) btnNum = 2;
-
-                //if(number)
-                addButton(window.actionDescription.YY.SpendYY, "action-btn", 2, function(){
-                    if(getAllIndexes(window.Current,"Y").length < 2)
-                    {
-                        //if I have less tha 2 Y I can't do it
+    if(window.actionNeeded && !window.actionCompleted)
+    {
+        switch (window.draw) {
+            case "KK":
+                //Reduce Wealth by one
+                addButton(window.actionDescription.KK.ReduceWealth, "action-btn", 1, function(){
+                    window.Wealth = Math.max(window.Wealth -1,window.MIN_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});
+                //window.Wealth = Math.max(window.Wealth -1,window.MIN_POINTS);
+                //and increase cuts on every institution by one
+                //window.cutsNeeded = true;
+                break;
+            case "BK":
+                //spend Y or add R
+                addButton(window.actionDescription.BK.SpendY, "action-btn", 2, function(){
+                    var indexY = window.Treasury.indexOf("Y");
+                    if(indexY > -1) { 
+                        window.Treasury.splice(indexY, 1); 
+                        window.actionCompleted = true;}
+                    else { 
+                        alert(window.alertMsg.NoIncome); 
+                        return null;
+                    }
+                    endAction();
+                });
+                addButton(window.actionDescription.BK.AddR, "action-btn", 2, function(){
+                    addToArray("R", window.Used);
+                    window.actionCompleted = true;
+                    endAction();
+                });
+                //window.cutsNeeded = true;
+                break;
+            case "KR":
+                //Decrease Popularity by one 
+                addButton(window.actionDescription.KR.DecreasePopularity, "action-btn", 1, function(){
+                    window.Popularity = Math.max(window.Popularity -1,window.MIN_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});
+                //(+ Cuts)
+                //window.cutsNeeded = true;
+                break;
+            case "RY":
+                //ither Remove Y and R or increase Popularity by one and add K
+                addButton(window.actionDescription.RY.RemoveYR, "action-btn", 2, function(){
+                    
+                    if(window.Current.indexOf("Y") < 0) {
                         alert(window.alertMsg.NotEnoughY); 
+                        return null;
+                    }
+                    if(window.Current.indexOf("R") < 0) {
+                        alert(window.alertMsg.NotEnoughR); 
                         return null;
                     }
 
 
-                    drawSpecificCube(window.Current,"Y");
-                    drawSpecificCube(window.Current,"Y");
-                    window.fundChoiceNeeded = true;
-                    //if(window.fundedInst.PE<2) 
-                    fundChoise("PE", 3);
-                    //if(window.fundedInst.NS<2) 
-                    fundChoise("NS", 3);
-                    //if(window.fundedInst.SW<2) 
-                    fundChoise("SW", 3);
+                    drawSpecificCube(window.Current,"R");
+                    drawSpecificCube(window.Current,"Y"); 
+                    window.actionCompleted = true;
+                    endAction();});
+                addButton(window.actionDescription.RY.IncreasePopularityAddK, "action-btn", 2, function(){
+                    window.Popularity = Math.min(window.Popularity +1,window.MAX_POINTS);
+                    addToArray("K", window.Used);
+                    window.actionCompleted = true;
+                    endAction();});
+                break;
+            case "RR":
+                //Decrease Public Safety by two
+                addButton(window.actionDescription.RR.DecreasePS2, "action-btn", 1, function(){
+                    window.PublicSafety = Math.max(window.PublicSafety -2,window.MIN_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});
+                break;
+            case "RW":
+                //Decrease Employment by one
+                addButton(window.actionDescription.RW.DecreaseEmployment, "action-btn", 1, function(){
+                    window.Employment = Math.max(window.Employment -1,window.MIN_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});            
+                break;
+            case "WW":
+                //Increase Employment by two
+                addButton(window.actionDescription.WW.IncreaseEmployment2, "action-btn", 1, function(){
+                    window.Employment = Math.min(window.Employment +2,window.MAX_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});                      
+                break;
+            case "YY":
+                //Increase Wealth by one; 
+                addButton(window.actionDescription.YY.IncreaseWealth, "action-btn", 1, function(){
+                    window.Wealth = Math.min(window.Wealth +1,window.MAX_POINTS);
+                    //window.actionCompleted = true;
+                    $(".action-btn").remove();
+                    refreshUx();
 
+                    //let number = 0;
+                    //if(window.fundedInst.PE<2) number++;
+                    //if(window.fundedInst.NS<2) number++;
+                    //if(window.fundedInst.SW<2) number++;
+
+                    //let btnNum = 1;
+                    //if(number) btnNum = 2;
+
+                    //if(number)
+                    addButton(window.actionDescription.YY.SpendYY, "action-btn", 2, function(){
+                        if(getAllIndexes(window.Current,"Y").length < 2)
+                        {
+                            //if I have less tha 2 Y I can't do it
+                            alert(window.alertMsg.NotEnoughY); 
+                            return null;
+                        }
+
+
+                        drawSpecificCube(window.Current,"Y");
+                        drawSpecificCube(window.Current,"Y");
+                        window.fundChoiceNeeded = true;
+                        //if(window.fundedInst.PE<2) 
+                        fundChoise("PE", 3);
+                        //if(window.fundedInst.NS<2) 
+                        fundChoise("NS", 3);
+                        //if(window.fundedInst.SW<2) 
+                        fundChoise("SW", 3);
+
+                        window.actionCompleted = true;
+                        endAction();});   
+                    addButton(window.actionDescription.YY.NO, "action-btn", 2, function(){
+                        //do nothing
+                        window.actionCompleted = true;
+                        endAction();});   
+                });  
+                //may spend both cubes to fund a single already-funded institution
+                break;
+            case "KY":
+                //Optionally Spend Y to Remove K (or Cuts)            
+                addButton(window.actionDescription.KY.SpendYRemoveK, "action-btn", 2, function(){
+
+                    if(window.Current.indexOf("Y") < 0) {
+                        alert(window.alertMsg.NotEnoughY); 
+                        return null;
+                    }
+                    if(window.Current.indexOf("K") < 0) {
+                        alert(window.alertMsg.NotEnoughK); 
+                        return null;
+                    }
+
+
+                    drawSpecificCube(window.Current,"K");
+                    drawSpecificCube(window.Current,"Y");  //TODO: issue#1
+                    window.actionCompleted = true;
+                    endAction();});
+                addButton(window.actionDescription.KY.Cuts, "action-btn", 2, function(){
+                    //window.cutsNeeded = true;
+                    window.actionCompleted = true;
+                    endAction();});
+                break;
+            case "BY":
+                //Increase Popularity or Public Safety by one
+                addButton(window.actionDescription.BY.IncreasePopularity, "action-btn", 2, function(){
+                    window.Popularity = Math.min(window.Popularity +1,window.MAX_POINTS);
                     window.actionCompleted = true;
                     endAction();});   
-                addButton(window.actionDescription.YY.NO, "action-btn", 2, function(){
-                    //do nothing
+                addButton(window.actionDescription.BY.IncreasePS, "action-btn", 2, function(){
+                    window.PublicSafety = Math.min(window.PublicSafety +1,window.MAX_POINTS);
                     window.actionCompleted = true;
                     endAction();});   
-            });  
-            //may spend both cubes to fund a single already-funded institution
-            break;
-        case "KY":
-            //Optionally Spend Y to Remove K (or Cuts)            
-            addButton(window.actionDescription.KY.SpendYRemoveK, "action-btn", 2, function(){
+                break;
+            case "BB":
+                //Increase Public Safety by two
+                addButton(window.actionDescription.BB.IncreasePS, "action-btn", 1, function(){
+                    window.PublicSafety = Math.min(window.PublicSafety + 2,window.MAX_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});                      
+                break;
+            case "BR":
+                //Either Remove B and R or reduce Public Safety by one     
+                addButton(window.actionDescription.BR.RemoveBR, "action-btn", 2, function(){
 
-                if(window.Current.indexOf("Y") < 0) {
-                    alert(window.alertMsg.NotEnoughY); 
-                    return null;
-                }
-                if(window.Current.indexOf("K") < 0) {
-                    alert(window.alertMsg.NotEnoughK); 
-                    return null;
-                }
+                    if(window.Current.indexOf("B") < 0) {
+                        alert(window.alertMsg.NotEnoughB); 
+                        return null;
+                    }
+                    if(window.Current.indexOf("R") < 0) {
+                        alert(window.alertMsg.NotEnoughR); 
+                        return null;
+                    }
 
+                    drawSpecificCube(window.Current,"B");
+                    drawSpecificCube(window.Current,"R");
+                    window.actionCompleted = true;
+                    endAction();});
+                addButton(window.actionDescription.BR.ReducePS, "action-btn", 2, function(){
+                    window.PublicSafety = Math.max(window.PublicSafety -1,window.MIN_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});
+                break;
+            case "BW":
+                //Either Remove W or increase Employment by one and decrease Popularity by one
+                addButton(window.actionDescription.BW.RemoveW, "action-btn", 2, function(){
+                    if(window.Current.indexOf("W") < 0) {
+                        alert(window.alertMsg.NotEnoughW); 
+                        return null;
+                    }
 
-                drawSpecificCube(window.Current,"K");
-                drawSpecificCube(window.Current,"Y");  //TODO: issue#1
-                window.actionCompleted = true;
-                endAction();});
-            addButton(window.actionDescription.KY.Cuts, "action-btn", 2, function(){
+                    drawSpecificCube(window.Current,"W");
+                    window.actionCompleted = true;
+                    endAction();});
+                addButton(window.actionDescription.BW.IncreaseEmploymentDecreasePopularity, "action-btn", 2, function(){
+                    window.Employment = Math.min(window.Employment +1,window.MAX_POINTS);
+                    window.Popularity = Math.max(window.Popularity -1,window.MIN_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});
+                break;
+            case "WY":
+                //Increase Health by two
+                addButton(window.actionDescription.WY.IncreaseHealth, "action-btn", 1, function(){
+                    window.Health = Math.min(window.Health + 2,window.MAX_POINTS);
+                    window.actionCompleted = true;
+                    endAction();});              
+                break;
+            case "KW":
+                //Spend Y or reduce Health by one. 
+                addButton(window.actionDescription.KW.SpendY, "action-btn", 2, function(){
+                    var indexY = window.Treasury.indexOf("Y");
+                    if(indexY > -1) { 
+                        window.Treasury.splice(indexY, 1); 
+                        window.actionCompleted = true;}
+                    else { 
+                        alert(window.alertMsg.NoIncome); 
+                        return null;
+                    }
+                    endAction();
+                });
+                addButton(window.actionDescription.KW.ReduceHealth, "action-btn", 2, function(){
+                    window.Health = Math.max(window.Health -1,window.MIN_POINTS);
+                    window.actionCompleted = true;
+                    endAction();
+                });
+                //(+ Cuts)       
                 //window.cutsNeeded = true;
-                window.actionCompleted = true;
-                endAction();});
-            break;
-        case "BY":
-            //Increase Popularity or Public Safety by one
-            addButton(window.actionDescription.BY.IncreasePopularity, "action-btn", 2, function(){
-                window.Popularity = Math.min(window.Popularity +1,window.MAX_POINTS);
-                window.actionCompleted = true;
-                endAction();});   
-            addButton(window.actionDescription.BY.IncreasePS, "action-btn", 2, function(){
-                window.PublicSafety = Math.min(window.PublicSafety +1,window.MAX_POINTS);
-                window.actionCompleted = true;
-                endAction();});   
-            break;
-        case "BB":
-            //Increase Public Safety by two
-            addButton(window.actionDescription.BB.IncreasePS, "action-btn", 1, function(){
-                window.PublicSafety = Math.min(window.PublicSafety + 2,window.MAX_POINTS);
-                window.actionCompleted = true;
-                endAction();});                      
-            break;
-        case "BR":
-            //Either Remove B and R or reduce Public Safety by one     
-            addButton(window.actionDescription.BR.RemoveBR, "action-btn", 2, function(){
-
-                if(window.Current.indexOf("B") < 0) {
-                    alert(window.alertMsg.NotEnoughB); 
-                    return null;
-                }
-                if(window.Current.indexOf("R") < 0) {
-                    alert(window.alertMsg.NotEnoughR); 
-                    return null;
-                }
-
-                drawSpecificCube(window.Current,"B");
-                drawSpecificCube(window.Current,"R");
-                window.actionCompleted = true;
-                endAction();});
-            addButton(window.actionDescription.BR.ReducePS, "action-btn", 2, function(){
-                window.PublicSafety = Math.max(window.PublicSafety -1,window.MIN_POINTS);
-                window.actionCompleted = true;
-                endAction();});
-            break;
-        case "BW":
-            //Either Remove W or increase Employment by one and decrease Popularity by one
-            addButton(window.actionDescription.BW.RemoveW, "action-btn", 2, function(){
-                if(window.Current.indexOf("W") < 0) {
-                    alert(window.alertMsg.NotEnoughW); 
-                    return null;
-                }
-
-                drawSpecificCube(window.Current,"W");
-                window.actionCompleted = true;
-                endAction();});
-            addButton(window.actionDescription.BW.IncreaseEmploymentDecreasePopularity, "action-btn", 2, function(){
-                window.Employment = Math.min(window.Employment +1,window.MAX_POINTS);
-                window.Popularity = Math.max(window.Popularity -1,window.MIN_POINTS);
-                window.actionCompleted = true;
-                endAction();});
-            break;
-        case "WY":
-            //Increase Health by two
-            addButton(window.actionDescription.WY.IncreaseHealth, "action-btn", 1, function(){
-                window.Health = Math.min(window.Health + 2,window.MAX_POINTS);
-                window.actionCompleted = true;
-                endAction();});              
-            break;
-        case "KW":
-            //Spend Y or reduce Health by one. 
-            addButton(window.actionDescription.KW.SpendY, "action-btn", 2, function(){
-                var indexY = window.Treasury.indexOf("Y");
-                if(indexY > -1) { 
-                    window.Treasury.splice(indexY, 1); 
-                    window.actionCompleted = true;}
-                else { 
-                    alert(window.alertMsg.NoIncome); 
-                    return null;
-                }
-                endAction();
-            });
-            addButton(window.actionDescription.KW.ReduceHealth, "action-btn", 2, function(){
-                window.Health = Math.max(window.Health -1,window.MIN_POINTS);
-                window.actionCompleted = true;
-                endAction();
-            });
-            //(+ Cuts)       
-            //window.cutsNeeded = true;
-            break;
-        default:
-            effect = "NON GESTITO: " + draw;
-            break;
+                break;
+            default:
+                effect = "NON GESTITO: " + draw;
+                break;
+        }
+    }
+    else
+    {
+        endAction();
     }
 
     //console.Log("Effect: " + effect);
@@ -282,9 +303,9 @@ function endAction()
 
         refreshUx();
 
-        if(window.cutsNeeded)
+        if(window.cutsNeeded && !window.cutsCompleted)
             createCuts();
-        else if(window.fundNeeded)
+        else if(window.fundNeeded && !window.fundCompleted)
             createFunds();
     }
 }
@@ -292,7 +313,6 @@ function endAction()
 function checkCuts()
 {
     window.cutsNeeded = window.Current.indexOf("K") > -1;
-    window.cutsCompleted = !window.cutsNeeded;
 }
 
 function createCuts() 
@@ -424,7 +444,6 @@ function endCuts()
 function checkFunds()
 {
     window.fundNeeded = window.Current.indexOf("Y") > -1;
-    window.fundCompleted = !window.fundNeeded;
 
     return window.fundNeeded;
 }
@@ -443,12 +462,12 @@ function createFunds()
 
     addButton(window.actionDescription.Funds.Discard, "fund-btn", btnNum, function(){
         addToArray(drawSpecificCube(window.Current,"Y"), window.Used);
-        window.fundCompleted = true;
+        window.fundCompleted = !checkFunds();
         endFunds();
     });
     addButton(window.actionDescription.Funds.Treasury, "fund-btn", btnNum, function(){
         addToArray(drawSpecificCube(window.Current,"Y"), window.Treasury);
-        window.fundCompleted = true;
+        window.fundCompleted = !checkFunds();
         endFunds();
     });
     if(number)
@@ -460,7 +479,7 @@ function createFunds()
             if(!window.fundedInst.NS) fundChoise("NS", number);
             if(!window.fundedInst.SW) fundChoise("SW", number);
                      
-            window.fundCompleted = true;
+            window.fundCompleted = !checkFunds();
             endFunds();
         });
 }
@@ -496,16 +515,16 @@ function fundChoise(type, number) {
 
 function endFunds()
 {
-    if(!window.fundNeeded || (window.fundNeeded && window.fundCompleted))
-    {
+    //if(!window.fundNeeded || (window.fundNeeded && window.fundCompleted))
+    //{
         $(".fund-btn").remove();
 
+        checkFunds();
         refreshUx();
-        checkFunds()
 
         if(window.fundNeeded && !window.fundChoiceNeeded)
             createFunds();
-    }
+    //}
 }
 
 function endFundChoice()
@@ -524,15 +543,25 @@ function endFundChoice()
 
 /*DEFAULT ACTIONS*/
 
+
+function endDefaultAction() {
+    refreshCubeDrawResult();
+}
+
 function borrowMoney() {
     addToArray("Y",window.Used);
     addToArray("Y",window.Used);
     addToArray("K",window.Bag);
+
+    endDefaultAction();
 }
 
 function raiseTaxes() {
     addToArray("Y",window.Bag);
     addToArray("R",window.Bag);
+
+
+    endDefaultAction();
 }
 
 function payLoans() {
@@ -595,4 +624,7 @@ function payLoans() {
         else
             break;
     }
+
+
+    endDefaultAction();
 }

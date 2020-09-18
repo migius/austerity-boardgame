@@ -59,6 +59,7 @@ function logArray(divId, array)
             cubeIcon.classList.add(cList[c]);
         }
         content.append(cubeIcon);                    
+        content.append(" ");                    
     }
 }
 

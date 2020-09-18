@@ -63,8 +63,18 @@ function newTurn()
         //and trig end year
      
     }
-    
-    cubeDrawResult(c1, c2);
+
+
+    window.actionNeeded = true;
+    window.actionCompleted = false;
+    window.cutsNeeded = false;
+    window.cutsCompleted = false;
+    window.fundNeeded = false;
+    window.fundCompleted = false;
+    window.fundChoiceCompleted = false;
+    window.fundChoiceNeeded = false;
+        
+    refreshCubeDrawResult();
     
     window.turnEnded = false;
     refreshUx();
@@ -133,9 +143,11 @@ function newYear()
         }
 
     //reset funded
-    window.fundedInst.PE = 0;
-    window.fundedInst.NS = 0;
-    window.fundedInst.SW = 0;
+    //BUG #8
+    //also Institutions 
+    while(window.fundedInst.PE > 0) { addToArray("Y", window.Bag); window.fundedInst.PE--;}
+    while(window.fundedInst.NS > 0) { addToArray("Y", window.Bag); window.fundedInst.NS--;}
+    while(window.fundedInst.SW > 0) { addToArray("Y", window.Bag); window.fundedInst.SW--;}
 
 
     refreshUx();

@@ -57,23 +57,31 @@
 
                 <div class="row" id="bags">
                     <div class="col-xs-6 col-md-3">
-                        <h2>Bag</h2>
-                        <div id="bagContent"></div>
+                        <div class="bag">
+                            <h6>Bag</h6>
+                            <div id="bagContent"></div>
+                        </div>
                     </div>
 
                     <div class="col-xs-6 col-md-3">
-                        <h2>Current</h2>
-                        <div id="currentContent"></div>
+                        <div class="bag">
+                            <h6>Current</h6>
+                            <div id="currentContent"></div>
+                        </div>
                     </div>
 
                     <div class="col-xs-6 col-md-3">
-                        <h2>Used</h2>
-                        <div id="usedContent"></div>
+                        <div class="bag">
+                            <h6>Used</h6>
+                            <div id="usedContent"></div>
+                        </div>
                     </div>
 
                     <div class="col-xs-6 col-md-3">
-                        <h2>Treasury</h2>
-                        <div id="treasuryContent"></div>
+                        <div class="bag">
+                            <h6>Treasury</h6>
+                            <div id="treasuryContent"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -83,21 +91,21 @@
                         <div class="btn-group col-4" role="group">
                             <button type="button" onClick="borrowMoney();" id="bm-action-btn" class="btn btn-info col-12 btn-std-action">
                                 Borrow Money<hr />
-                                Add <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-Y smallCube fa fa-coins "></i><br />
+                                Add <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-Y smallCube fa fa-coins "></i><br />
                                 Add to bag <i class="cube cube-K fa fa-credit-card smallCube"></i>
                             </button>
                         </div>
                         <div class="btn-group col-4" role="group">
                             <button type="button" onClick="raiseTaxes();" id="rt-action-btn" class="btn btn-info col-12 btn-std-action">
                                 Raise Taxes<hr />
-                                Add to bag <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-R fa fa-bomb smallCube "></i><br />
+                                Add to bag <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-R fa fa-bomb smallCube "></i><br />
                                 &nbsp;
                             </button>
                         </div>
                         <div class="btn-group col-4" role="group">
                             <button type="button" onClick="payLoans();" id="pl-action-btn" class="btn btn-info col-12 btn-std-action">
                                 Pay Loans<hr />
-                                Remove <i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-Y smallCube fa fa-coins "></i><i class="cube cube-K fa fa-credit-card smallCube"></i><br />
+                                Remove <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-K fa fa-credit-card smallCube"></i><br />
                                 &nbsp;
                             </button>
                         </div>
@@ -107,23 +115,23 @@
             <div class="col-xs-12 col-md-6" >
 
                 <div id="result-box" class="col-xs-12 mt-3 p-2">
-                    <h2 class="newspaper-name">
-                        <i class="fas fa-newspaper float-left d-none d-sm-block"></i>Economic News<i class="fas fa-newspaper float-right d-none d-sm-block""></i>
+                    <h2 class="newspaper-name d-none d-sm-block">
+                        <i class="fas fa-newspaper float-left d-none d-sm-block d-md-none d-xl-block"></i>Economic News<i class="fas fa-newspaper float-right d-none d-sm-block d-md-none d-xl-block"></i>
                     </h2>
-                    <p class="newspaper-info"><span class="float-left">Thursday, November 5th 2020</span><span class="float-right">3 £</span></p>
+                    <p class="newspaper-info"><span class="float-left d-none d-sm-block">Thursday, November 5th 2020</span><span class="float-right d-none d-sm-block">3 £</span></p>
                     <h5>
                         <span id="cubeDrawResult" />
                     </h5>
                     <div class="row paper-text">
-                        <div class="col-4 d-none d-lg-block">
-                            Praesent vehicula scelerisque mi, a viverra tortor tempor quis. Fusce tristique placerat nibh vitae mollis. Sed erat erat, porta egestas purus nec, consectetur maximus massa. Aenean lacinia tellus ut velit mollis ultricies. Duis a urna non lectus luctus feugiat. Nullam sed metus at risus semper feugiat id non nunc.
+                        <div class="col d-none d-md-block">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                         </div>
                         <div class="col-12 col-lg-4">
-                           Nulla feugiat accumsan elit, tempor lacinia nisl consequat quis. 
+                           <p class="d-none  d-lg-block ">It has survived not only five centuries, but also the leap into electronic typesetting, </p>
                            <p id="cubeDrawResultEffect" class="p-2"></p>
                         </div>   
                         <div class="col-4 d-none d-lg-block">
-                            Pellentesque nec eleifend dolor, ut varius nibh. Mauris eros purus, fermentum vel eros sed, interdum pellentesque lacus. Mauris mattis feugiat lectus laoreet congue. Proin dignissim sollicitudin orci, vel congue odio pharetra eget.
+                            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                         </div>           
                     </div>                 
                 </div>
