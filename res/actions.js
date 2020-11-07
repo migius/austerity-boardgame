@@ -153,11 +153,11 @@ function cubeDrawResult(c1, c2)
                         drawSpecificCube(window.Current,"Y");
                         window.fundChoiceNeeded = true;
                         //if(window.fundedInst.PE<2) 
-                        fundChoise("PE", 3);
+                        fundChoise("PE", 3, 2);
                         //if(window.fundedInst.NS<2) 
-                        fundChoise("NS", 3);
+                        fundChoise("NS", 3, 2);
                         //if(window.fundedInst.SW<2) 
-                        fundChoise("SW", 3);
+                        fundChoise("SW", 3, 2);
 
                         window.actionCompleted = true;
                         endAction();});   
@@ -477,21 +477,21 @@ function createFunds()
             drawSpecificCube(window.Current,"Y");   
             window.fundChoiceNeeded = true;
             window.fundChoiceCompleted = false;
-            if(!window.fundedInst.PE) fundChoise("PE", number);
-            if(!window.fundedInst.NS) fundChoise("NS", number);
-            if(!window.fundedInst.SW) fundChoise("SW", number);
+            if(!window.fundedInst.PE) fundChoise("PE", number, 1);
+            if(!window.fundedInst.NS) fundChoise("NS", number, 1);
+            if(!window.fundedInst.SW) fundChoise("SW", number, 1);
                      
             window.fundCompleted = !checkFunds();
             endFunds();
         });
 }
 
-function fundChoise(type, number) {
+function fundChoise(type, number, cubesNumber) {
     switch(type) {
         case "PE":
             addButton(window.actionDescription.Funds.Choice.PE, "fund-c-btn", number, function(){
                 window.Employment = Math.min(window.Employment +1,window.MAX_POINTS);
-                window.fundedInst.PE++;
+                window.fundedInst.PE += cubesNumber;
                 window.fundChoiceCompleted = true;
                 endFundChoice();
             });         
@@ -499,7 +499,7 @@ function fundChoise(type, number) {
         case "NS":
             addButton(window.actionDescription.Funds.Choice.NS, "fund-c-btn", number, function(){
                 addToArray("B", window.Used);
-                window.fundedInst.NS++;
+                window.fundedInst.NS += cubesNumber;
                 window.fundChoiceCompleted = true;
                 endFundChoice();
             });  
@@ -507,7 +507,7 @@ function fundChoise(type, number) {
         case "SW":
             addButton(window.actionDescription.Funds.Choice.SW, "fund-c-btn", number, function(){
                 addToArray("W", window.Used);
-                window.fundedInst.SW++;
+                window.fundedInst.SW += cubesNumber;
                 window.fundChoiceCompleted = true;
                 endFundChoice();
             });   
