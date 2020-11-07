@@ -9,8 +9,10 @@ function refreshCubeDrawResult()
     //2 cubes
     if(window.Current.length == 2)
         cubeDrawResult(window.Current[0],window.Current[1]);
-    else if(window.Current.length == 1)
+    else if(window.Current.length == 1) {
+        window.actionNeeded = false;
         endAction();
+    }
     else {
         window.actionNeeded = false;
         window.cutsNeeded = false;
