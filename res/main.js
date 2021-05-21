@@ -100,11 +100,11 @@ function newYear()
 
     //Add a number of yellow Income cubes to your Treasury equal to the number of Income icons printed in the current space on the Employment track (0, 1 or 2).
     if(window.Employment >= 9) {
-        addToArray("Y", window.Used);
-        addToArray("Y", window.Used);
+        addToArray("Y", window.Treasury);
+        addToArray("Y", window.Treasury);
     }
     else if(window.Employment >= 5) {
-        addToArray("Y", window.Used);        
+        addToArray("Y", window.Treasury);        
     }
 
     //Adjust Wealth one step up or down the track towards the level of Employment (e.g. if Employment is lower than Wealth, reduce Wealth by one step; if Employment is at the same level as Wealth, then leave Wealth where it is).

@@ -163,9 +163,12 @@ function refreshUx()
             } else { 
                 //document.getElementById("newYear-btn").removeAttribute('disabled');
                 $("#newYear-btn-g").show();
-                $('button.btn-std-action').prop('disabled', true);
             }
         }
+    }
+
+    if (window.Bag && window.Bag.length == 0) { 
+        $('button.btn-std-action').prop('disabled', true);
     }
 
     $("div.points-cell").removeClass("current");    
