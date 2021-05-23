@@ -39,7 +39,7 @@ window.cubeDrawDescription.BB = "Increase Public Safety by two";
 window.cubeDrawDescription.BR = "Either Remove <i class='" + window.cubeIconClass.B + "' ></i> and <i class='" + window.cubeIconClass.R + "' ></i> or reduce Public Safety by one";
 window.cubeDrawDescription.BW = "Either Remove <i class='" + window.cubeIconClass.W + "' ></i> or increase Employment by one and decrease Popularity by one";
 window.cubeDrawDescription.WY = "Increase Health by two";
-window.cubeDrawDescription.KW = "Spend <i class='" + window.cubeIconClass.Y + "' /> or reduce Health by one. (+ Cuts)";
+window.cubeDrawDescription.KW = "Spend <i class='" + window.cubeIconClass.Y + "' ></i> or reduce Health by one. (+ Cuts)";
 
 window.actionDescription = {};
 window.actionDescription.KK = {};
@@ -110,8 +110,15 @@ window.alertMsg = {};
 window.alertMsg.NoIncome = "No Income available in Treasury";
 window.alertMsg.Lose = "YOU LOSE!";
 window.alertMsg.Win = "YOU WIN!";
-window.alertMsg.NotEnoughY = "Not enough Y!";
-window.alertMsg.NotEnoughK = "Not enough K!";
-window.alertMsg.NotEnoughR = "Not enough R!";
-window.alertMsg.NotEnoughB = "Not enough B!";
-window.alertMsg.NotEnoughW = "Not enough W!";
+window.alertMsg.NotEnoughY = "Not enough yellow cubes!";
+window.alertMsg.NotEnoughK = "Not enough black cubes!";
+window.alertMsg.NotEnoughR = "Not enough red cubes!";
+window.alertMsg.NotEnoughB = "Not enough blue cubes!";
+window.alertMsg.NotEnoughW = "Not enough white cubes!";
+
+
+//tooltip
+window.tooltip = {};
+window.tooltip.easyNewGame = "";
+window.tooltip.normalNewGame = "";
+window.tooltip.hardNewGame = "";

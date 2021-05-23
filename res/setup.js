@@ -24,9 +24,32 @@ function defaultBagSetUp()
     addToArray("W", window.Bag);
     addToArray("Y", window.Bag);
 
+    var radios = document.getElementsByName('DifficultyRadios');
 
-    //FOR DEBUG:
+    for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+        switch(radios[i].value) {
+            case "easy":
+                addToArray("Y", window.Bag);
+                addToArray("Y", window.Bag);
+                break;
+            case "normal":
+                break;
+            case "hard":
+                addToArray("K", window.Bag);
+                break;
+            case "veryHard":
+                addToArray("K", window.Bag);
+                addToArray("K", window.Bag);
+                break;
+        }
+      }
+    }
+
+
+
 }
+
 
 function defaultTrackSetUp()
 {
@@ -68,7 +91,7 @@ function defaultSetUp()
     defaultInstitutionsSetUp();
     defaultActions();
     refreshUx();
-    $("#newGame-btn-g").hide();
+    $(".newGame-btn-g").hide();
     $("#result-box").hide();
 }
 

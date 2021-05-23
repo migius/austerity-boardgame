@@ -35,7 +35,6 @@ window.draw = "";
 
 window.actionDiv = $('#actions');
 
-
 function newGame() {
     defaultSetUp();
 }
@@ -156,13 +155,14 @@ function newYear()
 function gameWin() {
     alert(window.alertMsg.Win);
     window.gameFinished = true;
-    $("#newGame-btn-g").show();
+    $(".newGame-btn-g").show();
 }
 
 function gameLosed() {
     alert(window.alertMsg.Lose);
     window.gameFinished = true;
-    $("#newGame-btn-g").show();
+    $("#result-box").hide();
+    $(".newGame-btn-g").show();
 }
 
 function checkLose() {
@@ -176,7 +176,10 @@ function checkLose() {
 
 function init()
 {
-    defaultSetUp();
+    //defaultSetUp();    
+    window.gameFinished = true;
+    $("#result-box").hide();
+    $(".newGame-btn-g").show();
     refreshUx();
     removeLoader();
 }
@@ -192,5 +195,9 @@ function init()
     } else { 
         window.onload = init;
     } 
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) { return new bootstrap.Tooltip(tooltipTriggerEl)
+})
 }
     
