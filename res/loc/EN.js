@@ -116,9 +116,3 @@ window.alertMsg.NotEnoughR = "Not enough red cubes!";
 window.alertMsg.NotEnoughB = "Not enough blue cubes!";
 window.alertMsg.NotEnoughW = "Not enough white cubes!";
 
-
-//tooltip
-window.tooltip = {};
-window.tooltip.easyNewGame = "";
-window.tooltip.normalNewGame = "";
-window.tooltip.hardNewGame = "";
