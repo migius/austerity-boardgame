@@ -14,330 +14,251 @@
     <link rel="stylesheet" href="res/style.css?v=0" />
         
 </head>
-<body class="d-flex flex-column h-100">
-
-    <div class="flex-column h-100 justify-content-center loader">        
-      <div class="spinner-border text-primary mx-auto" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <span class="text-primary mx-auto">Loading...</span>
-    </div>
-    
-    <div class="header bg-dark text-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-auto h1">Austerity</div> 
-                <div class="col-auto font-italic mt-auto mb-2">A solo game about debt, national budgets and other such trouble.</div>
-            </div>
+<body class="d-flex flex-column h-100" >
+    <div class="d-flex flex-column h-100" id="main"> 
+        <div class="flex-column h-100 justify-content-center loader">        
+          <div class="spinner-border text-primary mx-auto" role="status">
+            <span class="sr-only" v-html="$t('game_interface.loading')"></span>
+          </div>
+          <span class="text-primary mx-auto" v-html="$t('game_interface.loading')"></span>
         </div>
-    </div>
-
-    <div class="container loading">        
-        <div class="row riga1">          
-            
-            <div class="col-xs-12 col-md-6">
-
-                <div class="col-xs-12 mt-3 " id="buttonsArea">   
-                    <h5>What to do now?</h5>             
-                    <div id="actions" class="row">
-                        <div id="newTurn-btn-g" class="btn-group col-12" role="group">
-                            <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success col-12">New turn</button>
-                        </div>
-                        <div id="endTurn-btn-g" class="btn-group col-12" role="group">
-                            <button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning col-12">End turn</button>
-                        </div>    
-                        <div id="newYear-btn-g" class="btn-group col-12" role="group">
-                            <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger col-12">New year</button>
-                        </div>
-                        <div class="btn-group col-12 newGame-btn-g" role="group">
-                          <legend class="col-form-label col-sm-2 pt-0 fw-bold">Difficulty</legend>
-                          <div class="form-check col" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Start the game with two more yellow Income cubes">
-                            <input class="form-check-input" type="radio" name="DifficultyRadios" id="DifficultyRadiosEasy" value="easy" >
-                            <label class="form-check-label" for="DifficultyRadiosEasy">
-                              Easy
-                            </label>
-                          </div>
-                          <div class="form-check col"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Stadard game">
-                            <input class="form-check-input" type="radio" name="DifficultyRadios" id="DifficultyRadiosNormal" value="normal" checked>
-                            <label class="form-check-label" for="DifficultyRadiosNormal">
-                              Normal
-                            </label>
-                          </div>
-                          <div class="form-check col" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Start the game with one extra black Debt cubes.">
-                            <input class="form-check-input" type="radio" name="DifficultyRadios" id="DifficultyRadiosHard" value="hard">
-                            <label class="form-check-label" for="DifficultyRadiosHard">
-                              Hard
-                            </label>
-                          </div>
-                          <div class="form-check col" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Start the game with two extra black Debt cubes.">
-                            <input class="form-check-input" type="radio" name="DifficultyRadios" id="DifficultyRadiosVeryHard" value="veryHard">
-                            <label class="form-check-label" for="DifficultyRadiosVeryHard">
-                              Mario Draghi
-                            </label>
-                          </div>
-                        </div>
-                        <div class="btn-group col-12 newGame-btn-g" role="group">
-                            <button type="button" onClick="newGame()" class="btn btn-success col-12 newGame-btn">New game</button>
-                        </div>
-                    </div>
-                </div>   
-
-                <div class="row" id="bags">
-                    <div class="col-xs-6 col-md-3">
-                        <div class="bag">
-                            <h6>Bag</h6>
-                            <div id="bagContent"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <div class="bag">
-                            <h6>Current</h6>
-                            <div id="currentContent"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <div class="bag">
-                            <h6>Used</h6>
-                            <div id="usedContent"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <div class="bag">
-                            <h6>Treasury</h6>
-                            <div id="treasuryContent"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-3 ">
-                    <h5>Actions</h5>
-                    <div class="row" id="standard-action-area">
-                        <div class="btn-group col-4" role="group">
-                            <button type="button" onClick="borrowMoney();" id="bm-action-btn" class="btn btn-info col-12 btn-std-action">
-                                Borrow Money<hr />
-                                Add <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-Y smallCube fa fa-coins "></i><br />
-                                Add to bag <i class="cube cube-K fa fa-credit-card smallCube"></i>
-                            </button>
-                        </div>
-                        <div class="btn-group col-4" role="group">
-                            <button type="button" onClick="raiseTaxes();" id="rt-action-btn" class="btn btn-info col-12 btn-std-action">
-                                Raise Taxes<hr />
-                                Add to bag <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-R fa fa-bomb smallCube "></i><br />
-                                &nbsp;
-                            </button>
-                        </div>
-                        <div class="btn-group col-4" role="group">
-                            <button type="button" onClick="payLoans();" id="pl-action-btn" class="btn btn-info col-12 btn-std-action">
-                                Pay Loans<hr />
-                                Remove <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-Y smallCube fa fa-coins "></i> <i class="cube cube-K fa fa-credit-card smallCube"></i><br />
-                                &nbsp;
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6" >
-
-                <div id="result-box" class="col-xs-12 mt-3 p-2">
-                    <h2 class="newspaper-name d-none d-sm-block">
-                        <i class="fas fa-newspaper float-start d-none d-sm-block d-md-none d-xl-block"></i>Economic News<i class="fas fa-newspaper float-end d-none d-sm-block d-md-none d-xl-block"></i>
-                    </h2>
-                    <p class="newspaper-info"><span class="float-start d-none d-sm-block">Thursday, November 5th 2020</span><span class="float-end d-none d-sm-block">3 £</span></p>
-                    <h5>
-                        <span id="cubeDrawResult" />
-                    </h5>
-                    <div class="row paper-text">
-                        <div class="col d-none d-md-block">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        </div>
-                        <div class="col-12 col-lg-4">
-                           <p class="d-none  d-lg-block ">It has survived not only five centuries, but also the leap into electronic typesetting, </p>
-                           <p id="cubeDrawResultEffect" class="p-2"></p>
-                        </div>   
-                        <div class="col-4 d-none d-lg-block">
-                            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        </div>           
-                    </div>                 
-                </div>
         
-                
-            </div>  
+        <div class="header bg-dark text-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-auto h1" v-html="$t('game_interface.title')"></div> 
+                    <div class="col-auto font-italic mt-auto mb-2"  v-html="$t('game_interface.subtitle')"></div>
+                    <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-light choose-btn " v-html="$t('game_interface.new_game')"
+                        v-show="!game_status_parameters.gameFinished" @click="endCurrentGame"></button></div>
+
+                </div>
+            </div>
         </div>
 
-        <div class="row mb-2">
-            <div class="col-xs-12 col-md-6">
-                <div class="col-xs-12 mt-3 " id="Institutions">
-                    <h5>Institutions</h5>
-                    <div class="row col-12">
-                        <div class="pen-head col-12 head" ><span class="title">Private Enterprise</span>
-                            <span class="float-end">
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i> / 
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i> / 
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i>
-                            </span>
-                        </div>
-                        <div class="Institutions-cell private-action-cell pen-cell col-12 pt-1 pb-1" id="pen-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     +1 Employment</i></div>                    
-                        <div class="Institutions-cell Institutions-cell-first pen-cell col-2" id="pen-cell-1"></div>
-                        <div class="Institutions-cell pen-cell col-2" id="pen-cell-2"></div>
-                        <div class="Institutions-cell pen-cell col-2" id="pen-cell-3"></div>
-                        <div class="Institutions-cell pen-cell col-6" id="pen-cell-4"> - 2 Employment</div>
-                    </div>
+        <div class="container loading" >        
+            <div class="row riga1">          
                 
-                    <div class="row col-12 mt-2">
-                        <div class="nas-head col-12 head" ><span class="title">National Security</span>
-                            <span class="float-end">
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-R fa fa-bomb smallCube "></i> / 
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i>
-                            </span>
+                <div class="col-xs-12 col-md-6">
+
+                    <div class="col-xs-12 mt-3 " id="buttonsArea">   
+                        <h5 v-show="!game_status_parameters.gameFinished" v-html="$t('game_interface.action_title')"></h5>            
+                        <div v-show="game_status_parameters.gameFinished" class="new-game-opt">
+                            <h3 class="btn-group col-12 row mb-1" role="group"  v-html="$t('game_interface.options')"></h3>
+                            <div class="btn-group col-12 row mb-1" role="group">
+                                <legend class="col-form-label col fw-bold"  v-html="$t('game_interface.country_profile.label')"></legend>
+                                <select class="form-select col" aria-label="Country profile" v-model="new_game_options.country_profile">
+                                    <option value="KKKKWBBRRY" selected v-html="$t('game_interface.country_profile.cap_dem')"></option>
+                                    <option value="KKKKWWWRRY" v-html="$t('game_interface.country_profile.lib_dem')"></option>
+                                    <option value="KKKBBWWRRY" v-html="$t('game_interface.country_profile.soc_rep')"></option>
+                                    <option value="KKKKKBBBBY" v-html="$t('game_interface.country_profile.tin_dic')"></option>
+                                    <option value="CUSTOM"  v-html="$t('game_interface.country_profile.custom')"></option>
+                                </select>
+                            </div>
+                            <div class="btn-group col-12 row mb-1" role="group" v-show="new_game_options.country_profile === 'CUSTOM'">
+                                <legend class="col-form-label col fw-bold"  v-html="$t('game_interface.country_profile.custom_label')"></legend>
+                                <input type="text" class="col" v-model="new_game_options.country_profile_CUSTOM"></input>
+                            </div>
+                            <div class="btn-group col-12 row mb-1" role="group">
+                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.difficulty.label')"></legend>
+                                <select class="form-select col" aria-label="Country profile" v-model="new_game_options.difficulty">
+                                    <option value="YY" v-html="$t('game_interface.difficulty.easy')"></option>
+                                    <option value="" selected v-html="$t('game_interface.difficulty.normal')"></option>
+                                    <option value="K" v-html="$t('game_interface.difficulty.hard')"></option>
+                                    <option value="KK" v-html="$t('game_interface.difficulty.very_hard')" ></option>
+                                </select>
+                            </div>
+                            <div class="btn-group col-12 row mb-1" role="group">
+                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.extra_inst.label')"></legend>
+                                <select class="form-select col" aria-label="Country profile" v-model="new_game_options.extra_inst">
+                                    <option value="false" selected v-html="$t('game_interface.extra_inst.false')"></option>
+                                    <option value="true" v-html="$t('game_interface.extra_inst.true')"></option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="Institutions-cell private-action-cell nas-cell col-12 pt-1 pb-1" id="nas-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-B fa fa-user-shield "></i></div>                    
-                        <div class="Institutions-cell Institutions-cell-first nas-cell col-2" id="nas-cell-1"></div>
-                        <div class="Institutions-cell nas-cell col-2" id="nas-cell-2"></div>
-                        <div class="Institutions-cell nas-cell col-2" id="nas-cell-3"></div>
-                        <div class="Institutions-cell nas-cell col-6" id="nas-cell-4"> Add <i class="cube cube-R fa fa-bomb smallCube "></i></div>
-                    </div>
-                
-                    <div class="row col-12 mt-2">
-                        <div class="sow-head col-12 head" ><span class="title">Social Welfare</span>
-                            <span class="float-end">
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-B fa fa-user-shield smallCube "></i> / 
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-Y smallCube fa fa-coins "></i> / 
-                                <i class="cube cube-K fa fa-credit-card smallCube"></i> <i class="cube cube-W fa fa-briefcase-medical smallCube "></i>
-                            </span>
+
+
+                        <div id="actions" class="row">
+                            <div id="newTurn-btn-g" class="btn-group col-12" role="group" v-show="!game_status_parameters.gameFinished && Bag && Bag.content.length > 0 && game_status_parameters.turnEnded">
+                                <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success col-12" v-html="$t('game_interface.new_turn')"></button>
+                            </div>
+                            <div id="endTurn-btn-g" class="btn-group col-12" role="group" v-show="game_status_canEndTurn && !game_status_parameters.turnEnded">
+                                <button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning col-12" v-html="$t('game_interface.end_turn')"></button>
+                            </div>    
+                            <div id="newYear-btn-g" class="btn-group col-12" role="group" v-show="!game_status_parameters.gameFinished && Bag && Bag.content.length == 0 && game_status_parameters.turnEnded">
+                                <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger col-12" v-html="$t('game_interface.new_year')"></button>
+                            </div>
+                            <div class="btn-group col-12 newGame-btn-g mt-1" role="group" v-show="game_status_parameters.gameFinished">
+                                <button type="button" @click="newGame()" class="btn btn-success col-12 newGame-btn" v-html="$t('game_interface.new_game')"></button>
+                            </div>
+
+                            <div class="btn-group action-btn col" v-for="(item, index) of actions_available">
+                                <button type="button" class="btn btn-outline-primary choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
+                            </div>
+                            <div class="btn-group cuts-btn col" v-for="(item, index) of cuts_available">
+                                <button type="button" class="btn btn-outline-dark choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
+                            </div>
+                            <div class="btn-group fund-btn col" v-for="(item, index) of fund_available">
+                                <button type="button" class="btn btn-outline-warning choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
+                            </div>
+                            <div class="btn-group fund-c-btn col" v-for="(item, index) of fund_c_available">
+                                <button type="button" class="btn btn-outline-secondary choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
+                            </div>
                         </div>
-                        <div class="Institutions-cell private-action-cell sow-cell col-12 pt-1 pb-1" id="sow-action" > <i class="cube cube-Y fa fa-coins "></i> <i class="cube fa fa-arrow-right ">     add </i> <i class="cube cube-W fa fa-briefcase-medical "></i></div>                    
-                        <div class="Institutions-cell Institutions-cell-first sow-cell col-2" id="sow-cell-1"></div>
-                        <div class="Institutions-cell sow-cell col-2" id="sow-cell-2"></div>
-                        <div class="Institutions-cell sow-cell col-2" id="sow-cell-3"></div>
-                        <div class="Institutions-cell sow-cell col-6" id="sow-cell-4"> - 2 Health</div>
+                    </div>   
+
+                    <div class="row" id="bags" v-show="!game_status_parameters.gameFinished">
+                        <div v-for="(bagItem, index) of Spaces" class="col-xs-6 col-md-3" v-show="bagItem.visible" @click="bagItem.hide_content = !(bagItem.hide_content || !bagItem.hidable)">
+                            <div class="bag">
+                                <h6>{{$t('Spaces.' + bagItem.name)}}</h6>
+                                <div >
+                                    <i v-for="(item, index) of bagItem.content" :class="$t('cube_icons.' + (bagItem.hide_content ? 'X' : item) )">&nbsp;</i>
+                                </div>
+                                <span class="show-bag" v-show="bagItem.code === 'B'" v-html="$t('game_interface.click_to_X_content.X',[(bagItem.hide_content ? $t('game_interface.click_to_X_content.show') : $t('game_interface.click_to_X_content.hide'))])" />
+                            </div>
+                        </div>
                     </div>
 
-                </div>                
+                    <div class="mt-3 " v-show="!game_status_parameters.gameFinished">
+                        <h5 v-html="$t('keywords.actions')"></h5>
+                        <div class="row" id="standard-action-area">
+                            <div v-for="(item, index) of StandardActions" class="btn-group col" role="group">
+                                <button type="button" @click="item.click" id="bm-action-btn" class="btn btn-info col-12 btn-std-action" v-html="$t('standard_actions.' + item.name + '.title') + '<hr />' + $t('standard_actions.' + item.name + '.description')" :disabled='main.Bag && main.Bag.content.length == 0'>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6" v-show="!game_status_parameters.gameFinished">
+
+                    <div id="result-box" class="col-xs-12 mt-3 p-2">
+                        <h2 class="newspaper-name d-none d-sm-block">
+                            <i class="fas fa-newspaper float-start d-none d-sm-block d-md-none d-xl-block"></i>Economic News<i class="fas fa-newspaper float-end d-none d-sm-block d-md-none d-xl-block"></i>
+                        </h2>
+                        <p class="newspaper-info"><span class="float-start d-none d-sm-block">Thursday, November 5th 2020</span><span class="float-end d-none d-sm-block">3 £</span></p>
+                        <h5>
+                            <span id="cubeDrawResult" v-html="$t('cube_draw.' + draw + '.Title')" ></span>
+                        </h5>
+                        <div class="row paper-text">
+                            <div class="col d-none d-md-block">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                            </div>
+                            <div class="col-12 col-lg-4">
+                               <p class="d-none  d-lg-block ">It has survived not only five centuries, but also the leap into electronic typesetting, </p>
+                               <p id="cubeDrawResultEffect" class="p-2" v-html="$t('cube_draw.' + draw + '.Description')"></p>
+                            </div>   
+                            <div class="col-4 d-none d-lg-block">
+                                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            </div>           
+                        </div>                 
+                    </div>
+            
+                    
+                </div>  
             </div>
-            <div class="col-xs-12 col-md-6">                
-                <div class="mt-3 col-12 tracks">
-                    <div class="row head">
-                        <div class="emp-cell col">Employment</div>
-                        <div class="pub-cell col">Public Safety</div>
-                        <div class="wea-cell col">Wealth</div>
-                        <div class="hea-cell col">Health</div>
-                        <div class="pop-cell col">Popularity</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-10">10 <span class="float-end"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                        <div class="col points-cell pub-cell " id="pub-cell-10">10</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-10">10</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-10">10</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-10">10</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-9">9 <span class="float-end"><i class="cube cube-DY fa fa-coins smallCube"></i> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                        <div class="col points-cell pub-cell " id="pub-cell-9">9</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-9">9</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-9">9</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-9">9</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-8">8 <span class="float-end"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                        <div class="col points-cell pub-cell " id="pub-cell-8">8</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-8">8</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-8">8</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-8">8</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-7">7 <span class="float-end"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                        <div class="col points-cell pub-cell " id="pub-cell-7">7</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-7">7</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-7">7</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-7">7</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-6">6 <span class="float-end"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                        <div class="col points-cell pub-cell " id="pub-cell-6">6</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-6">6</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-6">6</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-6">6</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-5">5 <span class="float-end"> <i class="cube cube-DY fa fa-coins smallCube"></i></div>
-                        <div class="col points-cell pub-cell " id="pub-cell-5">5</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-5">5</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-5">5</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-5">5</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-4">4 <span class="float-end"> </div>
-                        <div class="col points-cell pub-cell " id="pub-cell-4">4</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-4">4</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-4">4</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-4">4</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-3">3 <span class="float-end"> </div>
-                        <div class="col points-cell pub-cell " id="pub-cell-3">3</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-3">3</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-3">3</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-3">3</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-2">2 <span class="float-end"> </div>
-                        <div class="col points-cell pub-cell " id="pub-cell-2">2</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-2">2</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-2">2</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-2">2</div>
-                    </div>
-                    <div class="row">
-                        <div class="col points-cell emp-cell" id="emp-cell-1">1 <span class="float-end"> </div>
-                        <div class="col points-cell pub-cell " id="pub-cell-1">1</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-1">1</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-1">1</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-1">1</div>
-                    </div>
-                    <div class="row tr-0">
-                        <div class="col points-cell emp-cell" id="emp-cell-0">0 <span class="float-end"> </div>
-                        <div class="col points-cell pub-cell " id="pub-cell-0">0</div>
-                        <div class="col points-cell wea-cell" id="wea-cell-0">0</div>
-                        <div class="col points-cell hea-cell" id="hea-cell-0">0</div>
-                        <div class="col points-cell pop-cell" id="pop-cell-0">0</div>
+
+            <div class="row mb-2" v-show="!game_status_parameters.gameFinished">
+                <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 mt-3 " id="Institutions">
+                        <h5 v-html="$t('keywords.institutions')"></h5>
+
+                        <div v-for="(item, index) of Institutions" class="row col-12 mb-4 Institutions-box">
+                            <div :class="item.code + '-head col-12 head'" >
+                                <span class="title">{{$t('institution.' + item.code + '.title')}}</span>
+                                <span class="payed-founds"><i v-for="(itemCube, indexCube) of item.founded" :class="$t('cube_icons.Y') + ' smallCube'">&nbsp;</i></span>
+                                <span class="float-end">
+                                    <span v-for="(itemCubes, indexCubes) of item.cubes_on_right">
+                                        <span v-show="indexCubes > 0">/</span>
+                                        <i v-for="(itemCube, indexCube) of itemCubes" :class="$t('cube_icons.' + itemCube) + ' smallCube'">&nbsp;</i></span>
+                                </span>
+                            </div>
+                            <div :class="[(item.founded >= item.REQ_FOUND ? 'p-a-used' : ''), item.code + '-cell Institutions-cell private-action-cell col-12 pt-1 pb-1']"  v-html="$t('institution.' + item.code + '.action')                                  " >                              
+                            </div>
+                            <div :class="[item.code + '-cell Institutions-cell Institutions-cell-first col-2',(item.value === 1 ? 'current' : '')]" ></div>
+                            <div :class="[item.code + '-cell Institutions-cell col-2',(item.value === 2 ? 'current' : '')]" ></div>
+                            <div :class="[item.code + '-cell Institutions-cell col-2',(item.value === 3 ? 'current' : '')]" ></div>
+                            <div :class="[item.code + '-cell Institutions-cell col-6']"  v-html="$t('institution.' + item.code + '.effect')"></div>
+                        </div>
+
+
+                        <div v-show="new_game_options.extra_inst && extra_institutions.length > 0" class="btn-group col-12 mb-4" role="group">
+                            <button type="button" @click="addExtraInstitutionDialog" id="bm-action-btn" class="btn btn-info col btn-std-action" v-html="$t('game_interface.buy_extra_inst')">
+                            </button>                        
+                        </div>
+
+
+                        <h5 v-html="$t('keywords.extra_institutions')" v-show="new_game_options.extra_inst && extra_institutions.length > 0"></h5>
+
+                        <div v-for="(item, index) of extra_institutions" class="row col-12 mb-4 Institutions-box opacity05" v-show="new_game_options.extra_inst && extra_institutions.length > 0">
+                            <div :class="item.code + '-head col-12 head'" >
+                                <span class="title">{{$t('institution.' + item.code + '.title')}}</span>
+                                <span class="payed-founds"><i v-for="(itemCube, indexCube) of item.founded" :class="$t('cube_icons.Y') + ' smallCube'">&nbsp;</i></span>
+                                <span class="float-end">
+                                    <span v-for="(itemCubes, indexCubes) of item.cubes_on_right">
+                                        <span v-show="indexCubes > 0">/</span>
+                                        <i v-for="(itemCube, indexCube) of itemCubes" :class="$t('cube_icons.' + itemCube) + ' smallCube'">&nbsp;</i></span>
+                                </span>
+                            </div>
+                            <div :class="[(item.founded >= item.REQ_FOUND ? 'p-a-used' : ''), item.code + '-cell Institutions-cell private-action-cell col-12 pt-1 pb-1']"  v-html="$t('institution.' + item.code + '.action')                                  " >                              
+                            </div>
+                            <div :class="[item.code + '-cell Institutions-cell Institutions-cell-first col-2',(item.value === 101 ? 'current' : '')]" ></div>
+                            <div :class="[item.code + '-cell Institutions-cell col-2',(item.value === 2 ? 'current' : '')]" ></div>
+                            <div :class="[item.code + '-cell Institutions-cell col-2',(item.value === 3 ? 'current' : '')]" ></div>
+                            <div :class="[item.code + '-cell Institutions-cell col-6']"  v-html="$t('institution.' + item.code + '.effect')"></div>
+                        </div>
+
+                    </div>                
+                </div>
+                <div class="col-xs-12 col-md-6">                
+                    <div class="mt-3 col-12 tracks">
+
+
+                        <div class="row head">
+                            <div v-for="(track, index) of Tracks" :class="track.code + '-cell col'" v-html="$t('keywords.' + track.name)" ></div>
+                        </div>
+
+
+                        <div v-for="index in trackValues" class="row">
+                            <div :class="track.code + '-cell col points-cell' + (track.LOSE_VALUE === index ? ' tr-0' : '') + (track.value === index ? ' current' : '')" :id="'emp-cell-' + index" v-for="(track, indexT) of Tracks" >{{index}}<span class="float-end" v-for="r in track.revenue[index]" v-html="$t('small_cube.' + r[0]) + '&nbsp;'" ></span>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-<!--
-    <div id="commands">
-        <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success">New turn</button>
-        <button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning d-none">End turn</button>
-        <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger">New year</button>
-    </div>
--->
+        <footer class="footer mt-auto py-3">
+            <div class="container text-dark">
+                <span ><a href="https://github.com/migius/austerity-boardgame" target=_blank><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="navbar-nav-svg" viewBox="0 0 512 499.36" role="img"><title>GitHub</title><path style="fill:#000000" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path></svg>  <span v-html="$t('game_interface.source_code')"></span></a> | <span v-html="$t('game_interface.a_game_by')"></span> | <a href="https://migio.altervista.org/contatti/" target="_blank" v-html="$t('game_interface.report_bug')"></a>
+                </span>
+                <span class="float-end ">
+                    <a href="https://migio.altervista.org/lt/" target=_blank >migio</a>
+                    <a href="https://github.com/migius" target=_blank><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="navbar-nav-svg text-dark" viewBox="0 0 512 499.36" role="img"><title>GitHub</title><path style="fill:#000000" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path></svg></a>
+                    <a href="https://www.instagram.com/_migio/" target=_blank><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"    class="navbar-nav-svg text-dark" viewBox="0 0 512 512"><path style="fill:#000000" d="M256,49.471c67.266,0,75.233.257,101.8,1.469,24.562,1.121,37.9,5.224,46.778,8.674a78.052,78.052,0,0,1,28.966,18.845,78.052,78.052,0,0,1,18.845,28.966c3.45,8.877,7.554,22.216,8.674,46.778,1.212,26.565,1.469,34.532,1.469,101.8s-0.257,75.233-1.469,101.8c-1.121,24.562-5.225,37.9-8.674,46.778a83.427,83.427,0,0,1-47.811,47.811c-8.877,3.45-22.216,7.554-46.778,8.674-26.56,1.212-34.527,1.469-101.8,1.469s-75.237-.257-101.8-1.469c-24.562-1.121-37.9-5.225-46.778-8.674a78.051,78.051,0,0,1-28.966-18.845,78.053,78.053,0,0,1-18.845-28.966c-3.45-8.877-7.554-22.216-8.674-46.778-1.212-26.564-1.469-34.532-1.469-101.8s0.257-75.233,1.469-101.8c1.121-24.562,5.224-37.9,8.674-46.778A78.052,78.052,0,0,1,78.458,78.458a78.053,78.053,0,0,1,28.966-18.845c8.877-3.45,22.216-7.554,46.778-8.674,26.565-1.212,34.532-1.469,101.8-1.469m0-45.391c-68.418,0-77,.29-103.866,1.516-26.815,1.224-45.127,5.482-61.151,11.71a123.488,123.488,0,0,0-44.62,29.057A123.488,123.488,0,0,0,17.3,90.982C11.077,107.007,6.819,125.319,5.6,152.134,4.369,179,4.079,187.582,4.079,256S4.369,333,5.6,359.866c1.224,26.815,5.482,45.127,11.71,61.151a123.489,123.489,0,0,0,29.057,44.62,123.486,123.486,0,0,0,44.62,29.057c16.025,6.228,34.337,10.486,61.151,11.71,26.87,1.226,35.449,1.516,103.866,1.516s77-.29,103.866-1.516c26.815-1.224,45.127-5.482,61.151-11.71a128.817,128.817,0,0,0,73.677-73.677c6.228-16.025,10.486-34.337,11.71-61.151,1.226-26.87,1.516-35.449,1.516-103.866s-0.29-77-1.516-103.866c-1.224-26.815-5.482-45.127-11.71-61.151a123.486,123.486,0,0,0-29.057-44.62A123.487,123.487,0,0,0,421.018,17.3C404.993,11.077,386.681,6.819,359.866,5.6,333,4.369,324.418,4.079,256,4.079h0Z"/>
+                    <path style="fill:#000000" d="M256,126.635A129.365,129.365,0,1,0,385.365,256,129.365,129.365,0,0,0,256,126.635Zm0,213.338A83.973,83.973,0,1,1,339.974,256,83.974,83.974,0,0,1,256,339.973Z"/>
+                    <circle style="fill:#000000" cx="390.476" cy="121.524" r="30.23"/></svg></a>
+                </span>
+            </div>
+        </footer>
 
-    <footer class="footer mt-auto py-3">
-        <div class="container text-dark">
-            <span ><a href="https://github.com/migius/austerity-boardgame" target=_blank><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="navbar-nav-svg" viewBox="0 0 512 499.36" role="img"><title>GitHub</title><path style="fill:#000000" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path></svg> Source code</a> | Austerity is a game by Jake Staines | <a href="https://migio.altervista.org/contatti/" target="_blank">report a bug</a>
-            </span>
-            <span class="float-end ">
-                <a href="https://migio.altervista.org/lt/" target=_blank >migio</a>
-                <a href="https://github.com/migius" target=_blank><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="navbar-nav-svg text-dark" viewBox="0 0 512 499.36" role="img"><title>GitHub</title><path style="fill:#000000" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path></svg></a>
-                <a href="https://www.instagram.com/_migio/" target=_blank><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"    class="navbar-nav-svg text-dark" viewBox="0 0 512 512"><path style="fill:#000000" d="M256,49.471c67.266,0,75.233.257,101.8,1.469,24.562,1.121,37.9,5.224,46.778,8.674a78.052,78.052,0,0,1,28.966,18.845,78.052,78.052,0,0,1,18.845,28.966c3.45,8.877,7.554,22.216,8.674,46.778,1.212,26.565,1.469,34.532,1.469,101.8s-0.257,75.233-1.469,101.8c-1.121,24.562-5.225,37.9-8.674,46.778a83.427,83.427,0,0,1-47.811,47.811c-8.877,3.45-22.216,7.554-46.778,8.674-26.56,1.212-34.527,1.469-101.8,1.469s-75.237-.257-101.8-1.469c-24.562-1.121-37.9-5.225-46.778-8.674a78.051,78.051,0,0,1-28.966-18.845,78.053,78.053,0,0,1-18.845-28.966c-3.45-8.877-7.554-22.216-8.674-46.778-1.212-26.564-1.469-34.532-1.469-101.8s0.257-75.233,1.469-101.8c1.121-24.562,5.224-37.9,8.674-46.778A78.052,78.052,0,0,1,78.458,78.458a78.053,78.053,0,0,1,28.966-18.845c8.877-3.45,22.216-7.554,46.778-8.674,26.565-1.212,34.532-1.469,101.8-1.469m0-45.391c-68.418,0-77,.29-103.866,1.516-26.815,1.224-45.127,5.482-61.151,11.71a123.488,123.488,0,0,0-44.62,29.057A123.488,123.488,0,0,0,17.3,90.982C11.077,107.007,6.819,125.319,5.6,152.134,4.369,179,4.079,187.582,4.079,256S4.369,333,5.6,359.866c1.224,26.815,5.482,45.127,11.71,61.151a123.489,123.489,0,0,0,29.057,44.62,123.486,123.486,0,0,0,44.62,29.057c16.025,6.228,34.337,10.486,61.151,11.71,26.87,1.226,35.449,1.516,103.866,1.516s77-.29,103.866-1.516c26.815-1.224,45.127-5.482,61.151-11.71a128.817,128.817,0,0,0,73.677-73.677c6.228-16.025,10.486-34.337,11.71-61.151,1.226-26.87,1.516-35.449,1.516-103.866s-0.29-77-1.516-103.866c-1.224-26.815-5.482-45.127-11.71-61.151a123.486,123.486,0,0,0-29.057-44.62A123.487,123.487,0,0,0,421.018,17.3C404.993,11.077,386.681,6.819,359.866,5.6,333,4.369,324.418,4.079,256,4.079h0Z"/>
-                <path style="fill:#000000" d="M256,126.635A129.365,129.365,0,1,0,385.365,256,129.365,129.365,0,0,0,256,126.635Zm0,213.338A83.973,83.973,0,1,1,339.974,256,83.974,83.974,0,0,1,256,339.973Z"/>
-                <circle style="fill:#000000" cx="390.476" cy="121.524" r="30.23"/></svg></a>
-            </span>
-        </div>
-    </footer>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+        <script src="res/lib/vue-i18n.min.js"></script> <!--https://kazupon.github.io/vue-i18n/guide/formatting.html-->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="res/loc/EN.js" ></script>
-    <script src="res/utilities.js" ></script>
-    <script src="res/setup.js" ></script>
-    <script src="res/actions.js" ></script>
-    <script src="res/main.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 
+        <script src="res/utilities.js" ></script>
+        <!--<script src="res/setup.js" ></script>-->
+        <script src="res/actions.js" ></script>
+        <script src="res/main.js" ></script>
+
+        <!--migration to VueJs-->
+        <script src="res/i18n.js" ></script>
+        <script src="res/main_v2.js" ></script>
+
+    </div> 
 </body>
 
 

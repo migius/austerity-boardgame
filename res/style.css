@@ -2,16 +2,6 @@ div.container {
     max-width: 95%;
 }
 
-.bag {
-    border: 1px solid black;
-    background: linear-gradient(180deg, #333 0%, #eee 100%);
-    margin: 8px 0px;
-    padding: 1px 2px;
-    color: white;
-    height: 100%;
-    border-radius: 0.25rem;
-}
-
 i.cube {
     font-size: 20px;
     text-shadow: 0 0 3px white;
@@ -45,6 +35,25 @@ i.cube-DY {
 
 #bags {
     min-height: 100px;
+}
+
+.bag {
+    border: 1px solid black;
+    background: linear-gradient(180deg, #333 0%, #eee 100%);
+    margin: 8px 0px;
+    padding: 1px 2px;
+    color: white;
+    height: 100%;
+    border-radius: 0.25rem;
+    position: relative;
+}
+
+.show-bag {
+    color: #333;
+    font-size: xx-small;
+    bottom: 0px;
+    font-family: monospace;
+    position: absolute;
 }
 
 div#result-box {
@@ -96,50 +105,50 @@ div#commands {
     left:10px;
 }
 
-.emp-cell {
-    background-color: #ead6a4;
-    border: 1px solid #e09c37;
+.E-cell {
+    background: linear-gradient(90deg, #ead6a4 0%, #fff 100%); 
+    border: 1px solid #926017;
 }
-#emp-cell-0, .row.head div.emp-cell {
-    background-color: #e09c37;
-    border: 1px solid #e09c37;
+div.tr-0.E-cell, .row.head div.E-cell {
+    background: #926017;
+    border: 1px solid #926017;
 }
 
-.pub-cell {
-    background-color: #d4d4f4;
+.S-cell {
+    background: linear-gradient(90deg, #d4d4f4 0%, #fff 100%); 
     border: 1px solid #b0a2c1;
 }
-#pub-cell-0, .row.head div.pub-cell {
-    background-color: #b0a2c1;
+div.tr-0.S-cell, .row.head div.S-cell {
+    background: #b0a2c1;
     border: 1px solid #b0a2c1;
 }
 
-.wea-cell {
-    background-color: #eaca72;
+.W-cell {
+    background: linear-gradient(90deg, #eaca72 0%, #fff 100%); 
     border: 1px solid #e28500;
 }
-#wea-cell-0, .row.head div.wea-cell {
-    background-color: #e28500;
+div.tr-0.W-cell, .row.head div.W-cell {
+    background: #e28500;
     border: 1px solid #e28500;
 }
 
-.hea-cell {
-    background-color: #a4a4d4;
+.H-cell {
+    background: linear-gradient(90deg, #a4a4d4 0%, #fff 100%); 
     border: 1px solid #1d0da8;
 }
-#hea-cell-0, .row.head div.hea-cell {
-    background-color: #1d0da8;
+div.tr-0.H-cell, .row.head div.H-cell {
+    background: #1d0da8;
     border: 1px solid #1d0da8;
     color: white;
 }
 
-.pop-cell {
-    background-color: #90d090;
+.P-cell {
+    background: linear-gradient(90deg, #90d090 0%, #fff 100%); 
     border: 1px solid #008A31;
 }
 
-#pop-cell-0, .row.head div.pop-cell {
-    background-color: #008A31;
+div.tr-0.P-cell, .row.head div.P-cell {
+    background: #008A31;
     border-bottom: 1px solid #008A31;
 }
 
@@ -165,45 +174,79 @@ div#Institutions div div.head span.title {
 div#Institutions div.row.col-12 {
     margin: 0px;
     padding: 0px;
+    box-shadow: #0000005e 0px 0px 7px 3px;
 }
     
-div.pen-cell {
+div.PE-cell {
     background-color: #ead6a4;
-    border: 1px solid #e09c37;
+    border: 1px solid #926017;
 }
 
-div.pen-head {
-    background-color: #e09c37;    
-    background: linear-gradient(90deg, #e09c37 30%, #fff 85%);
-    border: 1px solid #e09c37;
+div.PE-head {
+    background-color: #926017;    
+    background: linear-gradient(90deg, #926017 30%, #fff 85%);
+    border: 1px solid #926017;
 }
 
-div.nas-cell {
+div.NS-cell {
     background-color: #a4a4d4;
-    border: 1px solid #1d0da8;
+    border: 1px solid #3c0da8;
 }
 
-div.nas-head {
-    background-color: #1d0da8;
-    background: linear-gradient(90deg, #1d0da8 30%, #fff 85%);
-    border: 1px solid #1d0da8;
+div.NS-head {
+    background-color: #3c0da8;
+    background: linear-gradient(90deg, #3c0da8 30%, #fff 85%);
+    border: 1px solid #3c0da8;
 }
 
-div.sow-cell {
-    background-color: #aaa;
-    border: 1px solid #555;
+div.SW-cell {
+    background-color: #ccc;
+    border: 1px solid #777;
 }
 
-div.sow-head {
-    background-color: #222;
-    background: linear-gradient(90deg, #222 30%, #fff 85%);
-    border: 1px solid #222;
+div.SW-head {
+    background-color: #777;
+    background: linear-gradient(90deg, #555 30%, #fff 85%);
+    border: 1px solid #777;
 }
 
+div.IF-cell {
+    background-color: #999;
+    border: 1px solid #000;
+}
+
+div.IF-head {
+    background-color: #000;
+    background: linear-gradient(90deg, #000 30%, #ccc 85%);
+    border: 1px solid #000;
+}
+
+div.IN-cell {
+    background-color: #aaeaa4;
+    border: 1px solid #329217;
+}
+
+div.IN-head {
+    background-color: #329217;
+    background: linear-gradient(90deg, #329217 30%, #fff 85%);
+    border: 1px solid #329217;
+}
+
+div.HE-cell {
+    background-color: #76ade6;
+    border: 1px solid #172092;
+}
+
+div.HE-head {
+    background-color: #172092;
+    background: linear-gradient(90deg, #172092 30%, #fff 85%);
+    border: 1px solid #172092;
+}
 
 .Institutions-cell.private-action-cell, .Institutions-cell.icon-cell {
     background-color: #fff;
-    border: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
 }
 .Institutions-cell.Institutions-cell-first    {
     filter: brightness(0.8);
@@ -219,7 +262,9 @@ div.p-a-used {
 }
  
 td.current, div.current {
-    border: 6px solid #ff0000 !important;
+    border: calc(var(--bs-gutter-x)/5) solid #ff0000 !important;
+    padding-left: calc(var(--bs-gutter-x)/2 - var(--bs-gutter-x)/5);
+    padding-right: calc(var(--bs-gutter-x)/2 - var(--bs-gutter-x)/5);
 }
 
 
@@ -240,4 +285,34 @@ footer.footer {
 
 .loading {
     filter: blur(5px) grayscale(0.8) opacity(0.1);
+}
+
+button.bootbox-close-button.close {
+    cursor: pointer;
+    font-weight: 100;
+    padding: 1.75rem;
+    margin: -1.75rem -1.75rem -1.75rem auto;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    float: right;
+    font-size: 1.40625rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #000;
+    text-shadow: none;
+    opacity: .5;
+    text-transform: none;
+    overflow: visible;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border-radius: 0;
+}
+
+
+.opacity05 {
+    opacity: 0.5;
 }
