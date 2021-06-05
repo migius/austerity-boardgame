@@ -1,3 +1,5 @@
+
+
 function addToArray(cube, array) 
 {
     array.push(cube);
@@ -7,15 +9,14 @@ function drawCube(array)
 {
     var cube;
     if(array && array.length >0)
-        {
-            var random = Math.floor(Math.random()*array.length);
-            cube = array[random];
-            array.splice(random,1);
-            
-            }
+    {
+        var random = Math.floor(Math.random()*array.length);
+        cube = array[random];
+        array.splice(random,1);
+    }
     else
     {
-        console.log("Empty " + array + "!");
+        console.log('\x1b[33m%s\x1b[0m', "USELESS? Empty " + array + "!");
     } 
     return cube;
  } 
@@ -31,11 +32,11 @@ function drawSpecificCube(array, type)
                 array.splice(index,1);
             }
             else
-                console.log("no " + type + " in " + array + "!");
+                console.log('\x1b[33m%s\x1b[0m', "USELESS? no " + type + " in " + array + "!");
         }
     else
     {
-        console.log("Empty " + array + "!");
+        console.log('\x1b[33m%s\x1b[0m', "USELESS? Empty " + array + "!");
     } 
     return cube;    
 } 
@@ -66,4 +67,5 @@ function getAllIndexes(arr, val) {
     }
     return indexes;
 }
+
 

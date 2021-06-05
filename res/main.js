@@ -1,6 +1,7 @@
-function newGame() {
-    defaultSetUp();
-}
+// function newGame() {
+//     defaultSetUp();
+// }
+/*
 
 function newTurn()
 {
@@ -77,4 +78,5 @@ function newYear()
         while(institution.founded > 0) { addToArray("Y", main.Bag.content); institution.founded--;}
     });    
 }
+*/
 

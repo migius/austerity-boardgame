@@ -86,7 +86,8 @@ const messages = {
                     K: "Where do you want to take @:cube.K from?",
                     R: "Where do you want to take @:cube.R from?",
                     W: "Where do you want to take @:cube.W from?",
-                }
+                },
+                buy_extra_inst: "What Extra Institution do you want to buy?",
             },
             buy_extra_inst: "Buy an extra Institution for @:cube.Y @:cube.Y",
             click_to_X_content: {

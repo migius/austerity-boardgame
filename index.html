@@ -79,13 +79,13 @@
 
                         <div id="actions" class="row">
                             <div id="newTurn-btn-g" class="btn-group col-12" role="group" v-show="!game_status_parameters.gameFinished && Bag && Bag.content.length > 0 && game_status_parameters.turnEnded">
-                                <button type="button" onClick="newTurn()" id="newTurn-btn" class="btn btn-success col-12" v-html="$t('game_interface.new_turn')"></button>
+                                <button type="button" @Click="newTurn()" id="newTurn-btn" class="btn btn-success col-12" v-html="$t('game_interface.new_turn')"></button>
                             </div>
                             <div id="endTurn-btn-g" class="btn-group col-12" role="group" v-show="game_status_canEndTurn && !game_status_parameters.turnEnded">
-                                <button type="button" onClick="endTurn()" id="endTurn-btn" class="btn btn-warning col-12" v-html="$t('game_interface.end_turn')"></button>
+                                <button type="button" @Click="endTurn()" id="endTurn-btn" class="btn btn-warning col-12" v-html="$t('game_interface.end_turn')"></button>
                             </div>    
                             <div id="newYear-btn-g" class="btn-group col-12" role="group" v-show="!game_status_parameters.gameFinished && Bag && Bag.content.length == 0 && game_status_parameters.turnEnded">
-                                <button type="button" onClick="newYear()" id="newYear-btn" class="btn btn-danger col-12" v-html="$t('game_interface.new_year')"></button>
+                                <button type="button" @Click="newYear()" id="newYear-btn" class="btn btn-danger col-12" v-html="$t('game_interface.new_year')"></button>
                             </div>
                             <div class="btn-group col-12 newGame-btn-g mt-1" role="group" v-show="game_status_parameters.gameFinished">
                                 <button type="button" @click="newGame()" class="btn btn-success col-12 newGame-btn" v-html="$t('game_interface.new_game')"></button>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6" v-show="!game_status_parameters.gameFinished">
+                <div class="col-xs-12 col-md-6" v-show="!game_status_parameters.gameFinished && draw != ''">
 
                     <div id="result-box" class="col-xs-12 mt-3 p-2">
                         <h2 class="newspaper-name d-none d-sm-block">
@@ -249,10 +249,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 
-        <script src="res/utilities.js" ></script>
+        <!--<script src="res/utilities.js" ></script> -->
         <!--<script src="res/setup.js" ></script>-->
-        <script src="res/actions.js" ></script>
-        <script src="res/main.js" ></script>
+        <!-- <script src="res/actions.js" ></script> -->
+        <!-- <script src="res/main.js" ></script> -->
 
         <!--migration to VueJs-->
         <script src="res/i18n.js" ></script>
