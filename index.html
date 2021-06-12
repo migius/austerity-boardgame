@@ -78,29 +78,29 @@
 
 
                         <div id="actions" class="row">
-                            <div id="newTurn-btn-g" class="btn-group col-12" role="group" v-show="!game_status_parameters.gameFinished && Bag && Bag.content.length > 0 && game_status_parameters.turnEnded">
+                            <div id="newTurn-btn-g" class="btn-group col-12" role="group" v-show="game_status_canPlay && Bag && Bag.content.length > 0 && game_status_parameters.turnEnded">
                                 <button type="button" @Click="newTurn()" id="newTurn-btn" class="btn btn-success col-12" v-html="$t('game_interface.new_turn')"></button>
                             </div>
                             <div id="endTurn-btn-g" class="btn-group col-12" role="group" v-show="game_status_canEndTurn && !game_status_parameters.turnEnded">
                                 <button type="button" @Click="endTurn()" id="endTurn-btn" class="btn btn-warning col-12" v-html="$t('game_interface.end_turn')"></button>
                             </div>    
-                            <div id="newYear-btn-g" class="btn-group col-12" role="group" v-show="!game_status_parameters.gameFinished && Bag && Bag.content.length == 0 && game_status_parameters.turnEnded">
+                            <div id="newYear-btn-g" class="btn-group col-12" role="group" v-show="game_status_canPlay && Bag && Bag.content.length == 0 && game_status_parameters.turnEnded">
                                 <button type="button" @Click="newYear()" id="newYear-btn" class="btn btn-danger col-12" v-html="$t('game_interface.new_year')"></button>
                             </div>
                             <div class="btn-group col-12 newGame-btn-g mt-1" role="group" v-show="game_status_parameters.gameFinished">
                                 <button type="button" @click="newGame()" class="btn btn-success col-12 newGame-btn" v-html="$t('game_interface.new_game')"></button>
                             </div>
 
-                            <div class="btn-group action-btn col" v-for="(item, index) of actions_available">
+                            <div class="btn-group action-btn col" v-for="(item, index) of actions_available" v-show="game_status_canPlay">
                                 <button type="button" class="btn btn-outline-primary choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
                             </div>
-                            <div class="btn-group cuts-btn col" v-for="(item, index) of cuts_available">
+                            <div class="btn-group cuts-btn col" v-for="(item, index) of cuts_available" v-show="game_status_canPlay">
                                 <button type="button" class="btn btn-outline-dark choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
                             </div>
-                            <div class="btn-group fund-btn col" v-for="(item, index) of fund_available">
+                            <div class="btn-group fund-btn col" v-for="(item, index) of fund_available" v-show="game_status_canPlay">
                                 <button type="button" class="btn btn-outline-warning choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
                             </div>
-                            <div class="btn-group fund-c-btn col" v-for="(item, index) of fund_c_available">
+                            <div class="btn-group fund-c-btn col" v-for="(item, index) of fund_c_available" v-show="game_status_canPlay">
                                 <button type="button" class="btn btn-outline-secondary choose-btn col-12" @click="item.click" v-html="$t(item.text)"></button>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                         <h5 v-html="$t('keywords.actions')"></h5>
                         <div class="row" id="standard-action-area">
                             <div v-for="(item, index) of StandardActions" class="btn-group col" role="group">
-                                <button type="button" @click="item.click" id="bm-action-btn" class="btn btn-info col-12 btn-std-action" v-html="$t('standard_actions.' + item.name + '.title') + '<hr />' + $t('standard_actions.' + item.name + '.description')" :disabled='main.Bag && main.Bag.content.length == 0'>
+                                <button type="button" @click="item.click" id="bm-action-btn" class="btn btn-info col-12 btn-std-action" v-html="$t('standard_actions.' + item.name + '.title') + '<hr />' + $t('standard_actions.' + item.name + '.description')" :disabled='(!main.game_status_canPlay) || main.Bag && main.Bag.content.length == 0'>
                                 </button>
                             </div>
                         </div>

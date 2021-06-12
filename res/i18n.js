@@ -43,10 +43,10 @@ const messages = {
             },
             difficulty: {
                 label: "Difficulty",
-                easy: "Easy",
+                easy: "Easy (+1 Yellow/Income)",
                 normal: "Normal",
-                hard: "Hard",
-                very_hard: "Mario Draghi",
+                hard: "Hard (+1 Black/Debt)",
+                very_hard: "Mario Draghi (+2 Black/Debt)",
             },
             extra_inst: {
                 label: "Use extra Institutions",

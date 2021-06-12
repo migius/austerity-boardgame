@@ -25,7 +25,9 @@ var main = new Vue({
             turnEnded: true,
             fundChoiceNeeded: false,
             fundChoiceCompleted: false,
-            gameFinished: true
+            gameFinished: true,
+            gameWin: false,
+            gameLose: false,
         },
         StandardActions: [],
         Institutions: [],
@@ -61,7 +63,10 @@ var main = new Vue({
             return this.Current && this.Current.content.indexOf("Y") > -1;
         },
         game_status_canEndTurn: function(){
-            return (!this.game_status_actionNeeded || this.game_status_parameters.actionCompleted) && !this.game_status_cutsNeeded && !this.game_status_fundNeeded && (!this.game_status_parameters.fundChoiceNeeded || this.game_status_parameters.fundChoiceCompleted);
+            return this.game_status_canPlay && (!this.game_status_actionNeeded || this.game_status_parameters.actionCompleted) && !this.game_status_cutsNeeded && !this.game_status_fundNeeded && (!this.game_status_parameters.fundChoiceNeeded || this.game_status_parameters.fundChoiceCompleted);
+        },
+        game_status_canPlay: function(){
+            return !(this.game_status_parameters.gameWin || this.game_status_parameters.gameLose || this.game_status_parameters.gameFinished);
         },
         Bag: function(){
             return this.getSpaceByCode("B");
@@ -256,6 +261,8 @@ var main = new Vue({
             this.game_status_parameters.fundChoiceNeeded = false;
             this.game_status_parameters.fundChoiceCompleted = false;
             this.game_status_parameters.gameFinished = false;
+            this.game_status_parameters.gameWin = false;
+            this.game_status_parameters.gameLose = false;
 
 
             ////////////////////////////////////////// ACTION SETUP
@@ -592,9 +599,11 @@ var main = new Vue({
             });
         },
         gameLosed: function() {
+            this.game_status_parameters.gameLose = true;
             this.engGameTriggered("Lose");
         },
         gameWin:  function() {
+            this.game_status_parameters.gameWin = true;
             this.engGameTriggered("Win");
         },
         endCurrentGame:  function() {
