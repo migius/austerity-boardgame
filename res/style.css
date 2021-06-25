@@ -63,6 +63,15 @@ div#result-box {
     text-align: justify;
 }
 
+div#result-box {
+    max-height: 280px;
+    /*overflow: hidden scroll;*/
+}
+
+div.turn-track {
+    border: calc(var(--bs-gutter-x)/5) solid #ff000000;
+}
+
 h2.newspaper-name {
     font-family: serif;
     text-align: center;

@@ -53,6 +53,21 @@ const messages = {
                 false: "NO",
                 true: "YES",
             },
+            turn_track: "Turn track",
+            scenario: {
+                label: "Scenario",
+                no: "Nessuno",
+                olympics: "Olympics",
+                economic_crash: "Economic Crash (cooming soon)",
+                organised_crime: "Organised Crime (cooming soon)",
+                war_footing: "War Footing (cooming soon)",
+            },
+            scenario_diff: {
+                label: "Scenario Difficulty",
+                easy: "Easy",
+                normal: "Normal",
+                hard: "Hard",
+            },
             new_turn: "New turn",
             end_turn: "End turn",
             new_year: "New year",
@@ -235,7 +250,12 @@ const messages = {
                 title: "Pay Loans",
                 description: "Remove @:cube.Y @:cube.Y @:cube.K<br />&nbsp;",
                 btn_text: "@:title <hr /> @:description",
-            }
+            },
+            finance_olympics: {
+                title: "Finance the Olympics",
+                description: "Add @:cube.Y to this box",
+                btn_text: "@:title <hr /> @:description",
+            },
         },
         institution: {
             PE: {

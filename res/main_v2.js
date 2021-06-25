@@ -13,6 +13,8 @@ var main = new Vue({
             country_profile_CUSTOM: "KKKKWBBRRY",
             difficulty: "",
             extra_inst: false,
+            scenario: "NO",
+            scenario_diff: "E",
         },
         Spaces: [],
         Tracks: [],
@@ -28,7 +30,10 @@ var main = new Vue({
             gameFinished: true,
             gameWin: false,
             gameLose: false,
+            turns: Array(20)
         },
+        Current_turn: 0,
+        Olympics_finance: 0,
         StandardActions: [],
         Institutions: [],
         extra_institutions: [],
@@ -263,7 +268,8 @@ var main = new Vue({
             this.game_status_parameters.gameFinished = false;
             this.game_status_parameters.gameWin = false;
             this.game_status_parameters.gameLose = false;
-
+            this.game_status_parameters.turns = Array(20);
+            this.Current_turn = 0;
 
             ////////////////////////////////////////// ACTION SETUP
 
@@ -486,9 +492,38 @@ var main = new Vue({
 
 
 
+            //scenario
 
-            //TODO: remove
-            //refreshUx();
+            switch(this.new_game_options.scenario){
+                case "NO":
+                    break;
+                case "OL":
+                    this.incrementTrack(undefined, "E", 2);
+                    this.incrementTrack(undefined, "S", -1);
+                    this.incrementTrack(undefined, "H", -1);
+                    this.incrementTrack(undefined, "P", 2);
+
+                    this.game_status_parameters.turns = Array(8);
+
+                    this.Olympics_finance = 0;
+
+                    break;
+                case "EC":
+                    break;
+                case "OC":
+                    this.incrementTrack(undefined, "E", 1);
+                    this.incrementTrack(undefined, "S", -1);
+                    this.incrementTrack(undefined, "W", -1);
+                    this.incrementTrack(undefined, "H", 1);
+                    this.incrementTrack(undefined, "P", 2);
+                    break;
+                case "WF":
+                    this.incrementTrack(undefined, "S", 2);
+                    this.incrementTrack(undefined, "W", 1);
+                    this.incrementTrack(undefined, "H", 1);
+                    this.incrementTrack(undefined, "P", -1);
+                    break;
+            }
 
         },
         addExtraInstitutionDialog: function(){
@@ -675,7 +710,57 @@ var main = new Vue({
         },
         newYear: function() {
             //Check to see if you have won - see Ending the Game below
-            if(this.Used.content.indexOf("K") < 0) this.gameWin();
+
+
+            switch(this.new_game_options.scenario){
+                case "NO":
+                    if(this.Used.content.indexOf("K") < 0) this.gameWin();
+                    break;
+                case "OL":
+                    //Track years on the Turn Track; at the end of eight years, the game ends. (count start from 0)
+                    if(this.Current_turn === 7){
+                        //check win
+                        main.Tracks.forEach(function(t){                        
+                            //You win if you have a Public Safety of 6 or more and 
+                            if(t.code === "S" && t.value < 6) {
+                                main.gameLosed();
+                                return;
+                            }
+                        });
+                        //placed 2 (Easy), 3 (Normal) or 4 (Hard) on this card.
+                        switch(main.new_game_options.scenario_diff) {
+                            case "E":
+                                if(main.Olympics_finance < 2) {
+                                    this.gameLosed();
+                                    return;
+                                }
+                                break;
+                            case "N":
+                                if(main.Olympics_finance < 3) {
+                                    this.gameLosed();
+                                    return;
+                                }
+                                break;
+                            case "H":                            
+                                if(main.Olympics_finance < 4) {
+                                    this.gameLosed();
+                                    return;
+                                }
+                                break;
+
+                        }
+                        //se non sono uscito prima ho vinto
+                        this.gameWin();
+                    }
+
+                    break;
+                case "EC":
+                    break;
+                case "OC":
+                    break;
+                case "WF":
+                    break;
+            }
 
             this.Tracks.forEach(function(track){
                 if(track.revenue.length != 0 && track.revenue[track.value].length != 0){
@@ -704,6 +789,14 @@ var main = new Vue({
             this.Institutions.forEach(function(institution){
                 while(institution.founded > 0) { main.addToArray("Y", main.Bag.content); institution.founded--;}
             });    
+
+
+            this.Current_turn++;
+
+            if(this.Current_turn >= this.game_status_parameters.turns.length){
+                this.game_status_parameters.turns.push(this.Current_turn);
+            }
+
         },                
         refreshCubeDrawResult: function() {
             this.actions_available = [];
@@ -937,6 +1030,19 @@ var main = new Vue({
                 indexes.push(i);
             }
             return indexes;
+        },
+        ////////////########################### scenario
+        financeOlympics: function(){
+            let YToPay = 1;
+
+            var spacesForPay = [main.Current, main.Used, main.Treasury];
+
+            if(!main.canPay("Y", YToPay, spacesForPay, true)) return;
+
+            main.Olympics_finance++;
+
+            main.doPay("Y", YToPay, spacesForPay);
+            main.endDefaultAction();
         },
     },
     beforeCreate: function(){

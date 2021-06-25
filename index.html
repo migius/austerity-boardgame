@@ -74,6 +74,24 @@
                                     <option value="true" v-html="$t('game_interface.extra_inst.true')"></option>
                                 </select>
                             </div>
+                            <div class="btn-group col-12 row mb-1" role="group">
+                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.scenario.label')"></legend>
+                                <select class="form-select col" aria-label="Scenario" v-model="new_game_options.scenario">
+                                    <option value="NO" selected v-html="$t('game_interface.scenario.no')"></option>
+                                    <option value="OL" v-html="$t('game_interface.scenario.olympics')"></option>
+                                    <option value="EC" disabled v-html="$t('game_interface.scenario.economic_crash')"></option>
+                                    <option value="OC" disabled v-html="$t('game_interface.scenario.organised_crime')"></option>
+                                    <option value="WF" disabled v-html="$t('game_interface.scenario.war_footing')"></option>
+                                </select>
+                            </div>
+                            <div class="btn-group col-12 row mb-1" role="group" v-show="new_game_options.scenario != 'NO'">
+                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.scenario_diff.label')"></legend>
+                                <select class="form-select col" aria-label="Scenario" v-model="new_game_options.scenario_diff">
+                                    <option value="E" selected v-html="$t('game_interface.scenario_diff.easy')"></option>
+                                    <option value="N" v-html="$t('game_interface.scenario_diff.normal')"></option>
+                                    <option value="H" v-html="$t('game_interface.scenario_diff.hard')"></option>
+                                </select>
+                            </div>
                         </div>
 
 
@@ -126,11 +144,29 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6" v-show="!game_status_parameters.gameFinished && draw != ''">
 
-                    <div id="result-box" class="col-xs-12 mt-3 p-2">
+
+                        <div v-show="new_game_options.scenario === 'OL'" class="btn-group col-12 mt-2" role="group">
+                            <button type="button" @click="financeOlympics" id="bm-action-btn" class="btn btn-info col btn-std-action" >
+                                {{$t('standard_actions.finance_olympics.title')}}
+                                <span class=float-end><i v-for="i in Array(Olympics_finance)" :class="$t('cube_icons.Y')"></i></span>
+                                <hr />
+                                <span v-html="$t('standard_actions.finance_olympics.description')" />
+                            </button>
+                            </button>                        
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-md-6" >
+                    <h5 v-show="!game_status_parameters.gameFinished">{{$t('game_interface.turn_track')}}</h5>
+
+                    <div class="turn-table row" v-show="!game_status_parameters.gameFinished">
+                        <div v-for="(item, index) of game_status_parameters.turns" :class="[(index === Current_turn ? 'current' : ''), 'col turn-track']">{{index+1}}</div>
+                    </div>
+
+                    <div id="result-box" v-show="!game_status_parameters.gameFinished && draw != ''" class="col-xs-12 mt-3 p-2">
                         <h2 class="newspaper-name d-none d-sm-block">
                             <i class="fas fa-newspaper float-start d-none d-sm-block d-md-none d-xl-block"></i>Economic News<i class="fas fa-newspaper float-end d-none d-sm-block d-md-none d-xl-block"></i>
                         </h2>
@@ -139,16 +175,17 @@
                             <span id="cubeDrawResult" v-html="$t('cube_draw.' + draw + '.Title')" ></span>
                         </h5>
                         <div class="row paper-text">
-                            <div class="col d-none d-md-block">
+                            <!--<div class="col d-none d-md-block">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                            </div>
-                            <div class="col-12 col-lg-4">
-                               <p class="d-none  d-lg-block ">It has survived not only five centuries, but also the leap into electronic typesetting, </p>
+
+                            </div>-->
+                            <div class="col ">
+                               <p class="d-none  d-lg-block "><!--It has survived not only five centuries, but also the leap into electronic typesetting, --></p>
                                <p id="cubeDrawResultEffect" class="p-2" v-html="$t('cube_draw.' + draw + '.Description')"></p>
-                            </div>   
+                            </div>   <!--
                             <div class="col-4 d-none d-lg-block">
                                 remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                            </div>           
+                            </div>           -->
                         </div>                 
                     </div>
             
