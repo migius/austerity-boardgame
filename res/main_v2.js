@@ -13,7 +13,7 @@ var main = new Vue({
             country_profile_CUSTOM: "KKKKWBBRRY",
             difficulty: "",
             extra_inst: false,
-            scenario: "NO",
+            scenario: "EC",
             scenario_diff: "E",
         },
         Spaces: [],
@@ -30,10 +30,11 @@ var main = new Vue({
             gameFinished: true,
             gameWin: false,
             gameLose: false,
-            turns: Array(20)
+            turns: Array(21)
         },
-        Current_turn: 0,
+        Current_turn: 1,
         Olympics_finance: 0,
+        War_feed: 0,
         StandardActions: [],
         Institutions: [],
         extra_institutions: [],
@@ -268,8 +269,8 @@ var main = new Vue({
             this.game_status_parameters.gameFinished = false;
             this.game_status_parameters.gameWin = false;
             this.game_status_parameters.gameLose = false;
-            this.game_status_parameters.turns = Array(20);
-            this.Current_turn = 0;
+            this.game_status_parameters.turns = Array(21);
+            this.Current_turn = 1;
 
             ////////////////////////////////////////// ACTION SETUP
 
@@ -300,12 +301,27 @@ var main = new Vue({
                 }}
                 ]});
 
-            this.Actions.push({code: "KR", buttons: [
+            if(this.new_game_options.scenario == "OC"){
+                this.Actions.push({code: "KR", buttons: [
+                {name: "DecreasePopularity_OC", action: function(){
+                    main.incrementTrack(undefined, "P", -1);
+                    main.game_status_parameters.actionCompleted = true;
+
+                    main.Used.content.push("R");
+
+                    main.endGenericAction();
+                }}]});
+            
+            }
+            else {
+                this.Actions.push({code: "KR", buttons: [
                 {name: "DecreasePopularity", action: function(){
                     main.incrementTrack(undefined, "P", -1);
                     main.game_status_parameters.actionCompleted = true;
                     main.endGenericAction();
                 }}]});
+
+            }
 
             this.Actions.push({code: "RY", buttons: [
                 {name: "RemoveYR", action: function(){           
@@ -495,33 +511,70 @@ var main = new Vue({
             //scenario
 
             switch(this.new_game_options.scenario){
-                case "NO":
-                    break;
                 case "OL":
                     this.incrementTrack(undefined, "E", 2);
                     this.incrementTrack(undefined, "S", -1);
                     this.incrementTrack(undefined, "H", -1);
                     this.incrementTrack(undefined, "P", 2);
 
-                    this.game_status_parameters.turns = Array(8);
+                    this.game_status_parameters.turns = Array(9);
 
                     this.Olympics_finance = 0;
 
                     break;
-                case "EC":
+                case "EC":                
+                    switch(main.new_game_options.scenario_diff) {
+                        case "E":
+                            //no changes
+                            break;
+                        case "N":
+                            main.Bag.content.push("K");
+                            break;
+                        case "H": 
+                            main.Bag.content.push("K");
+                            main.Bag.content.push("K");
+                            break;
+                    }
                     break;
                 case "OC":
                     this.incrementTrack(undefined, "E", 1);
                     this.incrementTrack(undefined, "S", -1);
                     this.incrementTrack(undefined, "W", -1);
                     this.incrementTrack(undefined, "H", 1);
-                    this.incrementTrack(undefined, "P", 2);
+                    this.incrementTrack(undefined, "P", 2);                           
+                    switch(main.new_game_options.scenario_diff) {
+                        case "E":
+                            //no changes
+                            break;
+                        case "N":
+                            main.Bag.content.push("R");
+                            break;
+                        case "H": 
+                            main.Bag.content.push("R");
+                            main.Bag.content.push("R");
+                            break;
+                    }
                     break;
                 case "WF":
                     this.incrementTrack(undefined, "S", 2);
                     this.incrementTrack(undefined, "W", 1);
                     this.incrementTrack(undefined, "H", 1);
                     this.incrementTrack(undefined, "P", -1);
+
+                    this.Current_turn = 2
+           
+                    switch(main.new_game_options.scenario_diff) {
+                        case "E":
+                            this.game_status_parameters.turns = Array(6);
+                            break;
+                        case "N":
+                            this.game_status_parameters.turns = Array(7);
+                            break;
+                        case "H": 
+                            this.game_status_parameters.turns = Array(8);
+                            break;
+                    }                    
+
                     break;
             }
 
@@ -713,12 +766,9 @@ var main = new Vue({
 
 
             switch(this.new_game_options.scenario){
-                case "NO":
-                    if(this.Used.content.indexOf("K") < 0) this.gameWin();
-                    break;
                 case "OL":
-                    //Track years on the Turn Track; at the end of eight years, the game ends. (count start from 0)
-                    if(this.Current_turn === 7){
+                    //Track years on the Turn Track; at the end of eight years, the game ends. 
+                    if(this.Current_turn === 8){
                         //check win
                         main.Tracks.forEach(function(t){                        
                             //You win if you have a Public Safety of 6 or more and 
@@ -755,10 +805,49 @@ var main = new Vue({
 
                     break;
                 case "EC":
+                    if(this.Used.content.indexOf("K") < 0) this.gameWin();
                     break;
                 case "OC":
+                    if(this.Used.content.indexOf("R") < 0) this.gameWin();
                     break;
                 case "WF":
+                    if(this.War_feed === 1) {
+                        this.War_feed = 0;
+                        this.Current_turn++;
+                    }
+                    else
+                    {
+                        this.Current_turn--;
+                    }
+
+                    if(this.Current_turn === 0) {
+                        this.gameLosed();
+                        return;
+                    }
+
+                    switch(main.new_game_options.scenario_diff) {
+                        case "E":
+                            if(this.Current_turn >= 5) {
+                                this.gameWin();
+                                return;
+                            }
+                            break;
+                        case "N":
+                            if(this.Current_turn >= 6) {
+                                this.gameWin();
+                                return;
+                            }
+                            break;
+                        case "H":                                            
+                            if(this.Current_turn >= 7) {
+                                this.gameWin();
+                                return;
+                            }
+                            break;
+
+                    }
+
+
                     break;
             }
 
@@ -790,8 +879,9 @@ var main = new Vue({
                 while(institution.founded > 0) { main.addToArray("Y", main.Bag.content); institution.founded--;}
             });    
 
-
-            this.Current_turn++;
+            if(this.new_game_options.scenario !== "WF") {
+                this.Current_turn++;
+            }
 
             if(this.Current_turn >= this.game_status_parameters.turns.length){
                 this.game_status_parameters.turns.push(this.Current_turn);
@@ -1035,7 +1125,7 @@ var main = new Vue({
         financeOlympics: function(){
             let YToPay = 1;
 
-            var spacesForPay = [main.Current, main.Used, main.Treasury];
+            var spacesForPay = [main.Current, main.Treasury];
 
             if(!main.canPay("Y", YToPay, spacesForPay, true)) return;
 
@@ -1044,6 +1134,18 @@ var main = new Vue({
             main.doPay("Y", YToPay, spacesForPay);
             main.endDefaultAction();
         },
+        feedWar: function(){
+            let YToPay = 1;
+            var spacesForPay = [main.Current, main.Treasury];
+            if(!main.canPay("Y", YToPay, spacesForPay, true)) return;
+
+            main.incrementTrack(undefined, "E", -1);
+
+            main.War_feed++;
+
+            main.doPay("Y", YToPay, spacesForPay);
+            main.endDefaultAction();
+        }
     },
     beforeCreate: function(){
         console.log("beforeCreate: " + ((new Date()).getTime() - statTime).toString());

@@ -56,11 +56,10 @@ const messages = {
             turn_track: "Turn track",
             scenario: {
                 label: "Scenario",
-                no: "Nessuno",
                 olympics: "Olympics",
-                economic_crash: "Economic Crash (cooming soon)",
-                organised_crime: "Organised Crime (cooming soon)",
-                war_footing: "War Footing (cooming soon)",
+                economic_crash: "Economic Crash (base game)",
+                organised_crime: "Organised Crime",
+                war_footing: "War Footing",
             },
             scenario_diff: {
                 label: "Scenario Difficulty",
@@ -145,6 +144,7 @@ const messages = {
                 Title: "Political Corruption",
                 Description: "Decrease Popularity by one (+ Cuts)",
                 DecreasePopularity: "Decrease Popularity by one",
+                DecreasePopularity_OC: "Add 1 @:cube.R and decrease Popularity by one",
             },
             RY: {
                 Title: "Anti-Austerity Protests",
@@ -254,6 +254,11 @@ const messages = {
             finance_olympics: {
                 title: "Finance the Olympics",
                 description: "Add @:cube.Y to this box",
+                btn_text: "@:title <hr /> @:description",
+            },
+            war_footing: {
+                title: "Feed the War",
+                description: "Spend @:cube.Y and -1 @:keywords.employment",
                 btn_text: "@:title <hr /> @:description",
             },
         },

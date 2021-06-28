@@ -58,6 +58,7 @@
                                 <legend class="col-form-label col fw-bold"  v-html="$t('game_interface.country_profile.custom_label')"></legend>
                                 <input type="text" class="col" v-model="new_game_options.country_profile_CUSTOM"></input>
                             </div>
+                            <!--
                             <div class="btn-group col-12 row mb-1" role="group">
                                 <legend class="col-form-label col fw-bold" v-html="$t('game_interface.difficulty.label')"></legend>
                                 <select class="form-select col" aria-label="Country profile" v-model="new_game_options.difficulty">
@@ -67,6 +68,7 @@
                                     <option value="KK" v-html="$t('game_interface.difficulty.very_hard')" ></option>
                                 </select>
                             </div>
+                            -->
                             <div class="btn-group col-12 row mb-1" role="group">
                                 <legend class="col-form-label col fw-bold" v-html="$t('game_interface.extra_inst.label')"></legend>
                                 <select class="form-select col" aria-label="Country profile" v-model="new_game_options.extra_inst">
@@ -77,11 +79,10 @@
                             <div class="btn-group col-12 row mb-1" role="group">
                                 <legend class="col-form-label col fw-bold" v-html="$t('game_interface.scenario.label')"></legend>
                                 <select class="form-select col" aria-label="Scenario" v-model="new_game_options.scenario">
-                                    <option value="NO" selected v-html="$t('game_interface.scenario.no')"></option>
                                     <option value="OL" v-html="$t('game_interface.scenario.olympics')"></option>
-                                    <option value="EC" disabled v-html="$t('game_interface.scenario.economic_crash')"></option>
-                                    <option value="OC" disabled v-html="$t('game_interface.scenario.organised_crime')"></option>
-                                    <option value="WF" disabled v-html="$t('game_interface.scenario.war_footing')"></option>
+                                    <option value="EC" selected v-html="$t('game_interface.scenario.economic_crash')"></option>
+                                    <option value="OC" v-html="$t('game_interface.scenario.organised_crime')"></option>
+                                    <option value="WF" v-html="$t('game_interface.scenario.war_footing')"></option>
                                 </select>
                             </div>
                             <div class="btn-group col-12 row mb-1" role="group" v-show="new_game_options.scenario != 'NO'">
@@ -156,6 +157,16 @@
                             </button>                        
                         </div>
 
+
+                        <div v-show="new_game_options.scenario === 'WF'" class="btn-group col-12 mt-2" role="group">
+                            <button type="button" @click="feedWar" id="bm-action-btn" class="btn btn-info col btn-std-action" :disabled='War_feed > 0'>
+                                {{$t('standard_actions.war_footing.title')}}
+                                <span class=float-end><i v-for="i in Array(War_feed)" :class="$t('cube_icons.Y')"></i></span>
+                                <hr />
+                                <span v-html="$t('standard_actions.war_footing.description')" />
+                            </button>                        
+                        </div>
+
                     </div>
 
                 </div>
@@ -163,7 +174,7 @@
                     <h5 v-show="!game_status_parameters.gameFinished">{{$t('game_interface.turn_track')}}</h5>
 
                     <div class="turn-table row" v-show="!game_status_parameters.gameFinished">
-                        <div v-for="(item, index) of game_status_parameters.turns" :class="[(index === Current_turn ? 'current' : ''), 'col turn-track']">{{index+1}}</div>
+                        <div v-for="(item, index) of game_status_parameters.turns" :class="[(index === Current_turn ? 'current' : ''), 'col turn-track']">{{index}}</div>
                     </div>
 
                     <div id="result-box" v-show="!game_status_parameters.gameFinished && draw != ''" class="col-xs-12 mt-3 p-2">
