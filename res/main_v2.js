@@ -582,7 +582,7 @@ var main = new Vue({
         addExtraInstitutionDialog: function(){
             let options = [];
 
-            var spacesForPay = [main.Current, main.Used, main.Treasury];
+            var spacesForPay = [main.Current, main.Treasury];
             if(!this.canPay("Y", 2, spacesForPay, true)) return; 
 
             this.extra_institutions.forEach(function(inst){
@@ -594,7 +594,7 @@ var main = new Vue({
                 inputType: 'select',
                 inputOptions: options,
                 callback: function (result) {
-                    main.doPay("Y", 2, [main.Current, main.Used, main.Treasury]);
+                    main.doPay("Y", 2, [main.Current, main.Treasury]);
                     main.extra_institutions.forEach(function(inst){
                         if(inst.code === result) {
                             var index = main.extra_institutions.indexOf(inst);
