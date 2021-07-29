@@ -707,15 +707,6 @@ var main = new Vue({
                     {label: main.$t("game_interface.new_game"), className: 'btn-info', callback: main.finishCurrentGame}],                        
             });
         },
-        openInstruction: function(area){
-
-            var dialog = bootbox.dialog({
-                title: main.$t("instructions." + area + ".title"),
-                message: main.$t("instructions." + area + ".text"),
-                buttons: [
-                    {label: main.$t("game_interface.close"), className: 'btn-secondary', callback: function(){return;}},]                 
-            });
-        },
         finishCurrentGame: function(){            
             main.game_status_parameters.gameFinished = true;
             $("#result-box").hide();
