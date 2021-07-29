@@ -37,6 +37,14 @@ i.cube-DY {
     min-height: 100px;
 }
 
+h5, .h5 {
+    display: inline-flex;
+}
+
+i.fas.fa-info-circle.btn.btn-link {
+    text-decoration: none;
+}
+
 .bag {
     border: 1px solid black;
     background: linear-gradient(180deg, #333 0%, #eee 100%);
@@ -321,6 +329,9 @@ button.bootbox-close-button.close {
     border-radius: 0;
 }
 
+.bootbox-body {
+    text-align: justify;
+}
 
 .opacity05 {
     opacity: 0.5;

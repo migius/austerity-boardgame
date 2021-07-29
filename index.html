@@ -26,8 +26,9 @@
         <div class="header bg-dark text-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-auto h1" v-html="$t('game_interface.title')"></div> 
+                    <div class="col-auto h1" v-html="$t('game_interface.title')"></div>
                     <div class="col-auto font-italic mt-auto mb-2"  v-html="$t('game_interface.subtitle')"></div>
+                    <div class="col-auto h1" @click="openInstruction('introduction')" ><i class="fas fa-info-circle btn btn-link"></i></div>
                     <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-light choose-btn " v-html="$t('game_interface.new_game')"
                         v-show="!game_status_parameters.gameFinished" @click="endCurrentGame"></button></div>
 
@@ -138,7 +139,7 @@
                     </div>
 
                     <div class="mt-3 " v-show="!game_status_parameters.gameFinished">
-                        <h5 v-html="$t('keywords.actions')"></h5>
+                        <h5 v-html="$t('keywords.actions')" ></h5><h5 @click="openInstruction('actions')" ><i class="fas fa-info-circle btn btn-link"></i></h5>
                         <div class="row" id="standard-action-area">
                             <div v-for="(item, index) of StandardActions" class="btn-group col" role="group">
                                 <button type="button" @click="item.click" id="bm-action-btn" class="btn btn-info col-12 btn-std-action" v-html="$t('standard_actions.' + item.name + '.title') + '<hr />' + $t('standard_actions.' + item.name + '.description')" :disabled='(!main.game_status_canPlay) || main.Bag && main.Bag.content.length == 0'>

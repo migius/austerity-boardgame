@@ -28,6 +28,7 @@ const messages = {
         },
         game_interface: {
             loading: "Loading...",
+            close: "Close",
             title: "Austerity",
             subtitle: "A solo game about debt, national budgets and other such trouble.",
             action_title: "What to do now?",
@@ -119,7 +120,7 @@ const messages = {
             wealth: "Wealth",
             health: "Health",
             popularity: "Popularity",
-            extra_institutions: "Extra @:institutions",
+            extra_institutions: "Extra @:keywords.institutions",
         },
         Spaces: {
             Bag: "Bag",
@@ -293,6 +294,16 @@ const messages = {
                 action: "@:cube.Y <i class='cube fa fa-arrow-right '>     +1 @:keywords.employment and -1 @:keywords.wealth</i> ",
                 effect: " Add @:small_cube.R",
             }
+        },
+        instructions: {
+            introduction: {
+                title: "Introduction",
+                text: "Austerity is a single-player board game in which you take the role of the finance minister in a country near-crippled with debt. You decide which institutions are funded, where the cuts are made and choose how to react to events that occur – but the rest of the country has other ideas and won’t necessarily behave… if you can’t balance the budget and pay off the country’s debt before your decisions come back to haunt you, you’ll be out of office and out on the street with the rest of them!<br/>In Austerity, the state of the country’s finances is represented by a budget bag of coloured cubes; each cube represents funding for security services or welfare programmes, income, debt or the unrest and crime that result from such desperate times. As the year progresses the player draws pairs of cubes from the bag, which determine events that occur that the player must react to. The player may decide when to raise taxes or sell government gilts, when income is available which institutions to funnel funding to, and when debt rears its ugly head which institutions have to face the cuts of austerity.",
+            },
+            actions: {
+                title: "@:keywords.actions",
+                text: "At any time during the year, you may perform any of the three Actions listed in the centre of the page - Raise Taxes, Borrow Money or Pay Loan. Simply perform the Action as described, which will involve adding or removing some combination of cubes.                 <br />Actions may be performed any number of times in a turn, before or during or after resolving cube effects - but remember that immediately that the bag is emptied, no more actions may be performed until next year.",
+            },
         }
     },
 }
