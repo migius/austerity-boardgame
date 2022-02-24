@@ -714,6 +714,7 @@ var main = new Vue({
 
             var dialog = bootbox.dialog({
                 title: main.$t("game_interface.events_list"),
+                size: "xl",
                 message: this.generateEventsList,
                 buttons: [
                     {label: main.$t("game_interface.look_to_curr_game"), className: 'btn-secondary', callback: function(){return;}}],                        
@@ -723,12 +724,20 @@ var main = new Vue({
             var eventsList = "";
 
             for (var key in messages[i18n.locale].cube_draw) {
-                eventsList = eventsList + main.$t("cube." + key[0]) + " " + main.$t("cube." + key[1]) + main.$t("cube_draw." + key +".Title") + ":";
+                eventsList += "<div class='event-list-item ";
+                if(!this.Bag.hide_content //if i don't show bag i don't filter events
+                    && ( this.getAllIndexes(main.Bag.content,key[0]).length === 0 //if the cube 1 isn't in bag i filter
+                        || this.getAllIndexes(main.Bag.content,key[1]).length === 0 //if the cube 2 isn't in bag i filter
+                        || (key[0] === key[1] && this.getAllIndexes(main.Bag.content,key[0]).length === 1))) //2 bubes but i only have 1
+                {
+                    eventsList += "not-available ";
+                }
+                eventsList += "'>";
+                eventsList += "<h5>" + main.$t("cube." + key[0]) + " " + main.$t("cube." + key[1]) + " " + main.$t("cube_draw." + key +".Title") + "</h5>";
 
-                eventsList = eventsList + "<br>";
-                eventsList = eventsList + main.$t("cube_draw." + key +".Description") + ".";
-                eventsList = eventsList + "<br>";
-                eventsList = eventsList + "<br>";                
+                eventsList += "<p>" + main.$t("cube_draw." + key +".Description") + "</p>";
+                eventsList += "<hr>"; 
+                eventsList += "</div>";               
             }
 
             return eventsList;

@@ -325,3 +325,7 @@ button.bootbox-close-button.close {
 .opacity05 {
     opacity: 0.5;
 }
+
+.not-available h5, .not-available p {
+    opacity: 0.3;
+}
