@@ -30,6 +30,8 @@
                     <div class="col-auto font-italic mt-auto mb-2"  v-html="$t('game_interface.subtitle')"></div>
                     <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-light choose-btn " v-html="$t('game_interface.new_game')"
                         v-show="!game_status_parameters.gameFinished" @click="endCurrentGame"></button></div>
+                    <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-light choose-btn " v-html="$t('game_interface.events_list')"
+                            v-show="!game_status_parameters.gameFinished" @click="showEventList"></button></div>
 
                 </div>
             </div>

@@ -71,6 +71,7 @@ const messages = {
             end_turn: "End turn",
             new_year: "New year",
             new_game: "New game",     
+            events_list: "Events list",     
             report_bug: "report a bug",
             a_game_by: "Austerity is a game by Jake Staines",
             source_code: "Source code",
