@@ -722,13 +722,40 @@ var main = new Vue({
         generateEventsList: function(){
             var eventsList = "";
 
+            var bagContentCombinations = [];
+            var twoOrMoreCubesArray = [];
+
+            if (main.Bag.content.length > 1) {
+                for (const cubeOut of main.Bag.content) {
+                    for (const cubeIn of this.Bag.content) {
+                        if (cubeIn === cubeOut && !twoOrMoreCubesArray.includes(cubeIn)) {
+                            twoOrMoreCubesArray.push(cubeIn);
+                            continue;
+                        }
+                        
+                        // Added both combbinations bedause we don't know the order
+                        bagContentCombinations.push(cubeIn + cubeOut);
+                        bagContentCombinations.push(cubeOut + cubeIn);
+                    }
+                }
+            }
+            
+            var possibleEvent = false;
             for (var key in messages[i18n.locale].cube_draw) {
+                possibleEvent = bagContentCombinations.includes(key);
+
+                if(possibleEvent)
+                    eventsList = eventsList + "<b>";
                 eventsList = eventsList + main.$t("cube." + key[0]) + " " + main.$t("cube." + key[1]) + main.$t("cube_draw." + key +".Title") + ":";
 
                 eventsList = eventsList + "<br>";
                 eventsList = eventsList + main.$t("cube_draw." + key +".Description") + ".";
+                if(possibleEvent)
+                    eventsList = eventsList + "</b>";
                 eventsList = eventsList + "<br>";
-                eventsList = eventsList + "<br>";                
+                eventsList = eventsList + "<br>";
+
+                possibleEvent = false;
             }
 
             return eventsList;
