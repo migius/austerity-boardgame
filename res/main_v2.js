@@ -697,6 +697,9 @@ var main = new Vue({
         endCurrentGame:  function() {
             this.engGameTriggered("EndGame");
         },
+        showEventList:  function() {
+            this.eventListTriggered();
+        },
         engGameTriggered: function(reason){
 
             var dialog = bootbox.dialog({
@@ -706,6 +709,29 @@ var main = new Vue({
                     {label: main.$t("game_interface.look_to_curr_game"), className: 'btn-secondary', callback: function(){return;}},
                     {label: main.$t("game_interface.new_game"), className: 'btn-info', callback: main.finishCurrentGame}],                        
             });
+        },
+        eventListTriggered: function(){
+
+            var dialog = bootbox.dialog({
+                title: main.$t("game_interface.events_list"),
+                message: this.generateEventsList,
+                buttons: [
+                    {label: main.$t("game_interface.look_to_curr_game"), className: 'btn-secondary', callback: function(){return;}}],                        
+            });
+        },
+        generateEventsList: function(){
+            var eventsList = "";
+
+            for (var key in messages[i18n.locale].cube_draw) {
+                eventsList = eventsList + main.$t("cube." + key[0]) + " " + main.$t("cube." + key[1]) + main.$t("cube_draw." + key +".Title") + ":";
+
+                eventsList = eventsList + "<br>";
+                eventsList = eventsList + main.$t("cube_draw." + key +".Description") + ".";
+                eventsList = eventsList + "<br>";
+                eventsList = eventsList + "<br>";                
+            }
+
+            return eventsList;
         },
         finishCurrentGame: function(){            
             main.game_status_parameters.gameFinished = true;
