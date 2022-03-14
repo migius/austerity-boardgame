@@ -700,13 +700,22 @@ var main = new Vue({
         showEventList:  function() {
             this.eventListTriggered();
         },
+        showInfo:  function(context) {
+            var dialog = bootbox.dialog({
+                title: main.$t(context+".title"),
+                size: "xl",
+                message: main.$t(context+".par"),
+                buttons: [
+                    {label: main.$t("game_interface.close"), className: 'btn-secondary', callback: function(){return;}}],                        
+            });
+        },
         engGameTriggered: function(reason){
 
             var dialog = bootbox.dialog({
                 title: main.$t("game_interface.alert." + reason + ".title"),
                 message: main.$t("game_interface.alert." + reason + ".ask"),
                 buttons: [
-                    {label: main.$t("game_interface.look_to_curr_game"), className: 'btn-secondary', callback: function(){return;}},
+                    {label: main.$t("game_interface.close"), className: 'btn-secondary', callback: function(){return;}},
                     {label: main.$t("game_interface.new_game"), className: 'btn-info', callback: main.finishCurrentGame}],                        
             });
         },
@@ -717,7 +726,7 @@ var main = new Vue({
                 size: "xl",
                 message: this.generateEventsList,
                 buttons: [
-                    {label: main.$t("game_interface.look_to_curr_game"), className: 'btn-secondary', callback: function(){return;}}],                        
+                    {label: main.$t("game_interface.close"), className: 'btn-secondary', callback: function(){return;}}],                        
             });
         },
         generateEventsList: function(){
@@ -733,7 +742,7 @@ var main = new Vue({
                     eventsList += "not-available ";
                 }
                 eventsList += "'>";
-                eventsList += "<h5>" + main.$t("cube." + key[0]) + " " + main.$t("cube." + key[1]) + " " + main.$t("cube_draw." + key +".Title") + "</h5>";
+                eventsList += "<h5>" + main.$t("cube." + key[0]) + "&nbsp;" + main.$t("cube." + key[1]) + "&nbsp;" + main.$t("cube_draw." + key +".Title") + "</h5>";
 
                 eventsList += "<p>" + main.$t("cube_draw." + key +".Description") + "</p>";
                 eventsList += "<hr>"; 

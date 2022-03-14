@@ -26,12 +26,15 @@
         <div class="header bg-dark text-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-auto h1" v-html="$t('game_interface.title')"></div> 
+                    <div class="col-auto h1" v-html="$t('game_interface.title') "></div> 
+                    <div class="col-auto mt-auto mb-4 ms-0 ps-0 " > <i class="fas fa-info-circle" @click="showInfo('info.title')"></i> </div>
                     <div class="col-auto font-italic mt-auto mb-2"  v-html="$t('game_interface.subtitle')"></div>
-                    <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-light choose-btn " v-html="$t('game_interface.new_game')"
-                        v-show="!game_status_parameters.gameFinished" @click="endCurrentGame"></button></div>
+                    <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-light choose-btn " v-html="$t('game_interface.howto_play')"
+                        v-show="!game_status_parameters.gameFinished" @click='showInfo(`info.action_title`)'></button></div>
                     <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-light choose-btn " v-html="$t('game_interface.events_list')"
                             v-show="!game_status_parameters.gameFinished" @click="showEventList"></button></div>
+                    <div class="mt-auto mb-2 col-auto"><button type="button" class="btn btn-success choose-btn " v-html="$t('game_interface.new_game')"
+                        v-show="!game_status_parameters.gameFinished" @click="endCurrentGame"></button></div>
 
                 </div>
             </div>
@@ -43,11 +46,11 @@
                 <div class="col-xs-12 col-md-6">
 
                     <div class="col-xs-12 mt-3 " id="buttonsArea">   
-                        <h5 v-show="!game_status_parameters.gameFinished" v-html="$t('game_interface.action_title')"></h5>            
+                        <h5 v-show="!game_status_parameters.gameFinished" v-html="$t('game_interface.action_title')"></h5> 
                         <div v-show="game_status_parameters.gameFinished" class="new-game-opt">
                             <h3 class="btn-group col-12 row mb-1" role="group"  v-html="$t('game_interface.options')"></h3>
                             <div class="btn-group col-12 row mb-1" role="group">
-                                <legend class="col-form-label col fw-bold"  v-html="$t('game_interface.country_profile.label')"></legend>
+                                <legend class="col-form-label col fw-bold"  v-html="$t('game_interface.country_profile.label')"  @click='showInfo(`info.country_profile`)'></legend>
                                 <select class="form-select col" aria-label="Country profile" v-model="new_game_options.country_profile">
                                     <option value="KKKKWBBRRY" selected v-html="$t('game_interface.country_profile.cap_dem')"></option>
                                     <option value="KKKKWWWRRY" v-html="$t('game_interface.country_profile.lib_dem')"></option>
@@ -57,7 +60,7 @@
                                 </select>
                             </div>
                             <div class="btn-group col-12 row mb-1" role="group" v-show="new_game_options.country_profile === 'CUSTOM'">
-                                <legend class="col-form-label col fw-bold"  v-html="$t('game_interface.country_profile.custom_label')"></legend>
+                                <legend class="col-form-label col fw-bold"  v-html="$t('game_interface.country_profile.custom_label')" @click='showInfo(`info.country_profile`)'></legend>
                                 <input type="text" class="col" v-model="new_game_options.country_profile_CUSTOM"></input>
                             </div>
                             <!--
@@ -72,14 +75,14 @@
                             </div>
                             -->
                             <div class="btn-group col-12 row mb-1" role="group">
-                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.extra_inst.label')"></legend>
+                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.extra_inst.label')" @click='showInfo(`info.extra_inst`)'></legend>
                                 <select class="form-select col" aria-label="Country profile" v-model="new_game_options.extra_inst">
                                     <option value="false" selected v-html="$t('game_interface.extra_inst.false')"></option>
                                     <option value="true" v-html="$t('game_interface.extra_inst.true')"></option>
                                 </select>
                             </div>
                             <div class="btn-group col-12 row mb-1" role="group">
-                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.scenario.label')"></legend>
+                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.scenario.label')" @click='showInfo(`info.scenario`)'></legend>
                                 <select class="form-select col" aria-label="Scenario" v-model="new_game_options.scenario">
                                     <option value="OL" v-html="$t('game_interface.scenario.olympics')"></option>
                                     <option value="EC" selected v-html="$t('game_interface.scenario.economic_crash')"></option>
@@ -88,7 +91,7 @@
                                 </select>
                             </div>
                             <div class="btn-group col-12 row mb-1" role="group" v-show="new_game_options.scenario != 'NO'">
-                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.scenario_diff.label')"></legend>
+                                <legend class="col-form-label col fw-bold" v-html="$t('game_interface.scenario_diff.label')" @click='showInfo(`info.scenario_diff`)'></legend>
                                 <select class="form-select col" aria-label="Scenario" v-model="new_game_options.scenario_diff">
                                     <option value="E" selected v-html="$t('game_interface.scenario_diff.easy')"></option>
                                     <option value="N" v-html="$t('game_interface.scenario_diff.normal')"></option>
@@ -140,7 +143,7 @@
                     </div>
 
                     <div class="mt-3 " v-show="!game_status_parameters.gameFinished">
-                        <h5 v-html="$t('keywords.actions')"></h5>
+                        <h5 v-html="$t('keywords.actions')"></h5> 
                         <div class="row" id="standard-action-area">
                             <div v-for="(item, index) of StandardActions" class="btn-group col" role="group">
                                 <button type="button" @click="item.click" id="bm-action-btn" class="btn btn-info col-12 btn-std-action" v-html="$t('standard_actions.' + item.name + '.title') + '<hr />' + $t('standard_actions.' + item.name + '.description')" :disabled='(!main.game_status_canPlay) || main.Bag && main.Bag.content.length == 0'>

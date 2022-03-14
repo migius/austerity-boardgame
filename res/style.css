@@ -90,6 +90,10 @@ p.newspaper-info {
     font-style: oblique;
 }
 
+h5 {
+    display: inline-flex;
+}
+
 div#result-box h5 {
     font-size: xxx-large;
     text-align: center;
